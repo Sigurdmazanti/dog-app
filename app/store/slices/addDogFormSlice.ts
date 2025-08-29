@@ -33,9 +33,17 @@ export const formSlice = createSlice({
     goToStep: (state, action: PayloadAction<number>) => {
       state.currentStep = action.payload
     },
+    nextStep(state) {
+      state.currentStep += 1
+    },
+    prevStep(state) {
+      if (state.currentStep > 1) {
+        state.currentStep -= 1
+      }
+    },
   },
 })
 
-export const { updateField, goToStep } = formSlice.actions
+export const { updateField, goToStep, nextStep, prevStep } = formSlice.actions
 
 export default formSlice.reducer

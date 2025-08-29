@@ -1,5 +1,10 @@
-import AddDogForm from "app/components/forms/AddDogForm"
+import AddDogForm from "components/forms/add-dog/AddDogForm"
+import { ContentContainer } from "styled/container/ContentContainer";
 
 export default function App() {
-  return <AddDogForm />
+  return (
+    <ContentContainer>
+      <AddDogForm />
+    </ContentContainer>
+  );
 }

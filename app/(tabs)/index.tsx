@@ -19,7 +19,9 @@ export default function TabOneScreen() {
       >
         <Paragraph>Add</Paragraph>
 
-        <Paragraph px="$2" py="$1" color="$blue10" bg="$blue5">
+        <Paragraph px="$2" py="$1" 
+        // color="$blue10" bg="$blue5"
+        >
           tamagui.config.ts
         </Paragraph>
 
@@ -31,18 +33,20 @@ export default function TabOneScreen() {
           px="$2"
           py="$1"
           rounded="$3"
-          bg="$green5"
-          hoverStyle={{ bg: '$green6' }}
-          pressStyle={{ bg: '$green4' }}
+          // bg="$green5"
+          // hoverStyle={{ bg: '$green6' }}
+          // pressStyle={{ bg: '$green4' }}
         >
           <Anchor
             href="https://tamagui.dev/docs/core/configuration"
             textDecorationLine="none"
-            color="$green10"
+            // color="$green10"
           >
             Configuration guide
           </Anchor>
-          <ExternalLink size="$1" color="$green10" />
+          <ExternalLink size="$1" 
+          // color="$green10" 
+          />
         </XStack>
 
         <Paragraph text="center">

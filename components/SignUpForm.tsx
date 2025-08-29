@@ -10,7 +10,7 @@ import { LinearGradient } from "tamagui/linear-gradient"
 
 
 export default function SignUpForm() {
-    const {
+  const {
     control,
     handleSubmit,
     formState: { errors },
@@ -92,7 +92,9 @@ export default function SignUpForm() {
                 }}>
                   Confirm Date
                 </Button>
-                <Button onPress={() => setShowPicker(false)} color="$red10">
+                <Button onPress={() => setShowPicker(false)} 
+                // color="$red10"
+                >
                   Cancel
                 </Button>
               </View>

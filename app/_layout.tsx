@@ -7,7 +7,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import App from './Provider'
-import { useTheme } from 'tamagui'
+import { Theme, useTheme } from 'tamagui'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,10 +52,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme()
-  const theme = useTheme()
+  // const theme = useTheme()
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+    <Theme name={colorScheme}>
+      <StatusBar />
       <Stack>
         <Stack.Screen
           name="(tabs)"
@@ -72,12 +72,10 @@ function RootLayoutNav() {
             animation: 'slide_from_right',
             gestureEnabled: true,
             gestureDirection: 'horizontal',
-            contentStyle: {
-              backgroundColor: theme.background.val,
-            },
+        
           }}
         />
       </Stack>
-    </ThemeProvider>
+    </Theme>
   )
 }

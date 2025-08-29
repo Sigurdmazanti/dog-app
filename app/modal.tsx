@@ -5,7 +5,9 @@ export default function ModalScreen() {
     <View flex={1} items="center" justify="center">
       <XStack gap="$2">
         <Paragraph text="center">Made by</Paragraph>
-        <Anchor color="$blue10" href="https://twitter.com/natebirdman" target="_blank">
+        <Anchor 
+        // color="$blue10" 
+        href="https://twitter.com/natebirdman" target="_blank">
           @natebirdman,
         </Anchor>
         <Anchor

@@ -22,8 +22,8 @@ export const CustomSheet = ({ open, setOpen, children }: CustomSheetProps) => {
       forceRemoveScrollEnabled={open}
     >
       <Sheet.Overlay
-        animation="lazy"
-        bg="$shadow6"
+        animation="quick"
+        bg="$backdrop"
         enterStyle={{ opacity: 0 }}
         exitStyle={{ opacity: 0 }}
       />

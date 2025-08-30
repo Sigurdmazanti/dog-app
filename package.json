@@ -18,7 +18,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-native-async-storage/async-storage": "2.1.2",
     "@react-native-community/datetimepicker": "8.4.1",
     "@react-navigation/native": "^7.1.6",
     "@reduxjs/toolkit": "^2.8.2",
@@ -29,8 +29,9 @@
     "@tamagui/toast": "^1.126.13",
     "babel-preset-expo": "~13.0.0",
     "burnt": "^0.12.2",
-    "expo": "53.0.19",
+    "expo": "53.0.22",
     "expo-build-properties": "~0.14.8",
+    "expo-constants": "~17.1.7",
     "expo-font": "~13.3.2",
     "expo-linear-gradient": "~14.1.5",
     "expo-linking": "~7.1.7",
@@ -55,14 +56,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.6",
-    "@expo/metro-config": "~0.20.0",
     "@expo/metro-runtime": "~5.0.4",
     "@tamagui/babel-plugin": "^1.126.13",
     "@tamagui/cli": "^1.126.13",
     "@tamagui/metro-plugin": "^1.126.13",
     "@types/lodash": "^4",
     "@types/react": "~19.0.10",
-    "@types/react-native": "^0.73.0",
     "typescript": "~5.8.3"
+  },
+  "resolutions": {
+    "metro": "0.82.0",
+    "metro-config": "0.82.0",
+    "metro-resolver": "0.82.0"
   }
 }

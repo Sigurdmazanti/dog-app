@@ -1,0 +1,11 @@
+{
+  "build": {
+    "development": {
+      "ios": {
+        "buildType": "development",
+        "env": {},
+        "preInstall": "corepack enable && corepack prepare yarn@4.5.0 --activate"
+      }
+    }
+  }
+}

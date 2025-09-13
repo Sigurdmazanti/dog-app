@@ -1,14 +1,13 @@
-import { styled } from 'tamagui'
-import { Button } from 'tamagui'
+import { styled, Button } from 'tamagui'
 
 export const TertiaryButton = styled(Button, {
-  name: 'SecondaryButton',
-  // bg: '$black2',
-  color: '$color',
-  borderWidth: 1,
-  // borderColor: '$blue4',
-  rounded: '$4',
-
+  name: 'TertiaryButton',
+  rounded: '$2',
+  px: '$4',
+  py: '$2',
+  borderWidth: 0,
+  bg: '$primaryText',
+  color: '$background',
   // hoverStyle: {
   //   bg: '$blue3',
   // },

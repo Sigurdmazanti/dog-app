@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { useForm, FormProvider, useWatch } from 'react-hook-form'
-import { Button, Text, XStack } from 'tamagui'
+import { Button, XStack } from 'tamagui'
 import { PrimaryButton } from 'styled/button/PrimaryButton'
 import { ContentContainer } from 'styled/container/ContentContainer'
 import { DogBreedType, FormStep, FormValues } from './AddDog.types'
 import { StepOne, StepTwo, StepThree, StepFour, Summary } from './steps'
-import { BodyText } from 'styled/text/BodyText'
 
 const getSteps = (methods: any): FormStep[] => {
   const dogBreedType = useWatch({ control: methods.control, name: 'dogBreedType' })
@@ -37,7 +36,7 @@ const getSteps = (methods: any): FormStep[] => {
   ]
 }
 
-export default function MultiStepForm() {
+export default function AddDogForm() {
   const [currentStep, setCurrentStep] = useState(1)
   const methods = useForm<FormValues>({
     defaultValues: {

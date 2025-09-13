@@ -1,4 +1,3 @@
-import { ChevronRight, Star } from "@tamagui/lucide-icons"
 import { memo, useEffect, useState } from "react"
 import { Keyboard, Pressable } from "react-native"
 import { ListItem, Sheet, useTheme, View, YGroup } from "tamagui"
@@ -8,6 +7,7 @@ import { InputWithIcon } from "components/input/InputWithIcon"
 import { PrimaryButton } from "styled/button/PrimaryButton"
 import { useDebouncedFetch } from "app/functions/helpers/debouncedFetch"
 import { BodyText } from "styled/text/BodyText"
+import { ChevronRightIcon } from "assets/icons/ChevronRight"
 
 type FetchItems = (query: string, page: number, pageSize: number) => Promise<string[]>
 
@@ -107,8 +107,7 @@ export function SelectList({
                     pressTheme
                     hoverTheme
                     title={item}
-                    icon={Star}
-                    iconAfter={ChevronRight}
+                    iconAfter={<ChevronRightIcon size={20} strokeWidth={1.2} />}
                     onPress={() => {
                       setSelected(item)
                       onSelect?.(item)

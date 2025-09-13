@@ -7,7 +7,6 @@ export const PrimaryButton = styled(Button, {
   px: '$4',
   py: '$2',
   borderWidth: 0,
-  width: 'max-content',
 
   variants: {
     tone: {

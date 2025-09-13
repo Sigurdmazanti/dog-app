@@ -1,18 +1,33 @@
-import { useColorScheme } from 'react-native'
+import { AppState, useColorScheme } from 'react-native'
 import { TamaguiProvider, type TamaguiProviderProps, Theme } from 'tamagui'
 import { ToastProvider, ToastViewport } from '@tamagui/toast'
 import { CurrentToast } from './CurrentToast'
 import { config } from 'tamagui.config'
 import store from './store/store'
 import { Provider } from 'react-redux'
+import { useEffect } from 'react'
+import { supabase } from 'services/supabase/supabaseClient'
 
 type AppProps = {
-  children: React.ReactNode
+  children?: React.ReactNode
 } & Omit<TamaguiProviderProps, 'config'>
 
 export default function App({ children, ...rest }: AppProps) {
   const colorScheme = "light";//useColorScheme() ?? "light";
+  
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        supabase.auth.startAutoRefresh()
+      } 
+      
+      else {
+        supabase.auth.stopAutoRefresh()
+      }
+    })
 
+    return () => subscription.remove()
+  }, [])
   return (
     <Provider store={store}>
       <TamaguiProvider

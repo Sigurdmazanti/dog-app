@@ -1,21 +1,20 @@
-import { Dog } from "@tamagui/lucide-icons";
 import { View } from "react-native";
 import { PrimaryButton } from "styled/button/PrimaryButton";
 import { YStack, XStack, Text } from "tamagui";
 import { DogBreedType } from "../AddDog.types";
 import { BodyText } from "styled/text/BodyText";
 
-const RenderStackedDogIcon = ({ iconSize, isActive }: { iconSize: number, isActive: boolean }) => {
-  const color = isActive ? "$primaryText" : "$text";
+// const RenderStackedDogIcon = ({ iconSize, isActive }: { iconSize: number, isActive: boolean }) => {
+//   const color = isActive ? "$primaryText" : "$text";
 
-  return (
-    <YStack items='center' height='100%' width={iconSize * 2.5}>
-      <Dog size={iconSize} color={color} position='absolute' t={13.5} l={5}></Dog>
-      <Dog size={iconSize} color={color} position='absolute' t={2}></Dog>
-      <Dog size={iconSize} color={color} position='absolute' t={13.5} r={5}></Dog>
-    </YStack>
-  )
-}
+//   return (
+//     <YStack items='center' height='100%' width={iconSize * 2.5}>
+//       <Dog size={iconSize} color={color} position='absolute' t={13.5} l={5}></Dog>
+//       <Dog size={iconSize} color={color} position='absolute' t={2}></Dog>
+//       <Dog size={iconSize} color={color} position='absolute' t={13.5} r={5}></Dog>
+//     </YStack>
+//   )
+// }
 
 export function StepOne({
   dogBreedType,
@@ -36,7 +35,7 @@ export function StepOne({
               setDogBreedType("mixed")
             }}
             tone={dogBreedType === "mixed" ? "success" : "inactive"}
-            icon={<RenderStackedDogIcon iconSize={iconSize} isActive={dogBreedType === "mixed"}/>}
+            // icon={<RenderStackedDogIcon iconSize={iconSize} isActive={dogBreedType === "mixed"}/>}
           >
             <BodyText ml={-5} color={dogBreedType === "mixed" ? "$primaryText" : "$text"}>Mixed/cross breed</BodyText>
           </PrimaryButton>
@@ -46,7 +45,7 @@ export function StepOne({
               setDogBreedType("pure")
             }}
             tone={dogBreedType === "pure" ? "success" : "inactive"}
-            icon={<Dog size={18}></Dog>}
+            // icon={<Dog size={18}></Dog>}
           >
             Pure breed
           </PrimaryButton>

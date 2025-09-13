@@ -2,7 +2,6 @@ import { Text, View, Button, Input } from "tamagui"
 import { useForm, Controller } from "react-hook-form"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import { useState, useMemo } from "react"
-import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 
 import type { FontSizeTokens, SelectProps } from 'tamagui'
 import { Adapt, Label, Select, Sheet, XStack, YStack, getFontSize } from 'tamagui'

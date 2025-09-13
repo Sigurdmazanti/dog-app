@@ -1,5 +1,3 @@
-import '../tamagui-web.css'
-
 import { useEffect } from 'react'
 import { useColorScheme } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
@@ -51,7 +49,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme()
+  const colorScheme = "light";
   // const theme = useTheme()
   return (
     <Theme name={colorScheme}>

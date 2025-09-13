@@ -1,6 +1,6 @@
 import { XStack, useTheme } from 'tamagui'
-import { Search } from '@tamagui/lucide-icons'
 import { CustomInput } from 'styled/input/Input'
+import { SearchIcon } from 'assets/icons/Search'
 
 type InputWithIconProps = {
   value?: string
@@ -13,7 +13,7 @@ export function InputWithIcon({
   value = '',
   onChangeText = () => {},
   placeholder = '',
-  icon = <Search strokeWidth={1.75} size={20} />,
+  icon = <SearchIcon strokeWidth={1.75} size={20} />,
 }: InputWithIconProps) {
 
   return (

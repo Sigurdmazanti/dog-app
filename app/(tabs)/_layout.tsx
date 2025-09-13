@@ -1,6 +1,6 @@
 import { Link, Tabs } from 'expo-router'
 import { Button, useTheme } from 'tamagui'
-import { Atom, AudioWaveform, Dog } from '@tamagui/lucide-icons'
+import { GoogleIcon } from 'assets/icons/Google'
 
 export default function TabLayout() {
   // const theme = useTheme()
@@ -24,7 +24,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Tab One',
-          tabBarIcon: ({ color }) => <Atom color={color as any} />,
+          tabBarIcon: ({ color }) => <GoogleIcon color={color}/>,
           headerRight: () => (
             <Link href="/modal" asChild>
               {/* <Button mr="$4" bg="$green8" color="$green12">
@@ -34,13 +34,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="add-dog"
-        options={{
-          title: 'Add dog',
-          tabBarIcon: ({ color }) => <Dog color={color as any} strokeWidth={1.75} />,
-        }}
-      />
+
     </Tabs>
   )
 }

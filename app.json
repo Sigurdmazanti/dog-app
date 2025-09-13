@@ -16,6 +16,7 @@
       "**/*"
     ],
     "ios": {
+      "usesAppleSignIn": true,
       "supportsTablet": true,
       "bundleIdentifier": "com.mazanti.exporouterexample",
       "infoPlist": {
@@ -37,6 +38,7 @@
     "plugins": [
       "expo-router",
       "expo-font",
+      "expo-apple-authentication",
       [
         "expo-build-properties",
         {

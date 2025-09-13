@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { View, Input, Button, YStack, XStack } from "tamagui"
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { BodyText } from "styled/text/BodyText"
-import { CustomSheet } from "components/sheet/CustomSheet"
-import { PrimaryButton } from "styled/button/PrimaryButton"
+import { BodyText } from "src/styled/text/BodyText"
+import { CustomSheet } from "src/components/sheet/CustomSheet"
+import { PrimaryButton } from "src/styled/button/PrimaryButton"
 
 export function StepFour({
   dogDateOfBirth,

@@ -1,4 +1,4 @@
-import Svg, { Rect, Path } from 'react-native-svg'
+import Svg, { Path } from 'react-native-svg'
 
 export const ChevronRightIcon = ({ size = 26, color = '#000', strokeWidth = 1 }) => (
   <Svg

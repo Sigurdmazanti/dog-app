@@ -1,6 +1,6 @@
 import { Link, Tabs } from 'expo-router'
 import { Button, useTheme } from 'tamagui'
-import { GoogleIcon } from 'assets/icons/Google'
+import { GoogleIcon } from 'src/assets/icons/Google'
 
 export default function TabLayout() {
   // const theme = useTheme()

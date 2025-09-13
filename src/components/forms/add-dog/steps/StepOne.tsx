@@ -1,8 +1,8 @@
 import { View } from "react-native";
-import { PrimaryButton } from "styled/button/PrimaryButton";
+import { PrimaryButton } from "src/styled/button/PrimaryButton";
 import { YStack, XStack, Text } from "tamagui";
 import { DogBreedType } from "../AddDog.types";
-import { BodyText } from "styled/text/BodyText";
+import { BodyText } from "src/styled/text/BodyText";
 
 // const RenderStackedDogIcon = ({ iconSize, isActive }: { iconSize: number, isActive: boolean }) => {
 //   const color = isActive ? "$primaryText" : "$text";

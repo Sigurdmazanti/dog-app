@@ -2,12 +2,12 @@ import { memo, useEffect, useState } from "react"
 import { Keyboard, Pressable } from "react-native"
 import { ListItem, Sheet, useTheme, View, YGroup } from "tamagui"
 import { LoadingOverlay } from "../LoadingOverlay"
-import { HeadingText } from "styled/text/HeadingText"
-import { InputWithIcon } from "components/input/InputWithIcon"
-import { PrimaryButton } from "styled/button/PrimaryButton"
-import { useDebouncedFetch } from "app/functions/helpers/debouncedFetch"
-import { BodyText } from "styled/text/BodyText"
-import { ChevronRightIcon } from "assets/icons/ChevronRight"
+import { HeadingText } from "src/styled/text/HeadingText"
+import { InputWithIcon } from "src/components/input/InputWithIcon"
+import { PrimaryButton } from "src/styled/button/PrimaryButton"
+import { useDebouncedFetch } from "src/functions/helpers/debouncedFetch"
+import { BodyText } from "src/styled/text/BodyText"
+import { ChevronRightIcon } from "src/assets/icons/ChevronRight"
 
 type FetchItems = (query: string, page: number, pageSize: number) => Promise<string[]>
 

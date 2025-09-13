@@ -1,19 +1,19 @@
 import { AppState, useColorScheme } from 'react-native'
 import { TamaguiProvider, type TamaguiProviderProps, Theme } from 'tamagui'
 import { ToastProvider, ToastViewport } from '@tamagui/toast'
-import { CurrentToast } from './CurrentToast'
+import { CurrentToast } from '../app/CurrentToast'
 import { config } from 'tamagui.config'
 import store from './store/store'
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
-import { supabase } from 'services/supabase/supabaseClient'
+import { supabase } from 'src/services/supabase/supabaseClient'
 
 type AppProps = {
   children?: React.ReactNode
+  colorScheme?: 'light' | 'dark'
 } & Omit<TamaguiProviderProps, 'config'>
 
-export default function App({ children, ...rest }: AppProps) {
-  const colorScheme = "light";//useColorScheme() ?? "light";
+export default function App({ children, colorScheme = 'light', ...rest }: AppProps) {
   
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (state) => {

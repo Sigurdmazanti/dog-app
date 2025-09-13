@@ -1,6 +1,6 @@
 import { Link, Stack } from 'expo-router'
 import { StyleSheet } from 'react-native'
-import { BodyText } from 'styled/text/BodyText'
+import { BodyText } from 'src/styled/text/BodyText'
 import { View } from 'tamagui'
 
 export default function NotFoundScreen() {

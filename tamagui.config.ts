@@ -13,18 +13,18 @@
 import { shorthands } from '@tamagui/shorthands/v4'
 import type { CreateTamaguiProps } from '@tamagui/web'
 import { createTamagui } from 'tamagui'
-import { customTokens } from './config/tokens/tokens'
-import { customThemes } from './config/themes/themes'
-import { animations } from './config/default/v3-animations'
-import { fonts } from './config/default/v4-fonts'
-import { media, mediaQueryDefaultActive } from './config/default/v4-media'
+import { customTokens } from './src/config/tokens/tokens'
+import { customThemes } from './src/config/themes/themes'
+import { animations } from './src/config/default/v3-animations'
+import { fonts } from './src/config/default/v4-fonts'
+import { media, mediaQueryDefaultActive } from './src/config/default/v4-media'
 
 export { shorthands } from '@tamagui/shorthands/v4'
 export { createThemes } from '@tamagui/theme-builder'
 export { tamaguiThemes, tokens } from '@tamagui/themes/v4'
-export { animations } from './config/default/v4-animations'
-export { createSystemFont, fonts } from './config/default/v4-fonts'
-export { breakpoints, media, mediaQueryDefaultActive } from './config/default/v4-media'
+export { animations } from './src/config/default/v4-animations'
+export { createSystemFont, fonts } from './src/config/default/v4-fonts'
+export { breakpoints, media, mediaQueryDefaultActive } from './src/config/default/v4-media'
 
 export const settings = {
   mediaQueryDefaultActive,

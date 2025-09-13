@@ -1,6 +1,6 @@
 import { XStack, useTheme } from 'tamagui'
-import { CustomInput } from 'styled/input/Input'
-import { SearchIcon } from 'assets/icons/Search'
+import { CustomInput } from 'src/styled/input/Input'
+import { SearchIcon } from 'src/assets/icons/Search'
 
 type InputWithIconProps = {
   value?: string

@@ -1,4 +1,4 @@
-import { BodyText } from "styled/text/BodyText"
+import { BodyText } from "src/styled/text/BodyText"
 import { View, YStack, Input } from "tamagui"
 
 export function StepThree({

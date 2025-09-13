@@ -8,13 +8,15 @@ export const TertiaryButton = styled(Button, {
   borderWidth: 0,
   bg: '$primaryText',
   color: '$background',
+  fontWeight: '$8',
   // hoverStyle: {
   //   bg: '$blue3',
   // },
 
-  // pressStyle: {
-  //   bg: '$blue2',
-  // },
+  pressStyle: {
+    bg: '$primaryText',
+    opacity: 0.9
+  },
 
   // disabledStyle: {
   //   bg: '$blue2',

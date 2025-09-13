@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useForm, FormProvider, useWatch } from 'react-hook-form'
 import { Button, XStack } from 'tamagui'
-import { PrimaryButton } from 'styled/button/PrimaryButton'
-import { ContentContainer } from 'styled/container/ContentContainer'
+import { PrimaryButton } from 'src/styled/button/PrimaryButton'
+import { ContentContainer } from 'src/styled/container/ContentContainer'
 import { DogBreedType, FormStep, FormValues } from './AddDog.types'
 import { StepOne, StepTwo, StepThree, StepFour, Summary } from './steps'
 

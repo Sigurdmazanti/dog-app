@@ -13,8 +13,8 @@ module.exports = (api) => {
         },
       ],
 
-      // NOTE: this is only necessary if you are using reanimated for animations
-      'react-native-reanimated/plugin',
+      // Updated for Reanimated v3+
+      'react-native-worklets/plugin',
     ],
   }
 }

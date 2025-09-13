@@ -1,5 +1,5 @@
-import { ContentContainer } from "styled/container/ContentContainer";
-import { Login } from "components/auth/login/Login";
+import { ContentContainer } from "src/styled/container/ContentContainer";
+import { Login } from "src/components/auth/login/Login";
 
 export default function App() {
   return (

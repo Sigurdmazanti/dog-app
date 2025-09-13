@@ -1,11 +1,11 @@
-import { CustomSheet } from "components/sheet/CustomSheet"
-import { SearchableSelectList } from "components/list/SearchableSelectList"
+import { CustomSheet } from "src/components/sheet/CustomSheet"
+import { SearchableSelectList } from "src/components/list/SearchableSelectList"
 import { useState, useEffect } from "react"
-import { PrimaryButton } from "styled/button/PrimaryButton"
+import { PrimaryButton } from "src/styled/button/PrimaryButton"
 import { YStack, View } from "tamagui"
 import { FetchItems } from "../AddDog.types"
-import { supabase } from "services/supabase/supabaseClient"
-import { BodyText } from "styled/text/BodyText"
+import { supabase } from "src/services/supabase/supabaseClient"
+import { BodyText } from "src/styled/text/BodyText"
 
 const fetchDogBreeds: FetchItems = async (search, page, pageSize) => {
   const from = (page - 1) * pageSize

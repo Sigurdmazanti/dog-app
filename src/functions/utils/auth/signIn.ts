@@ -1,4 +1,4 @@
-import { supabase } from "services/supabase/supabaseClient"
+import { supabase } from "src/services/supabase/supabaseClient"
 
 export async function signInWithEmail(
   email: string,

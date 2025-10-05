@@ -3,7 +3,7 @@ import { styled, Input } from 'tamagui'
 export const CustomInput = styled(Input, {
   name: 'CustomInput',
   borderWidth: 0,
-  rounded: "$4",
+  rounded: 0,
   bg: 'transparent',
   fontSize: '$4',
   placeholderTextColor: '$placeholderText',

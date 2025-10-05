@@ -1,10 +1,10 @@
 import { ContentContainer } from "src/styled/container/ContentContainer";
-import { Login } from "src/components/auth/login/Login";
+import { SignUp } from "src/components/auth/signup/SignUp";
 
-export default function App() {
+export default function ProfileSignUp() {
   return (
     <ContentContainer>
-      <Login></Login>
+      <SignUp />
     </ContentContainer>
   );
 }

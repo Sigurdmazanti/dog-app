@@ -12,7 +12,7 @@ import { TertiaryButton } from 'src/styled/button/TertiaryButton'
 import { useColorScheme } from 'react-native'
 import { useRouter } from 'expo-router'
 
-export function Login() {
+export function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -26,19 +26,22 @@ export function Login() {
     <YStack gap="$2">
       <TertiaryButton 
         height={50} 
-        icon={<EnvelopeIcon size={30} color={iconColor} strokeWidth={1.5} />}
+        icon={<EnvelopeIcon size={30} color="$primaryTextAccent" strokeWidth={1.5} />}
         onPress={() => router.push('/signup/email')}
       >
         Continue using Email
       </TertiaryButton>
 
-      <TertiaryButton height={50} icon={<GoogleIcon size={30} color={iconColor} />}>
+      <TertiaryButton
+        height={50}
+        icon={<GoogleIcon size={30} color="$primaryTextAccent" />}
+      >
         Continue using Google (N/A)
       </TertiaryButton>
 
       <TertiaryButton 
         height={50} 
-        icon={<AppleIcon size={30} color={iconColor} />}
+        icon={<AppleIcon size={30} color="$primaryTextAccent" />}
       >
         Continue using Apple (N/A)
       </TertiaryButton>

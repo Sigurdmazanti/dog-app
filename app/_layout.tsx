@@ -25,7 +25,7 @@ export default function RootLayout() {
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
 
-  const colorScheme = useColorScheme() ?? "light";
+  const colorScheme = "dark";
 
   useEffect(() => {
     if (interLoaded || interError) {
@@ -47,14 +47,8 @@ export default function RootLayout() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="modal"
-            options={{
-              title: 'Tamagui + Expo',
-              presentation: 'modal',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-            }}
+            name="add-dog"
+            options={{ headerShown: false }}
           />
         </Stack>
       </Theme>

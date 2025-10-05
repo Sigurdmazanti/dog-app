@@ -2,8 +2,8 @@ import { View, Text } from "tamagui"
 import { FormValues } from "../AddDog.types"
 import { useFormContext } from "react-hook-form"
 import { BodyText } from "src/styled/text/BodyText"
-import { Login } from "src/components/auth/login/Login"
 import { HeadingText } from "src/styled/text/HeadingText"
+import { SignUp } from "src/components/auth/signup/SignUp"
 
 export function Summary() {
   const { getValues } = useFormContext<FormValues>()
@@ -16,7 +16,7 @@ export function Summary() {
       <BodyText>Name: {form.dogName}</BodyText>
       <BodyText>Date of Birth: {form.dogDateOfBirth?.toLocaleDateString()}</BodyText> */}
       <HeadingText text="center" mb="$4">Let's get started</HeadingText>
-      <Login />
+      <SignUp />
     </View>
   )
 }

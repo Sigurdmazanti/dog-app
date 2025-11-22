@@ -1,13 +1,8 @@
-import { View, Text } from "tamagui"
-import { FormValues } from "../AddDog.types"
-import { useFormContext } from "react-hook-form"
-import { BodyText } from "src/styled/text/BodyText"
+import { View } from "tamagui"
 import { HeadingText } from "src/styled/text/HeadingText"
 import { SignUp } from "src/components/auth/signup/SignUp"
 
 export function Summary() {
-  const { getValues } = useFormContext<FormValues>()
-  const form = getValues()
 
   return (
     <View>

@@ -12,12 +12,19 @@ import { FloatingLabelInput } from 'src/components/input/FloatingLabelInput'
 import { Keyboard, TouchableWithoutFeedback, useColorScheme } from 'react-native'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { LinkText } from 'src/styled/text/LinkText'
+import { DogFormValues } from 'src/components/forms/add-dog/AddDog.types'
+import { useLocalSearchParams } from 'expo-router';
 
 export default function EmailSignup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+
+  const params = useLocalSearchParams();
+  const formData = params.data ? JSON.parse(params.data as string) : null;
+
+  console.log(formData);
 
   // TODO: Validation using ZOD maybe?
   const handleSignUp = async () => {

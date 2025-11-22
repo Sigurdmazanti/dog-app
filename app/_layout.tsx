@@ -25,7 +25,7 @@ export default function RootLayout() {
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
 
-  const colorScheme = "dark";
+  const colorScheme = useColorScheme() ?? "light";
 
   useEffect(() => {
     if (interLoaded || interError) {

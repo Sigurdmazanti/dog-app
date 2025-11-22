@@ -11,6 +11,8 @@ import { EnvelopeIcon } from 'src/assets/icons/Envelope'
 import { TertiaryButton } from 'src/styled/button/TertiaryButton'
 import { useColorScheme } from 'react-native'
 import { useRouter } from 'expo-router'
+import { useFormContext } from 'react-hook-form'
+import { DogFormValues } from 'src/components/forms/add-dog/AddDog.types'
 
 export function SignUp() {
   const [email, setEmail] = useState('')
@@ -19,15 +21,24 @@ export function SignUp() {
   const colorScheme = useColorScheme();
   const router = useRouter();
 
+  const { getValues } = useFormContext<DogFormValues>()
+  const formValues = getValues()
+  const serialized = JSON.stringify({
+    ...formValues,
+    dogDateOfBirth: formValues.dogDateOfBirth?.toISOString() ?? null
+  });
+
   // TODO SET REDUX THEME ?
   const iconColor = colorScheme == "dark" ? "#000" : "#fff";
-
   return (
     <YStack gap="$2">
       <TertiaryButton 
         height={50} 
         icon={<EnvelopeIcon size={30} color="$primaryTextAccent" strokeWidth={1.5} />}
-        onPress={() => router.push('/signup/email')}
+        onPress={() => router.push({
+          pathname: '/signup/email',
+          params: { data: serialized }
+        })}
       >
         Continue using Email
       </TertiaryButton>

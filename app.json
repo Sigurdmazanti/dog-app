@@ -18,9 +18,12 @@
     "ios": {
       "usesAppleSignIn": true,
       "supportsTablet": true,
-      "bundleIdentifier": "com.mazanti.exporouterexample",
+      "bundleIdentifier": "com.mazanti.dogapp",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "This app needs access to your camera to take photos or record videos.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select images or videos.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone when recording videos."
       }
     },
     "android": {
@@ -28,7 +31,7 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mazanti.exporouterexample"
+      "package": "com.mazanti.dogapp"
     },
     "web": {
       "bundler": "metro",
@@ -40,6 +43,12 @@
       "expo-font",
       "expo-apple-authentication",
       [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "ios": {
@@ -49,8 +58,7 @@
             "newArchEnabled": true
           }
         }
-      ],
-      "expo-web-browser"
+      ]
     ],
     "experiments": {
       "typedRoutes": true

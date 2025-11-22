@@ -3,14 +3,15 @@ import { useForm, FormProvider, useWatch } from 'react-hook-form'
 import { Button, XStack } from 'tamagui'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
-import { DogBreedType, FormStep, FormValues } from './AddDog.types'
-import { StepOne, StepTwo, StepThree, StepFour, Summary } from './steps'
+import { DogBreedType, FormStep, DogFormValues } from './AddDog.types'
+import { StepOne, StepTwo, StepThree, StepFour, StepFive, Summary } from './steps'
 
 const getSteps = (methods: any): FormStep[] => {
   const dogBreedType = useWatch({ control: methods.control, name: 'dogBreedType' })
   const dogBreed = useWatch({ control: methods.control, name: 'dogBreed' })
   const dogName = useWatch({ control: methods.control, name: 'dogName' })
   const dogDateOfBirth = useWatch({ control: methods.control, name: 'dogDateOfBirth' })
+  const dogAvatar = useWatch({ control: methods.control, name: 'dogAvatar' })
 
   return [
     {
@@ -30,6 +31,10 @@ const getSteps = (methods: any): FormStep[] => {
       canProceed: () => !!dogDateOfBirth,
     },
     {
+      content: <StepFive dogAvatar={dogAvatar} setDogAvatar={(val: string) => methods.setValue('dogAvatar', val)} />,
+      canProceed: () => !!dogAvatar,
+    },
+    {
       content: <Summary />,
       canProceed: () => true,
     },
@@ -38,12 +43,13 @@ const getSteps = (methods: any): FormStep[] => {
 
 export default function AddDogForm() {
   const [currentStep, setCurrentStep] = useState(1)
-  const methods = useForm<FormValues>({
+  const methods = useForm<DogFormValues>({
     defaultValues: {
       dogBreedType: '',
       dogBreed: [],
       dogName: '',
       dogDateOfBirth: null,
+      dogAvatar: ''
     },
   })
 

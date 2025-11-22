@@ -4,6 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { BodyText } from "src/styled/text/BodyText"
 import { CustomSheet } from "src/components/sheet/CustomSheet"
 import { PrimaryButton } from "src/styled/button/PrimaryButton"
+import { useColorScheme } from "react-native"
 
 export function StepFour({
   dogDateOfBirth,
@@ -16,6 +17,8 @@ export function StepFour({
   const [tempDate, setTempDate] = useState(
     dogDateOfBirth != null && dogDateOfBirth instanceof Date ? dogDateOfBirth : new Date()
   )
+  
+  const colorScheme = useColorScheme() ?? 'light'
 
   return (
     <View items="center" justify="center">
@@ -39,6 +42,7 @@ export function StepFour({
                   if (selectedDate) setTempDate(selectedDate)
                 }}
                 display="inline"
+                themeVariant={colorScheme}
               />
               <PrimaryButton
                 mt="$4"

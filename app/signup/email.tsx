@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { YStack, Input, Button, View, XStack, Label, Text, getVariableValue } from 'tamagui'
 import { Link, useRouter } from 'expo-router'
 import { BodyText } from 'src/styled/text/BodyText'
-import { signUpWithEmail } from 'src/functions/utils/auth/signUp'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
 import { EnvelopeIcon } from 'src/assets/icons/Envelope'
 import { CustomInput } from 'src/styled/input/Input'
@@ -14,6 +13,7 @@ import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { LinkText } from 'src/styled/text/LinkText'
 import { DogFormValues } from 'src/components/forms/add-dog/AddDog.types'
 import { useLocalSearchParams } from 'expo-router';
+import { signUpWithDog } from 'src/services/auth/signUpWithDog'
 
 export default function EmailSignup() {
   const [email, setEmail] = useState('')
@@ -29,7 +29,7 @@ export default function EmailSignup() {
     try {
       if (!formData) return;
 
-      const data = await signUpWithEmail(formData, email, password, setLoading)
+      const data = await signUpWithDog(email, password, formData)
       if (!data) return;
       
       if (data.session) {

@@ -3,9 +3,10 @@ import { SearchableSelectList } from "src/components/list/SearchableSelectList"
 import { useState, useEffect } from "react"
 import { PrimaryButton } from "src/styled/button/PrimaryButton"
 import { YStack, View } from "tamagui"
-import { DogBreed, FetchDogBreeds } from "../AddDog.types"
+import { FetchDogBreeds } from "../AddDog.types"
 import { supabase } from "src/services/supabase/supabaseClient"
 import { BodyText } from "src/styled/text/BodyText"
+import { DogBreed } from "src/services/dogs/dogs.breeds.models"
 
 const fetchDogBreeds: FetchDogBreeds = async (search, page, pageSize) => {
   const from = (page - 1) * pageSize

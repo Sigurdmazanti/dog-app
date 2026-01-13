@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { View, Input, Button, YStack, XStack } from 'tamagui'
 import { BodyText } from 'src/styled/text/BodyText'
-import { signInWithEmail } from 'src/functions/utils/auth/signIn'
 import { signUpWithEmail } from 'src/functions/utils/auth/signUp'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'

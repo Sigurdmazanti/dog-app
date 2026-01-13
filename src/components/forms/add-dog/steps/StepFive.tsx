@@ -13,9 +13,8 @@ export function StepFive({
   dogAvatar: string | null
   setDogAvatar: (val: string) => void
 }) {
-  const size = 200;
-  const url = 'test';
 
+  const size = 200;
   const openImageLibrary = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -27,9 +26,9 @@ export function StepFive({
         compressImageQuality: 0.9,
       });
 
-      if (image.path) {
+      if (image.path) 
         setDogAvatar(image.path);
-      }
+      
     } catch (error) {
       if (error.code === 'E_PICKER_CANCELLED') return;
       console.error('Image selection error:', error);
@@ -38,7 +37,7 @@ export function StepFive({
 
     return (
     <>
-        <YStack items="center" gap="$4">
+      <YStack items="center" gap="$4">
       {dogAvatar ? (
         <Image
           source={{ uri: dogAvatar }}
@@ -51,7 +50,7 @@ export function StepFive({
         <BodyText>No image selected</BodyText>
       )}
 
-      <PrimaryButton onPress={openImageLibrary}>Choose Image</PrimaryButton>
+      <PrimaryButton onPress={openImageLibrary}>Choose image</PrimaryButton>
     </YStack>
       {/* <ImagePickerInput /> */}
       {/* {avatarUrl ? (
@@ -67,7 +66,7 @@ export function StepFive({
       )} */}
 
       <YStack width={size}>
-        <PrimaryButton onPress={() => setDogAvatar('test')}>
+        <PrimaryButton>
           tryk mig test
         </PrimaryButton>
         <BodyText>

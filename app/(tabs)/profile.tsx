@@ -6,7 +6,7 @@ import { SignIn } from "src/components/auth/signin/SignIn";
 import { useAuth } from "src/AuthProvider";
 import { BodyText } from "src/styled/text/BodyText";
 import { PrimaryButton } from "src/styled/button/PrimaryButton";
-import { signOut } from "src/services/supabase/supabaseAuthHelpers";
+import { signOut } from "src/services/auth/auth.service";
 
 export default function App() {
   const { user, isLoading } = useAuth()

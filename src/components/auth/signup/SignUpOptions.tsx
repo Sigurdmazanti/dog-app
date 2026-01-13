@@ -1,10 +1,5 @@
 import { useState } from 'react'
-import { View, Input, Button, YStack, XStack } from 'tamagui'
-import { BodyText } from 'src/styled/text/BodyText'
-import { signInWithEmail } from 'src/functions/utils/auth/signIn'
-import { signUpWithEmail } from 'src/functions/utils/auth/signUp'
-import { PrimaryButton } from 'src/styled/button/PrimaryButton'
-import { ContentContainer } from 'src/styled/container/ContentContainer'
+import { YStack } from 'tamagui'
 import { GoogleIcon } from 'src/assets/icons/Google'
 import { AppleIcon } from 'src/assets/icons/Apple'
 import { EnvelopeIcon } from 'src/assets/icons/Envelope'
@@ -14,7 +9,7 @@ import { useRouter } from 'expo-router'
 import { useFormContext } from 'react-hook-form'
 import { DogFormValues } from 'src/components/forms/add-dog/AddDog.types'
 
-export function SignUp() {
+export function SignUpOptions() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)

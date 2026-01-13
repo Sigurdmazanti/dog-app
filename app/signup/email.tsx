@@ -24,13 +24,13 @@ export default function EmailSignup() {
   const params = useLocalSearchParams();
   const formData = params.data ? JSON.parse(params.data as string) : null;
 
-  console.log(formData);
-
   // TODO: Validation using ZOD maybe?
   const handleSignUp = async () => {
     try {
-      const data = await signUpWithEmail(email, password, setLoading)
-      if (!data) return
+      if (!formData) return;
+
+      const data = await signUpWithEmail(formData, email, password, setLoading)
+      if (!data) return;
       
       if (data.session) {
         // logged in right away (if email confirmation is OFF)

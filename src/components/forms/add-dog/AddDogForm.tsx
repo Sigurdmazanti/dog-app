@@ -3,8 +3,9 @@ import { useForm, FormProvider, useWatch } from 'react-hook-form'
 import { Button, XStack } from 'tamagui'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
-import { DogBreedType, FormStep, DogFormValues } from './AddDog.types'
+import { FormStep, DogFormValues } from './AddDog.types'
 import { StepOne, StepTwo, StepThree, StepFour, StepFive, Summary } from './steps'
+import { DogBreed, DogBreedType } from 'src/services/dogs/dogs.breeds.models'
 
 const getSteps = (methods: any): FormStep[] => {
   const dogBreedType = useWatch({ control: methods.control, name: 'dogBreedType' })
@@ -19,7 +20,7 @@ const getSteps = (methods: any): FormStep[] => {
       canProceed: () => !!dogBreedType,
     },
     {
-      content: <StepTwo dogBreedType={dogBreedType} dogBreed={dogBreed} setDogBreed={(val: string[]) => methods.setValue('dogBreed', val)} />,
+      content: <StepTwo dogBreedType={dogBreedType} dogBreed={dogBreed} setDogBreed={(val: DogBreed[]) => methods.setValue('dogBreed', val)} />,
       canProceed: () => Array.isArray(dogBreed) && dogBreed.length > 0,
     },
     {
@@ -45,10 +46,10 @@ export default function AddDogForm() {
   const [currentStep, setCurrentStep] = useState(1)
   const methods = useForm<DogFormValues>({
     defaultValues: {
-      dogBreedType: '',
+      dogBreedType: 'unknown',
       dogBreed: [],
       dogName: '',
-      dogDateOfBirth: null,
+      dogDateOfBirth: new Date(),
       dogAvatar: ''
     },
   })

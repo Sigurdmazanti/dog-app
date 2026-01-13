@@ -3,17 +3,17 @@ import { SearchableSelectList } from "src/components/list/SearchableSelectList"
 import { useState, useEffect } from "react"
 import { PrimaryButton } from "src/styled/button/PrimaryButton"
 import { YStack, View } from "tamagui"
-import { FetchItems } from "../AddDog.types"
+import { DogBreed, FetchDogBreeds } from "../AddDog.types"
 import { supabase } from "src/services/supabase/supabaseClient"
 import { BodyText } from "src/styled/text/BodyText"
 
-const fetchDogBreeds: FetchItems = async (search, page, pageSize) => {
+const fetchDogBreeds: FetchDogBreeds = async (search, page, pageSize) => {
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
 
   let queryBuilder = supabase
     .from('dog_breeds')
-    .select('dog_breed')
+    .select('id, dog_breed')
     .range(from, to)
 
   if (search.trim()) {
@@ -22,7 +22,11 @@ const fetchDogBreeds: FetchItems = async (search, page, pageSize) => {
 
   const { data, error } = await queryBuilder
   if (error) throw error
-  return data.map((row: any) => row.dog_breed)
+
+  return data.map(row => ({
+    id: row.id,
+    label: row.dog_breed,
+  }))
 }
 
 export function StepTwo({
@@ -31,8 +35,8 @@ export function StepTwo({
   setDogBreed,
 }: {
   dogBreedType: string,
-  dogBreed: string[]
-  setDogBreed: (val: string[]) => void
+  dogBreed: DogBreed[]
+  setDogBreed: (val: DogBreed[]) => void
 }) {
   const [open, setOpen] = useState(false)
 
@@ -45,7 +49,7 @@ export function StepTwo({
           <>
             {dogBreed.map((breed, index) => (
               <PrimaryButton key={index} onPress={() => setOpen(true)}>
-                {breed}
+                {breed.label}
               </PrimaryButton>
             ))}
 
@@ -69,7 +73,7 @@ export function StepTwo({
 
       <CustomSheet open={open} setOpen={setOpen}>
         {(setOpen) => (
-          <SearchableSelectList
+          <SearchableSelectList<DogBreed>
             setOpen={setOpen}
             pageSize={5}
             fetchItems={fetchDogBreeds}
@@ -77,13 +81,14 @@ export function StepTwo({
             loadMoreButtonText="Load more"
             noResultsText="No results found"
             title="Choose your dog's breed"
-            onSelect={(value: string) => {
-              if (!dogBreed.includes(value)) {
+            getKey={dog => dog.id}
+            getLabel={dog => dog.label}
+            onSelect={(item: DogBreed) => {
+              if (!dogBreed.some(b => b.id === item.id)) {
                 if (dogBreedType !== 'pure') {
-                  setDogBreed([...dogBreed, value])
-                }
-                else {
-                  setDogBreed([value])
+                  setDogBreed([...dogBreed, item])
+                } else {
+                  setDogBreed([item])
                 }
               }
               setOpen(false)

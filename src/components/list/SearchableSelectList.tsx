@@ -11,89 +11,98 @@ import { ChevronRightIcon } from "src/assets/icons/ChevronRight"
 import { CustomInput } from "src/styled/input/Input"
 import { SearchIcon } from "src/assets/icons/Search"
 
-type FetchItems = (query: string, page: number, pageSize: number) => Promise<string[]>
+type FetchItems<T> = (query: string, page: number, pageSize: number) => Promise<T[]>
 
-type SearchableSelectListProps = {
+type SearchableSelectListProps<T> = {
   pageSize: number
   searchPlaceholder: string
   loadMoreButtonText: string
-  fetchItems: FetchItems
+  fetchItems: FetchItems<T>
   noResultsText?: string
   title?: string
   setOpen?: (val: boolean) => void
-  onSelect?: (val: string) => void
+  onSelect?: (val: T) => void
+  getKey: (item: T) => string
+  getLabel: (item: T) => string
 }
 
-type SelectListProps = {
+type SelectListProps<T> = {
   query: string
   pageSize: number
   loadMoreButtonText: string
-  fetchItems: FetchItems
+  fetchItems: FetchItems<T>
   noResultsText?: string
-  onSelect?: (value: string) => void
+  onSelect?: (value: T) => void
+  getKey: (item: T) => string
+  getLabel: (item: T) => string
 }
 
-export const SearchableSelectList = memo(
-  ({ pageSize, searchPlaceholder, loadMoreButtonText, fetchItems, noResultsText, title, setOpen, onSelect }: SearchableSelectListProps) => {
-    const [query, setQuery] = useState('')
-    const theme = useTheme();
-    const colorScheme = useColorScheme() ?? "light";
+export function SearchableSelectList<T>({
+  pageSize,
+  searchPlaceholder,
+  loadMoreButtonText,
+  fetchItems,
+  noResultsText,
+  title,
+  setOpen,
+  onSelect,
+  getKey,
+  getLabel,
+}: SearchableSelectListProps<T>) {
 
-    return (
-      <View width="100%" flex={1} items="center">
-        <Pressable
-          onPress={() => Keyboard.dismiss()}
-          style={{ width: '100%' }}
-        >
-          {title && <HeadingText mx="auto" mb="$4">{title}</HeadingText>}
-          <XStack
-            items="center"
-            rounded="$4"
-            borderWidth="$0.5"
-            borderColor="$borderColor"
-            px="$2"
-            mb="$4"
-          >
-            <SearchIcon strokeWidth={1.75} size={20} color="$primaryText"/>
-            <CustomInput
-              flex={1}
-              value={query}
-              onChangeText={setQuery}
-              placeholder={searchPlaceholder}
-            />
-          </XStack>
-        </Pressable>
+  const [query, setQuery] = useState('')
 
-        <SelectList 
-          query={query}
-          pageSize={pageSize}
-          loadMoreButtonText={loadMoreButtonText}
-          noResultsText={noResultsText}
-          fetchItems={fetchItems}
-          onSelect={onSelect}
+  return (
+    <View width="100%" flex={1} items="center">
+      {title && <HeadingText mx="auto" mb="$4">{title}</HeadingText>}
+
+      <XStack
+        items="center"
+        rounded="$4"
+        borderWidth="$0.5"
+        borderColor="$borderColor"
+        px="$2"
+        mb="$4"
+      >
+        <SearchIcon strokeWidth={1.75} size={20} color="$primaryText" />
+        <CustomInput
+          flex={1}
+          value={query}
+          onChangeText={setQuery}
+          placeholder={searchPlaceholder}
         />
-    </View>
-    )
-  }
-)
+      </XStack>
 
-export function SelectList({
+      <SelectList<T>
+        query={query}
+        pageSize={pageSize}
+        loadMoreButtonText={loadMoreButtonText}
+        fetchItems={fetchItems}
+        noResultsText={noResultsText}
+        onSelect={onSelect}
+        getKey={getKey}
+        getLabel={getLabel}
+      />
+    </View>
+  )
+}
+
+export function SelectList<T>({
   query,
   pageSize,
   loadMoreButtonText,
   fetchItems,
   noResultsText,
   onSelect,
-}: SelectListProps) {
-  const [selected, setSelected] = useState<string | null>(null)
+  getKey,
+  getLabel,
+}: SelectListProps<T>) {
+
+  const [selected, setSelected] = useState<T | null>(null)
   const [page, setPage] = useState(1)
-  
-  const {
-    items,
-    hasMore,
-    loading,
-    debouncedFetch
-  } = useDebouncedFetch(fetchItems, pageSize)
+
+  const { items, hasMore, loading, debouncedFetch } =
+    useDebouncedFetch<T>(fetchItems, pageSize)
 
   useEffect(() => {
     setPage(1)
@@ -101,57 +110,39 @@ export function SelectList({
     return () => debouncedFetch.cancel()
   }, [query, debouncedFetch])
 
-  const loadMore = () => {
-    if (!hasMore || loading) return
-    const nextPage = page + 1
-    setPage(nextPage)
-    debouncedFetch(query, nextPage)
-  }
-
   return (
     <>
       <View width="100%" position="relative" flex={1}>
         {loading && <LoadingOverlay />}
+
         <Sheet.ScrollView width="100%" keyboardShouldPersistTaps="handled">
           <YGroup bordered>
-            {items.length > 0 ? (
-              items.map((item) => (
-                <YGroup.Item key={item}>
-                  <ListItem
-                    pressTheme
-                    hoverTheme
-                    title={item}
-                    iconAfter={<ChevronRightIcon size={20} strokeWidth={1.2} color="$primaryText" />}
-                    onPress={() => {
-                      setSelected(item)
-                      onSelect?.(item)
-                      Keyboard.dismiss()
-                    }}
-                  />
-                </YGroup.Item>
-              ))
-            ) : (
+
+            {items.length > 0 ? items.map(item => (
+              <YGroup.Item key={getKey(item)}>
+                <ListItem
+                  pressTheme
+                  hoverTheme
+                  title={getLabel(item)}
+                  iconAfter={<ChevronRightIcon size={20} strokeWidth={1.2} color="$primaryText" />}
+                  onPress={() => {
+                    setSelected(item)
+                    onSelect?.(item)
+                    Keyboard.dismiss()
+                  }}
+                />
+              </YGroup.Item>
+            )) : (
               <YGroup.Item>
                 <ListItem justify="center">
                   <BodyText fontWeight="bold">{noResultsText}</BodyText>
                 </ListItem>
               </YGroup.Item>
             )}
+
           </YGroup>
         </Sheet.ScrollView>
       </View>
-      {hasMore &&
-        <PrimaryButton 
-          onPress={() => {
-            if (hasMore) {
-              loadMore()
-            }
-          }}
-          mt="$4"
-        >
-          {loadMoreButtonText}
-        </PrimaryButton>
-      }
     </>
   )
 }

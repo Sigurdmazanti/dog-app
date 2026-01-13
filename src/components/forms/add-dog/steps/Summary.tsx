@@ -1,6 +1,6 @@
 import { View } from "tamagui"
 import { HeadingText } from "src/styled/text/HeadingText"
-import { SignUp } from "src/components/auth/signup/SignUp"
+import { SignUpOptions } from "src/components/auth/signup/SignUpOptions"
 
 export function Summary() {
 
@@ -11,7 +11,7 @@ export function Summary() {
       <BodyText>Name: {form.dogName}</BodyText>
       <BodyText>Date of Birth: {form.dogDateOfBirth?.toLocaleDateString()}</BodyText> */}
       <HeadingText text="center" mb="$4">Let's get started</HeadingText>
-      <SignUp />
+      <SignUpOptions />
     </View>
   )
 }

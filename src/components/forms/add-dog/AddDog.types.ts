@@ -1,5 +1,6 @@
 import { JSX } from "react";
-import { DogBreed, DogBreedType } from "src/services/dogs/dogs.breeds.models";
+import { DogBreed } from "src/services/dogs/dogs.breeds.models";
+import { DogActivityLevel, DogBreedType, DogGender } from "src/services/dogs/dogs.models";
 
 export type FetchDogBreeds = (
   query: string,
@@ -8,10 +9,16 @@ export type FetchDogBreeds = (
 ) => Promise<DogBreed[]>
 
 export type DogFormValues = {
-  dogBreedType: DogBreedType;
-  dogBreed: DogBreed[]
   dogName: string
   dogDateOfBirth: Date
+  dogBreedType: DogBreedType | null
+  dogBreed: DogBreed[]
+  dogGender: DogGender | null
+  isNeutered: boolean
+  dogHeightCm: number
+  dogWeightKg: number
+  dogTargetWeightKg: number
+  dogActivityLevel: DogActivityLevel | null
   dogAvatar: string | null
 }
 

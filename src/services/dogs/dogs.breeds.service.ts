@@ -1,4 +1,5 @@
 import { supabase } from "../supabase/supabaseClient"
+import { DogBreed, mapDogBreedRowToDogBreed } from "./dogs.breeds.models"
 
 type BreedRef = { id: string }
 
@@ -18,4 +19,30 @@ export async function linkDogBreeds(
     )
 
   if (error) throw error
+}
+
+export async function getDogBreeds(
+  page: number,
+  pageSize: number,
+  search?: string
+): Promise<DogBreed[]> {
+  const safePage = Math.max(1, page)
+  const safePageSize = Math.min(Math.max(pageSize, 1), 50)
+
+  const from = (safePage - 1) * safePageSize
+  const to = from + safePageSize - 1
+
+  let query = supabase
+    .from("dog_breeds")
+    .select("id, dog_breed")
+
+  if (search?.trim()) 
+    query = query.ilike("dog_breed", `%${search}%`)
+
+  query = query.range(from, to)
+
+  const { data, error } = await query
+  if (error) throw error
+
+  return mapDogBreedRowToDogBreed(data);
 }

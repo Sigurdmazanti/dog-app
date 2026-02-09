@@ -3,44 +3,45 @@ import { SearchableSelectList } from "src/components/list/SearchableSelectList"
 import { useState, useEffect } from "react"
 import { PrimaryButton } from "src/styled/button/PrimaryButton"
 import { YStack, View } from "tamagui"
-import { FetchDogBreeds } from "../AddDog.types"
+import { DogFormValues, FetchDogBreeds } from "../AddDog.types"
 import { supabase } from "src/services/supabase/supabaseClient"
 import { BodyText } from "src/styled/text/BodyText"
 import { DogBreed } from "src/services/dogs/dogs.breeds.models"
+import { getDogBreeds } from "src/services/dogs/dogs.breeds.service"
+import { DogBreedType } from "src/services/dogs/dogs.models"
+import { useFormContext, useWatch } from "react-hook-form"
 
 const fetchDogBreeds: FetchDogBreeds = async (search, page, pageSize) => {
-  const from = (page - 1) * pageSize
-  const to = from + pageSize - 1
-
-  let queryBuilder = supabase
-    .from('dog_breeds')
-    .select('id, dog_breed')
-    .range(from, to)
-
-  if (search.trim()) {
-    queryBuilder = queryBuilder.ilike('dog_breed', `%${search}%`)
-  }
-
-  const { data, error } = await queryBuilder
-  if (error) throw error
-
-  return data.map(row => ({
-    id: row.id,
-    label: row.dog_breed,
-  }))
+  return await getDogBreeds(page, pageSize, search)
 }
 
-export function StepTwo({
-  dogBreedType,
-  dogBreed,
-  setDogBreed,
-}: {
-  dogBreedType: string,
-  dogBreed: DogBreed[]
-  setDogBreed: (val: DogBreed[]) => void
-}) {
+export function StepTwo() {
   const [open, setOpen] = useState(false)
+  const { control, setValue, getValues } = useFormContext<DogFormValues>()
 
+  const dogBreedType = useWatch<DogFormValues, "dogBreedType">({
+    control,
+    name: "dogBreedType",
+  });
+
+  const dogBreed = useWatch<DogFormValues, "dogBreed">({
+    control,
+    name: "dogBreed",
+  });
+
+  const handleSelectBreed = (item: DogBreed) => {
+    const currentBreeds = getValues("dogBreed") || []
+
+    if (!currentBreeds.some(b => b.id === item.id)) {
+      if (dogBreedType !== "pure")
+        setValue("dogBreed", [...currentBreeds, item])
+      else
+        setValue("dogBreed", [item])
+    }
+
+    setOpen(false)
+  }
+  
   return (
     <View items="center" justify="center">
       <YStack gap="$2" items="center">
@@ -65,7 +66,7 @@ export function StepTwo({
         {dogBreedType === 'pure' && (
           <>
             <PrimaryButton onPress={() => setOpen(true)}>
-              {dogBreed.at(-1) || 'Choose breed'}
+              {dogBreed.at(-1)?.label ?? 'Choose breed'}
             </PrimaryButton>
           </>
         )}
@@ -84,16 +85,7 @@ export function StepTwo({
             title="Choose your dog's breed"
             getKey={dog => dog.id}
             getLabel={dog => dog.label}
-            onSelect={(item: DogBreed) => {
-              if (!dogBreed.some(b => b.id === item.id)) {
-                if (dogBreedType !== 'pure') {
-                  setDogBreed([...dogBreed, item])
-                } else {
-                  setDogBreed([item])
-                }
-              }
-              setOpen(false)
-            }}
+            onSelect={handleSelectBreed}
           />
         )}
       </CustomSheet>

@@ -1,9 +1,9 @@
 import { View } from "react-native";
 import { PrimaryButton } from "src/styled/button/PrimaryButton";
-import { YStack, XStack, Text } from "tamagui";
+import { YStack, XStack } from "tamagui";
 import { BodyText } from "src/styled/text/BodyText";
-import { DogBreedType } from "src/services/dogs/dogs.breeds.models";
-
+import { DogFormValues } from "../AddDog.types";
+import { useFormContext, useWatch } from "react-hook-form";
 // const RenderStackedDogIcon = ({ iconSize, isActive }: { iconSize: number, isActive: boolean }) => {
 //   const color = isActive ? "$primaryText" : "$text";
 
@@ -16,14 +16,13 @@ import { DogBreedType } from "src/services/dogs/dogs.breeds.models";
 //   )
 // }
 
-export function StepOne({
-  dogBreedType,
-  setDogBreedType,
-}: {
-  dogBreedType: DogBreedType
-  setDogBreedType: (val: DogBreedType) => void
-}) {
+export function StepOne() {
   const iconSize = 15;
+  const { control, setValue } = useFormContext<DogFormValues>()
+  const dogBreedType = useWatch<DogFormValues, "dogBreedType">({
+    control,
+    name: "dogBreedType",
+  });
   
   return (
     <View>
@@ -31,9 +30,7 @@ export function StepOne({
         <BodyText>Step 1: Dog Type</BodyText>
         <XStack justify='center' flexWrap='wrap' columnGap="$4">
           <PrimaryButton
-            onPress={() => {
-              setDogBreedType("mixed")
-            }}
+            onPress={() => setValue("dogBreedType", "mixed")}
             tone={dogBreedType === "mixed" ? "success" : "inactive"}
             // icon={<RenderStackedDogIcon iconSize={iconSize} isActive={dogBreedType === "mixed"}/>}
           >
@@ -41,9 +38,7 @@ export function StepOne({
           </PrimaryButton>
           
           <PrimaryButton
-            onPress={() => {
-              setDogBreedType("pure")
-            }}
+            onPress={() => setValue("dogBreedType", "pure")}
             tone={dogBreedType === "pure" ? "success" : "inactive"}
             // icon={<Dog size={18}></Dog>}
           >

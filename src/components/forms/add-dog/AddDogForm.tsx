@@ -5,35 +5,30 @@ import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
 import { FormStep, DogFormValues } from './AddDog.types'
 import { StepOne, StepTwo, StepThree, StepFour, StepFive, Summary } from './steps'
-import { DogBreed, DogBreedType } from 'src/services/dogs/dogs.breeds.models'
+import { DogBreed } from 'src/services/dogs/dogs.breeds.models'
+import { DogBreedType } from 'src/services/dogs/dogs.models'
 
-const getSteps = (methods: any): FormStep[] => {
-  const dogBreedType = useWatch({ control: methods.control, name: 'dogBreedType' })
-  const dogBreed = useWatch({ control: methods.control, name: 'dogBreed' })
-  const dogName = useWatch({ control: methods.control, name: 'dogName' })
-  const dogDateOfBirth = useWatch({ control: methods.control, name: 'dogDateOfBirth' })
-  const dogAvatar = useWatch({ control: methods.control, name: 'dogAvatar' })
-
+export const getSteps = (formValues: DogFormValues): FormStep[] => {
   return [
     {
-      content: <StepOne dogBreedType={dogBreedType} setDogBreedType={(val: DogBreedType) => methods.setValue('dogBreedType', val)} />,
-      canProceed: () => !!dogBreedType,
+      content: <StepOne />,
+      canProceed: () => !!formValues.dogBreedType,
     },
     {
-      content: <StepTwo dogBreedType={dogBreedType} dogBreed={dogBreed} setDogBreed={(val: DogBreed[]) => methods.setValue('dogBreed', val)} />,
-      canProceed: () => Array.isArray(dogBreed) && dogBreed.length > 0,
+      content: <StepTwo />,
+      canProceed: () => Array.isArray(formValues.dogBreed) && formValues.dogBreed.length > 0,
     },
     {
-      content: <StepThree dogName={dogName} setDogName={(val: string) => methods.setValue('dogName', val)} />,
-      canProceed: () => !!dogName,
+      content: <StepThree />,
+      canProceed: () => !!formValues.dogName,
     },
     {
-      content: <StepFour dogDateOfBirth={dogDateOfBirth} setDogDateOfBirth={(val: Date) => methods.setValue('dogDateOfBirth', val)} />,
-      canProceed: () => !!dogDateOfBirth,
+      content: <StepFour />,
+      canProceed: () => !!formValues.dogDateOfBirth,
     },
     {
-      content: <StepFive dogAvatar={dogAvatar} setDogAvatar={(val: string) => methods.setValue('dogAvatar', val)} />,
-      canProceed: () => !!dogAvatar,
+      content: <StepFive />,
+      canProceed: () => !!formValues.dogAvatar,
     },
     {
       content: <Summary />,
@@ -42,19 +37,30 @@ const getSteps = (methods: any): FormStep[] => {
   ]
 }
 
+
 export default function AddDogForm() {
   const [currentStep, setCurrentStep] = useState(1)
   const methods = useForm<DogFormValues>({
     defaultValues: {
-      dogBreedType: 'unknown',
-      dogBreed: [],
       dogName: '',
       dogDateOfBirth: new Date(),
+      dogBreedType: null,
+      dogBreed: [],
+      dogGender: null,
+      isNeutered: false,
+      dogHeightCm: 0,
+      dogWeightKg: 0,
+      dogTargetWeightKg: 0,
+      dogActivityLevel: null,
       dogAvatar: ''
     },
   })
 
-  const steps = getSteps(methods)
+  const formValues = useWatch<DogFormValues>({
+    control: methods.control,
+  }) as DogFormValues;
+
+  const steps = getSteps(formValues)
   const maxStep = steps.length
   const isLastStep = currentStep === maxStep
   const currentStepData = steps[currentStep - 1]

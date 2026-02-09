@@ -54,7 +54,9 @@ export function SearchableSelectList<T>({
 
   return (
     <View width="100%" flex={1} items="center">
-      {title && <HeadingText mx="auto" mb="$4">{title}</HeadingText>}
+      {title && 
+        <HeadingText mx="auto" mb="$4">{title}</HeadingText>
+      }
 
       <XStack
         items="center"
@@ -110,6 +112,13 @@ export function SelectList<T>({
     return () => debouncedFetch.cancel()
   }, [query, debouncedFetch])
 
+  const loadMore = () => {
+    if (!hasMore || loading) return
+    const nextPage = page + 1
+    setPage(nextPage)
+    debouncedFetch(query, nextPage)
+  }
+
   return (
     <>
       <View width="100%" position="relative" flex={1}>
@@ -142,6 +151,18 @@ export function SelectList<T>({
 
           </YGroup>
         </Sheet.ScrollView>
+        {hasMore &&
+          <PrimaryButton 
+            onPress={() => {
+              if (hasMore) {
+                loadMore()
+              }
+            }}
+            mt="$4"
+          >
+            {loadMoreButtonText}
+          </PrimaryButton>
+        }
       </View>
     </>
   )

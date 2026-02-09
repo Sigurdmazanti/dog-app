@@ -1,13 +1,16 @@
+import { useFormContext, useWatch } from "react-hook-form"
 import { BodyText } from "src/styled/text/BodyText"
 import { View, YStack, Input } from "tamagui"
+import { DogFormValues } from "../AddDog.types"
 
-export function StepThree({
-  dogName,
-  setDogName,
-}: {
-  dogName: string
-  setDogName: (val: string) => void
-}) {
+export function StepThree() {
+  const { control, setValue } = useFormContext<DogFormValues>()
+
+  const dogName = useWatch<DogFormValues, "dogName">({
+    control,
+    name: "dogName",
+  })
+
   return (
     <View items="center" justify="center">
       <YStack gap="$2" items="center">
@@ -15,9 +18,7 @@ export function StepThree({
         <Input
           placeholder="What's the name of your dog?"
           value={dogName}
-          onChangeText={(value: string) => {
-            setDogName(value)
-          }}
+          onChangeText={(value: string) => setValue("dogName", value)}
           width={300}
         />
       </YStack>

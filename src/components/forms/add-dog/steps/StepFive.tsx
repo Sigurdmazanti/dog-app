@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
+import { useFormContext, useWatch } from 'react-hook-form';
 // import { ImagePickerInput } from 'src/components/input/ImagePicker'
 import ImagePicker from 'react-native-image-crop-picker';
 import { supabase } from 'src/services/supabase/supabaseClient'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { BodyText } from 'src/styled/text/BodyText'
 import { Image, Input, YStack } from 'tamagui'
+import { DogFormValues } from '../AddDog.types';
 
-export function StepFive({
-  dogAvatar,
-  setDogAvatar
-}: {
-  dogAvatar: string | null
-  setDogAvatar: (val: string) => void
-}) {
-
+export function StepFive() {
+  const { control, setValue } = useFormContext<DogFormValues>()
+  const dogAvatar = useWatch<DogFormValues, "dogAvatar">({
+    control,
+    name: "dogAvatar",
+  })
+  
   const size = 200;
+
   const openImageLibrary = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -26,8 +28,8 @@ export function StepFive({
         compressImageQuality: 0.9,
       });
 
-      if (image.path) 
-        setDogAvatar(image.path);
+      if (image.path)
+        setValue("dogAvatar", image.path)
       
     } catch (error) {
       if (error.code === 'E_PICKER_CANCELLED') return;

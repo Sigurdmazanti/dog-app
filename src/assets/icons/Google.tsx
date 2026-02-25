@@ -3,7 +3,7 @@ import { themed, type IconProps } from '@tamagui/helpers-icon'
 import { memo } from 'react'
 
 const Icon = (propsBase: IconProps) => {
-  const { color, size = 26, strokeWidth = 1.5, ...otherProps } = propsBase as SvgProps & { size: number }
+  const { color, size = 24, strokeWidth = 1.5, ...otherProps } = propsBase as SvgProps & { size: number }
 
   return (
     <Svg

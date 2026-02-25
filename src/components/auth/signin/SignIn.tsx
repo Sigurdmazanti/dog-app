@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { View, Input, Button, YStack, XStack } from 'tamagui'
 import { BodyText } from 'src/styled/text/BodyText'
-import { signUpWithEmail } from 'src/functions/utils/auth/signUp'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
 import { GoogleIcon } from 'src/assets/icons/Google'
@@ -70,14 +69,14 @@ export function SignIn() {
 
           <TertiaryButton
             height={50}
-            icon={<GoogleIcon size={30} color="$primaryTextAccent" />}
+            icon={<GoogleIcon size='$1.5' color="$primaryTextAccent" />}
           >
             Log in using Google (N/A)
           </TertiaryButton>
 
           <TertiaryButton 
             height={50} 
-            icon={<AppleIcon size={30} color="$primaryTextAccent" />}
+            icon={<AppleIcon size='$1.5' color="$primaryTextAccent" />}
           >
             Log in using Apple (N/A)
           </TertiaryButton>

@@ -3,6 +3,7 @@ import { DogFormValues } from "src/components/forms/add-dog/AddDog.types"
 /* =======================
    ENUMS (DB-aligned)
    ======================= */
+export type DogNeuteredOption = { value: "yes" | "no"; label: string; bool: boolean };
 export type DogBreedType = "mixed" | "pure";
 export type DogGender = "male" | "female";
 export type DogActivityLevel =
@@ -92,10 +93,10 @@ export function mapDogFormToInsert(
     dog_date_of_birth: form.dogDateOfBirth,
     dog_breed_type: form.dogBreedType,
     dog_gender: form.dogGender,
-    dog_is_neutered: form.isNeutered,
-    dog_height_cm: form.dogHeightCm,
-    dog_weight_kg: form.dogWeightKg,
-    dog_target_weight_kg: form.dogTargetWeightKg,
+    dog_is_neutered: form.dogIsNeutered,
+    dog_height_cm: form.dogHeightCm as number,
+    dog_weight_kg: form.dogWeightKg as number,
+    dog_target_weight_kg: form.dogTargetWeightKg as number,
     dog_activity_level: form.dogActivityLevel,
     dog_avatar_url: form.dogAvatar ?? null,
   }

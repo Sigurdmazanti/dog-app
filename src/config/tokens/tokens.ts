@@ -17,6 +17,7 @@ export const customTokens = createTokens({
     disabledTextLight: '#9E9E9E',
     placeholderTextLight: '#9E9E9E',
     borderColorLight: '#D1D5DB',
+    inputBgLight: '#f3f3f3',
 
     backgroundDark: '#1F1F1F',
     cardBackgroundDark: '#2C2C2C',
@@ -30,6 +31,7 @@ export const customTokens = createTokens({
     disabledBgDark: '#2F2F2F',
     disabledTextDark: '#EDEDED',
     placeholderTextDark: '#9E9E9E',
-    borderColorDark: '#D1D5DB'
+    borderColorDark: '#D1D5DB',
+    inputBgDark: '#232323'
   },
 })

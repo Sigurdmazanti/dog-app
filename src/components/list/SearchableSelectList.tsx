@@ -1,17 +1,17 @@
-import { memo, useEffect, useState } from "react"
+import { memo, useCallback, useEffect, useState } from "react"
 import { Keyboard, Pressable, useColorScheme } from "react-native"
-import { ListItem, Sheet, useTheme, View, XStack, YGroup } from "tamagui"
+import { H3, ListItem, Sheet, useTheme, View, XStack, YGroup, YStack } from "tamagui"
 import { LoadingOverlay } from "../LoadingOverlay"
-import { HeadingText } from "src/styled/text/HeadingText"
 import { InputWithIcon } from "src/components/input/InputWithIcon"
 import { PrimaryButton } from "src/styled/button/PrimaryButton"
 import { useDebouncedFetch } from "src/functions/helpers/debouncedFetch"
 import { BodyText } from "src/styled/text/BodyText"
 import { ChevronRightIcon } from "src/assets/icons/ChevronRight"
-import { CustomInput } from "src/styled/input/Input"
+import { CustomInput } from "src/styled/input/CustomInput"
 import { SearchIcon } from "src/assets/icons/Search"
+import { CustomH3 } from "src/styled/headings/CustomH3"
 
-type FetchItems<T> = (query: string, page: number, pageSize: number) => Promise<T[]>
+type FetchItems<T> = (query: string, page: number, pageSize: number) => Promise<{ items: T[]; total: number }>
 
 type SearchableSelectListProps<T> = {
   pageSize: number
@@ -22,8 +22,11 @@ type SearchableSelectListProps<T> = {
   title?: string
   setOpen?: (val: boolean) => void
   onSelect?: (val: T) => void
+  showTotalCount?: boolean
+  showTotalCountSuffix?: string
   getKey: (item: T) => string
   getLabel: (item: T) => string
+  onFetchResult?: (shown: number, total: number) => void
 }
 
 type SelectListProps<T> = {
@@ -33,14 +36,19 @@ type SelectListProps<T> = {
   fetchItems: FetchItems<T>
   noResultsText?: string
   onSelect?: (value: T) => void
+  showTotalCount: boolean
+  showTotalCountSuffix: string
   getKey: (item: T) => string
   getLabel: (item: T) => string
+  onFetchResult?: (shown: number, total: number) => void
 }
 
 export function SearchableSelectList<T>({
   pageSize,
   searchPlaceholder,
   loadMoreButtonText,
+  showTotalCount = false,
+  showTotalCountSuffix = 'results',
   fetchItems,
   noResultsText,
   title,
@@ -48,26 +56,29 @@ export function SearchableSelectList<T>({
   onSelect,
   getKey,
   getLabel,
+  onFetchResult,
 }: SearchableSelectListProps<T>) {
-
   const [query, setQuery] = useState('')
 
   return (
     <View width="100%" flex={1} items="center">
       {title && 
-        <HeadingText mx="auto" mb="$4">{title}</HeadingText>
+        <CustomH3 mx="auto" mb="$4">{title}</CustomH3>
       }
 
       <XStack
+        maxW={300}
         items="center"
         rounded="$4"
         borderWidth="$0.5"
         borderColor="$borderColor"
-        px="$2"
+        bg="$inputBg"
+        px="$4"
         mb="$4"
       >
-        <SearchIcon strokeWidth={1.75} size={20} color="$primaryText" />
+        <SearchIcon strokeWidth={1.75} size='$1' color="$primaryText" />
         <CustomInput
+          borderWidth={0}
           flex={1}
           value={query}
           onChangeText={setQuery}
@@ -84,6 +95,9 @@ export function SearchableSelectList<T>({
         onSelect={onSelect}
         getKey={getKey}
         getLabel={getLabel}
+        onFetchResult={onFetchResult}
+        showTotalCount={showTotalCount}
+        showTotalCountSuffix={showTotalCountSuffix}
       />
     </View>
   )
@@ -98,19 +112,33 @@ export function SelectList<T>({
   onSelect,
   getKey,
   getLabel,
+  onFetchResult,
+  showTotalCount,
+  showTotalCountSuffix,
 }: SelectListProps<T>) {
-
   const [selected, setSelected] = useState<T | null>(null)
   const [page, setPage] = useState(1)
+  const [total, setTotal] = useState(0)
 
-  const { items, hasMore, loading, debouncedFetch } =
-    useDebouncedFetch<T>(fetchItems, pageSize)
+  const wrappedFetch = useCallback(async (q: string, p: number, s: number) => {
+    const result = await fetchItems(q, p, s)
+    setTotal(result.total)
+    return result.items
+  }, [fetchItems])
+
+  const { items, hasMore, loading, debouncedFetch } = useDebouncedFetch<T>(wrappedFetch, pageSize)
 
   useEffect(() => {
     setPage(1)
     debouncedFetch(query, 1)
     return () => debouncedFetch.cancel()
   }, [query, debouncedFetch])
+
+  useEffect(() => {
+    if (onFetchResult) {
+      onFetchResult(items.length, total)
+    }
+  }, [items, total])
 
   const loadMore = () => {
     if (!hasMore || loading) return
@@ -126,14 +154,13 @@ export function SelectList<T>({
 
         <Sheet.ScrollView width="100%" keyboardShouldPersistTaps="handled">
           <YGroup bordered>
-
             {items.length > 0 ? items.map(item => (
               <YGroup.Item key={getKey(item)}>
                 <ListItem
                   pressTheme
                   hoverTheme
                   title={getLabel(item)}
-                  iconAfter={<ChevronRightIcon size={20} strokeWidth={1.2} color="$primaryText" />}
+                  iconAfter={<ChevronRightIcon size='$1' strokeWidth={1.2} color="$primaryText" />}
                   onPress={() => {
                     setSelected(item)
                     onSelect?.(item)
@@ -148,21 +175,29 @@ export function SelectList<T>({
                 </ListItem>
               </YGroup.Item>
             )}
-
           </YGroup>
         </Sheet.ScrollView>
-        {hasMore &&
-          <PrimaryButton 
-            onPress={() => {
-              if (hasMore) {
-                loadMore()
-              }
-            }}
-            mt="$4"
-          >
-            {loadMoreButtonText}
-          </PrimaryButton>
-        }
+
+        <YStack gap="$2" items="center">
+          {hasMore &&
+            <PrimaryButton
+              maxW={150}
+              onPress={() => {
+                if (hasMore) {
+                  loadMore()
+                }
+              }}
+              mt="$4"
+            >
+              {loadMoreButtonText}
+            </PrimaryButton>
+          }
+          {showTotalCount && total > 0 && (
+            <BodyText text="center">
+              {`Showing ${items.length} of ${total} ${showTotalCountSuffix}`}
+            </BodyText>
+          )}
+        </YStack>
       </View>
     </>
   )

@@ -29,7 +29,7 @@ export function SignUpOptions() {
     <YStack gap="$2">
       <TertiaryButton 
         height={50} 
-        icon={<EnvelopeIcon size={30} color="$primaryTextAccent" strokeWidth={1.5} />}
+        icon={<EnvelopeIcon size='$1.5' color="$primaryTextAccent" strokeWidth={1.5} />}
         onPress={() => router.push({
           pathname: '/signup/email',
           params: { data: serialized }
@@ -40,14 +40,14 @@ export function SignUpOptions() {
 
       <TertiaryButton
         height={50}
-        icon={<GoogleIcon size={30} color="$primaryTextAccent" />}
+        icon={<GoogleIcon size='$1.5' color="$primaryTextAccent" />}
       >
         Continue using Google (N/A)
       </TertiaryButton>
 
       <TertiaryButton 
         height={50} 
-        icon={<AppleIcon size={30} color="$primaryTextAccent" />}
+        icon={<AppleIcon size='$1.5' color="$primaryTextAccent" />}
       >
         Continue using Apple (N/A)
       </TertiaryButton>

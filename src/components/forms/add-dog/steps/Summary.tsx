@@ -1,6 +1,6 @@
 import { View } from "tamagui"
-import { HeadingText } from "src/styled/text/HeadingText"
 import { SignUpOptions } from "src/components/auth/signup/SignUpOptions"
+import { CustomH3 } from "src/styled/headings/CustomH3"
 
 export function Summary() {
 
@@ -10,7 +10,7 @@ export function Summary() {
       <BodyText>Breed: {form.dogBreed.length > 1 ? form.dogBreed.join(', ') : form.dogBreed}</BodyText>
       <BodyText>Name: {form.dogName}</BodyText>
       <BodyText>Date of Birth: {form.dogDateOfBirth?.toLocaleDateString()}</BodyText> */}
-      <HeadingText text="center" mb="$4">Let's get started</HeadingText>
+      <CustomH3 text="center" mb="$4">Let's get started</CustomH3>
       <SignUpOptions />
     </View>
   )

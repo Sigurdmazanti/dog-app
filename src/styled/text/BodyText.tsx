@@ -5,4 +5,21 @@ export const BodyText = styled(Text, {
   fontFamily: '$body',
   fontSize: '$4',
   color: '$primaryText',
+
+  variants: {
+    tone: {
+      default: {
+        color: '$primaryText',
+      },
+      disabled: {
+        color: '$disabledText',
+      },
+      inactive: {
+        color: '$primaryText',
+      }
+    } 
+  } as const,
+  defaultVariants: {
+    tone: 'default',
+  },
 })

@@ -6,5 +6,6 @@ export const ContentContainer = styled(YStack, {
   gap: '$4',
   px: '$2',
   pt: '$5',
+  pb: '$5',
   bg: '$background'
 })

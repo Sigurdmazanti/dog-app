@@ -7,7 +7,7 @@ import Animated, {
   withTiming,
   interpolate,
 } from 'react-native-reanimated';
-import { CustomInput } from 'src/styled/input/Input';
+import { CustomInput } from 'src/styled/input/CustomInput';
 import { CustomLabel } from 'src/styled/input/Label';
 import { ShowPasswordIcon } from 'src/assets/icons/ShowPassword';
 import { HidePasswordIcon } from 'src/assets/icons/HidePassword';

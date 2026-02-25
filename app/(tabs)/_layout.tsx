@@ -26,7 +26,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Tab One',
-          tabBarIcon: ({ color }) => <GoogleIcon color="$danger"/>,
+          tabBarIcon: ({ color }) => <GoogleIcon color="$danger" size="$1" />,
           headerRight: () => (
             <Link href="/modal" asChild>
               {/* <Button mr="$4" bg="$green8" color="$green12">
@@ -40,7 +40,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: !user ? 'Log in' : 'Profile',
-          tabBarIcon: ({ color }) => <GoogleIcon color="$danger"/>,
+          tabBarIcon: ({ color }) => <GoogleIcon color="$danger" size="$1" />,
         }}
       />
       <Tabs.Screen

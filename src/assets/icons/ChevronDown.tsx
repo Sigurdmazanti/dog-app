@@ -14,7 +14,7 @@ const Icon = (propsBase: IconProps) => {
       {...otherProps}
     >
       <Path
-        d="M9.5 7L14.5 12L9.5 17"
+        d="M7 9.5L12 14.5L17 9.5"
         stroke={color}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
@@ -24,6 +24,6 @@ const Icon = (propsBase: IconProps) => {
   )
 }
 
-Icon.displayName = 'ChevronRightIcon'
+Icon.displayName = 'ChevronDownIcon'
 
-export const ChevronRightIcon = memo(themed(Icon))
+export const ChevronDownIcon = memo(themed(Icon))

@@ -25,7 +25,7 @@ export async function getDogBreeds(
   page: number,
   pageSize: number,
   search?: string
-): Promise<DogBreed[]> {
+): Promise<{ breeds: DogBreed[]; total: number }> {
   const safePage = Math.max(1, page)
   const safePageSize = Math.min(Math.max(pageSize, 1), 50)
 
@@ -34,15 +34,15 @@ export async function getDogBreeds(
 
   let query = supabase
     .from("dog_breeds")
-    .select("id, dog_breed")
+    .select("id, dog_breed", { count: "exact" })
 
   if (search?.trim()) 
     query = query.ilike("dog_breed", `%${search}%`)
 
   query = query.range(from, to)
 
-  const { data, error } = await query
+  const { data, error, count } = await query
   if (error) throw error
 
-  return mapDogBreedRowToDogBreed(data);
+  return { breeds: mapDogBreedRowToDogBreed(data), total: count ?? 0 }
 }

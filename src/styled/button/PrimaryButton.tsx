@@ -31,6 +31,7 @@ export const PrimaryButton = styled(Button, {
         color: '$text',
         pressStyle: {
           bg: '$disabledBg',
+          opacity: 0.75
         },
       }
     } 

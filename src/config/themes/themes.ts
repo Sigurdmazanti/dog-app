@@ -16,7 +16,8 @@ export const customThemes = {
     disabledBg: customTokens.color.disabledBgLight,
     disabledText: customTokens.color.disabledTextLight,
     placeholderText: customTokens.color.placeholderTextLight,
-    borderColor: customTokens.color.borderColorLight
+    borderColor: customTokens.color.borderColorLight,
+    inputBg: customTokens.color.inputBgLight
   },
   dark: {
     background: customTokens.color.backgroundDark,
@@ -31,6 +32,7 @@ export const customThemes = {
     disabledBg: customTokens.color.disabledBgDark,
     disabledText: customTokens.color.disabledTextDark,
     placeholderText: customTokens.color.placeholderTextDark,
-    borderColor: customTokens.color.borderColorDark
+    borderColor: customTokens.color.borderColorDark,
+    inputBg: customTokens.color.inputBgDark
   },
 }

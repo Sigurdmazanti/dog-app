@@ -1,94 +1,165 @@
-import { CustomSheet } from "src/components/sheet/CustomSheet"
-import { SearchableSelectList } from "src/components/list/SearchableSelectList"
-import { useState, useEffect } from "react"
-import { PrimaryButton } from "src/styled/button/PrimaryButton"
-import { YStack, View } from "tamagui"
-import { DogFormValues, FetchDogBreeds } from "../AddDog.types"
-import { supabase } from "src/services/supabase/supabaseClient"
-import { BodyText } from "src/styled/text/BodyText"
-import { DogBreed } from "src/services/dogs/dogs.breeds.models"
-import { getDogBreeds } from "src/services/dogs/dogs.breeds.service"
-import { DogBreedType } from "src/services/dogs/dogs.models"
-import { useFormContext, useWatch } from "react-hook-form"
-
-const fetchDogBreeds: FetchDogBreeds = async (search, page, pageSize) => {
-  return await getDogBreeds(page, pageSize, search)
-}
+import { useFormContext, useWatch } from "react-hook-form";
+import { BodyText } from "src/styled/text/BodyText";
+import { Input, RadioGroup, View, YStack, XStack } from "tamagui";
+import { DogFormValues } from "../AddDog.types";
+import { useState } from "react";
+import { Platform, Pressable, useColorScheme } from "react-native";
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
+import { CustomSheet } from "src/components/sheet/CustomSheet";
+import { PrimaryButton } from "src/styled/button/PrimaryButton";
+import { DogGender, DogNeuteredOption } from "src/services/dogs/dogs.models";
+import { formatDateDMY } from "src/functions/helpers/dateFormatter";
+import { SelectInput, SelectItem } from "src/components/input/SelectInput";
+import { RadioGroupItem } from "src/components/input/RadioGroupItem";
+import { CustomInput } from "src/styled/input/CustomInput";
+import { CustomInputLabel } from "src/styled/input/CustomInputLabel";
 
 export function StepTwo() {
-  const [open, setOpen] = useState(false)
-  const { control, setValue, getValues } = useFormContext<DogFormValues>()
+	const { control, setValue, getValues } = useFormContext<DogFormValues>()
+	const dogName = getValues()?.dogName;
+    
 
-  const dogBreedType = useWatch<DogFormValues, "dogBreedType">({
-    control,
-    name: "dogBreedType",
-  });
+	const dogDateOfBirth = useWatch<DogFormValues, "dogDateOfBirth">({
+		control,
+		name: "dogDateOfBirth",
+	})
 
-  const dogBreed = useWatch<DogFormValues, "dogBreed">({
-    control,
-    name: "dogBreed",
-  });
+	const dogGender = useWatch<DogFormValues, "dogGender">({
+		control,
+		name: "dogGender",
+	})
 
-  const handleSelectBreed = (item: DogBreed) => {
-    const currentBreeds = getValues("dogBreed") || []
+	const dogIsNeutered = useWatch<DogFormValues, "dogIsNeutered">({
+		control,
+		name: "dogIsNeutered",
+	})
 
-    if (!currentBreeds.some(b => b.id === item.id)) {
-      if (dogBreedType !== "pure")
-        setValue("dogBreed", [...currentBreeds, item])
-      else
-        setValue("dogBreed", [item])
-    }
+	const dogGenderItems: SelectItem<DogGender>[] = [
+		{ value: "male", label: "Male" },
+		{ value: "female", label: "Female" },
+	]
 
-    setOpen(false)
-  }
-  
-  return (
-    <View items="center" justify="center">
-      <YStack gap="$2" items="center">
-        <BodyText>Step 2: Dog Breed</BodyText>
-        
-        {dogBreedType === 'mixed' && (
-          <>
-            {dogBreed.map((breed, index) => (
-              <PrimaryButton key={index} onPress={() => setOpen(true)}>
-                {breed.label}
-              </PrimaryButton>
-            ))}
+  const dogNeuteredOptions: DogNeuteredOption[] = [
+    { value: "yes", label: "Yes", bool: true },
+    { value: "no", label: "No", bool: false },
+  ];
+	
+	const [showPicker, setShowPicker] = useState(false)
+	const [showInnerPicker, setShowInnerPicker] = useState(false)
+	const [tempDate, setTempDate] = useState(
+		dogDateOfBirth != null && dogDateOfBirth instanceof Date ? dogDateOfBirth : new Date()
+	)
+	const colorScheme = useColorScheme() ?? 'light'
+	
 
-            {dogBreed.length < 3 && (
-              <PrimaryButton onPress={() => setOpen(true)}>
-                {dogBreed.length === 0 ? "Choose breed" : "Add another breed"}
-              </PrimaryButton>
-            )}
-          </>
-        )}
-
-        {dogBreedType === 'pure' && (
-          <>
-            <PrimaryButton onPress={() => setOpen(true)}>
-              {dogBreed.at(-1)?.label ?? 'Choose breed'}
-            </PrimaryButton>
-          </>
-        )}
-
+	const onAndroidPickerChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+		if (event.type === "dismissed") {
+			setShowPicker(false)
+			return
+		}
+		if (selectedDate) {
+			setValue("dogDateOfBirth", selectedDate)
+			setShowPicker(false)
+		}
+	}
+	return (
+		<View items="center" justify="center" gap="$6">
+			<YStack gap="$2" maxW={300} width='100%'>
+				<CustomInputLabel>What gender does {dogName} have?</CustomInputLabel>
+        <RadioGroup
+          items="center"
+          gap="$2.5"
+          orientation="vertical"
+          value={dogGender ?? undefined}
+          onValueChange={(val) => setValue("dogGender", val as DogGender)}
+        >
+        {dogGenderItems.map((item) => (
+          <RadioGroupItem
+            key={item.value}
+            selected={dogGender === item.value}
+            value={item.value}
+            label={item.label}
+            onSelect={() => setValue("dogGender", item.value)}
+          />
+        ))}
+        </RadioGroup>
       </YStack>
 
-      <CustomSheet open={open} setOpen={setOpen}>
-        {(setOpen) => (
-          <SearchableSelectList<DogBreed>
-            setOpen={setOpen}
-            pageSize={5}
-            fetchItems={fetchDogBreeds}
-            searchPlaceholder="Search..."
-            loadMoreButtonText="Load more"
-            noResultsText="No results found"
-            title="Choose your dog's breed"
-            getKey={dog => dog.id}
-            getLabel={dog => dog.label}
-            onSelect={handleSelectBreed}
+      <YStack gap="$2" maxW={300} width='100%'>
+				<CustomInputLabel>When is {dogName}'s birthday?</CustomInputLabel>
+				<Pressable onPress={() => setShowPicker(true)}>
+          <CustomInput
+            pointerEvents="none" // prevents Input from catching touches
+            editable={false}
+            placeholder="Date of birth"
+            value={formatDateDMY(dogDateOfBirth)}
           />
-        )}
-      </CustomSheet>
-    </View>
-  )
+				</Pressable>
+      </YStack>
+
+      {/* Android opens up the native datepicker dialog immediately on mount */}
+      {Platform.OS == 'android' ? (
+        showPicker && (
+          <DateTimePicker
+            value={tempDate}
+            mode="date"
+            maximumDate={new Date()}
+            onChange={onAndroidPickerChange}
+            display="default"
+            themeVariant={colorScheme}
+          />
+        )
+      ) : (
+        <CustomSheet open={showPicker} setOpen={setShowPicker}>
+          {(setShowPicker) => (
+            <>
+              {showPicker && (
+                <DateTimePicker
+                  value={tempDate}
+                  mode="date"
+                  maximumDate={new Date()}
+                  onChange={(e, selectedDate) => {
+                    if (selectedDate) setTempDate(selectedDate)
+                  }}
+                  display={Platform.OS === "ios" ? "inline" : "default"}
+                  themeVariant={colorScheme}
+                />
+              )}
+              <PrimaryButton
+                mt="$4"
+                onPress={() => {
+                  setValue("dogDateOfBirth", tempDate)
+                  setShowPicker(false)
+                }}
+                tone={tempDate ? "success" : "disabled"}
+              >
+                Confirm
+              </PrimaryButton>
+            </>
+          )}
+        </CustomSheet>
+      )}
+
+      <YStack gap="$2" maxW={300} width='100%'>
+        <CustomInputLabel>Is {dogName} neutered?</CustomInputLabel>
+        <RadioGroup
+          items="center"
+          gap="$2.5"
+          orientation="vertical"
+          value={dogIsNeutered === true ? "yes" : dogIsNeutered === false ? "no" : undefined}
+          onValueChange={(val) => setValue("dogIsNeutered", val === "yes")}
+        >
+        {dogNeuteredOptions.map((option) => (
+          <RadioGroupItem
+            key={option.value}
+            selected={dogIsNeutered === option.bool}
+            value={option.value}
+            label={option.label}
+            onSelect={() => setValue("dogIsNeutered", option.bool)}
+          />
+        ))}
+        </RadioGroup>
+      </YStack>
+		</View>
+	)
 }

@@ -1,5 +1,5 @@
 import { XStack, useTheme } from 'tamagui'
-import { CustomInput } from 'src/styled/input/Input'
+import { CustomInput } from 'src/styled/input/CustomInput'
 import { SearchIcon } from 'src/assets/icons/Search'
 
 type InputWithIconProps = {
@@ -13,7 +13,7 @@ export function InputWithIcon({
   value = '',
   onChangeText = () => {},
   placeholder = '',
-  icon = <SearchIcon strokeWidth={1.75} size={20} />,
+  icon = <SearchIcon strokeWidth={1.75} size='$1' />,
 }: InputWithIconProps) {
 
   return (

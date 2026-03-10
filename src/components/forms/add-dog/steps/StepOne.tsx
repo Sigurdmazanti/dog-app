@@ -11,6 +11,7 @@ import { SelectInput } from "src/components/input/SelectInput";
 import { CustomInput } from "src/styled/input/CustomInput";
 import { CustomH3 } from "src/styled/headings/CustomH3";
 import { CustomInputLabel } from "src/styled/input/CustomInputLabel";
+import { BorderedInput } from "src/components/input/BorderedInput";
 
 export function StepOne() {
   const { control, setValue } = useFormContext<DogFormValues>()
@@ -25,8 +26,7 @@ export function StepOne() {
 
       <YStack gap="$2" maxW={300} width='100%'>
         <CustomInputLabel>What's the name of your dog?</CustomInputLabel>
-        <CustomInput
-          bg='$inputBg'
+        <BorderedInput
           placeholder="What's the name of your dog?"
           value={dogName}
           onChangeText={(value: string) => setValue("dogName", value)}

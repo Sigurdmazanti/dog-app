@@ -14,10 +14,9 @@ export type DogFormValues = {
   dogBreedType: DogBreedType | null
   dogBreed: DogBreed[]
   dogGender: DogGender | null
-  isNeutered: boolean
-  dogHeightCm: number
-  dogWeightKg: number
-  dogTargetWeightKg: number
+  dogIsNeutered: boolean
+  dogWeightKg?: number
+  dogTargetWeightKg?: number
   dogActivityLevel: DogActivityLevel | null
   dogAvatar: string | null
 }

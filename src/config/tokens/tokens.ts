@@ -18,6 +18,8 @@ export const customTokens = createTokens({
     placeholderTextLight: '#9E9E9E',
     borderColorLight: '#D1D5DB',
     inputBgLight: '#f3f3f3',
+    inputFocusBorderLight: '#2ECC71',
+    inputFocusOutlineLight: '#19924b5b',
 
     backgroundDark: '#1F1F1F',
     cardBackgroundDark: '#2C2C2C',
@@ -32,6 +34,8 @@ export const customTokens = createTokens({
     disabledTextDark: '#EDEDED',
     placeholderTextDark: '#9E9E9E',
     borderColorDark: '#D1D5DB',
-    inputBgDark: '#232323'
+    inputBgDark: '#232323',
+    inputFocusBorderDark: '#58D68D',
+    inputFocusOutlineDark: '#19924b5b',
   },
 })

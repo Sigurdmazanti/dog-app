@@ -2,6 +2,7 @@ import { styled, Select } from 'tamagui'
 
 export const CustomSelectTrigger = styled(Select.Trigger, {
   name: 'CustomSelectTrigger',
+  height: 44,
   rounded: '$3',
   borderWidth: '$0.5',
   borderColor: '$borderColor',

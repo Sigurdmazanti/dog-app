@@ -24,7 +24,6 @@ export type Dog = {
   breedType: DogBreedType
   gender: DogGender
   isNeutered: boolean
-  heightCm: number
   weightKg: number
   targetWeightKg: number
   activityLevel: DogActivityLevel
@@ -43,7 +42,6 @@ export type DogRow = {
   dog_breed_type: DogBreedType
   dog_gender: DogGender
   dog_is_neutered: boolean
-  dog_height_cm: number
   dog_weight_kg: number
   dog_target_weight_kg: number
   dog_activity_level: DogActivityLevel
@@ -70,7 +68,6 @@ export function mapDogRowToDog(row: DogRow): Dog {
     breedType: row.dog_breed_type,
     gender: row.dog_gender,
     isNeutered: row.dog_is_neutered,
-    heightCm: row.dog_height_cm,
     weightKg: row.dog_weight_kg,
     targetWeightKg: row.dog_target_weight_kg,
     activityLevel: row.dog_activity_level,
@@ -94,7 +91,6 @@ export function mapDogFormToInsert(
     dog_breed_type: form.dogBreedType,
     dog_gender: form.dogGender,
     dog_is_neutered: form.dogIsNeutered,
-    dog_height_cm: form.dogHeightCm as number,
     dog_weight_kg: form.dogWeightKg as number,
     dog_target_weight_kg: form.dogTargetWeightKg as number,
     dog_activity_level: form.dogActivityLevel,

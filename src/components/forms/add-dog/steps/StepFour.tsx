@@ -1,96 +1,111 @@
-import { useEffect, useState } from "react"
-import { View, Input, Button, YStack, XStack } from "tamagui"
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
-import { BodyText } from "src/styled/text/BodyText"
-import { CustomSheet } from "src/components/sheet/CustomSheet"
-import { PrimaryButton } from "src/styled/button/PrimaryButton"
-import { Platform, Pressable, useColorScheme } from "react-native"
 import { useFormContext, useWatch } from "react-hook-form"
+import { YStack, View } from "tamagui"
 import { DogFormValues } from "../AddDog.types"
+import { CustomInputLabel } from "src/styled/input/CustomInputLabel"
+import { BorderedInput } from "src/components/input/BorderedInput"
+import { SelectInput } from "src/components/input/SelectInput"
+import { DogActivityLevel } from "src/services/dogs/dogs.models"
 
 export function StepFour() {
-  const { control, setValue } = useFormContext<DogFormValues>()
+  const { control, setValue, resetField, getValues } = useFormContext<DogFormValues>()
+  const dogName = getValues()?.dogName;
+  const dogWeightKg = useWatch<DogFormValues, "dogWeightKg">({ control, name: "dogWeightKg" })
+  const dogTargetWeightKg = useWatch<DogFormValues, "dogTargetWeightKg">({ control, name: "dogTargetWeightKg" })
+  const dogActivityLevel = useWatch<DogFormValues, "dogActivityLevel">({ control, name: "dogActivityLevel" })
 
-  const dogDateOfBirth = useWatch<DogFormValues, "dogDateOfBirth">({
-    control,
-    name: "dogDateOfBirth",
-  })
-  
-  const [showPicker, setShowPicker] = useState(false)
-  const [showInnerPicker, setShowInnerPicker] = useState(false)
-  const [tempDate, setTempDate] = useState(
-    dogDateOfBirth != null && dogDateOfBirth instanceof Date ? dogDateOfBirth : new Date()
-  )
-  const colorScheme = useColorScheme() ?? 'light'
-  
-
-  const onAndroidPickerChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (event.type === "dismissed") {
-      setShowPicker(false)
-      return
-    }
-    if (selectedDate) {
-      setValue("dogDateOfBirth", selectedDate)
-      setShowPicker(false)
-    }
-  }
+  // TODO: store this somewhere that is not plain text 
+  const physicalFormOptions: { value: DogActivityLevel; label: string }[] = [
+    { value: "very_inactive", label: "Very inactive" },
+    { value: "inactive", label: "Inactive" },
+    { value: "moderately_active", label: "Moderately active" },
+    { value: "active", label: "Active" },
+    { value: "very_active", label: "Very active" },
+  ];
 
   return (
-    <View items="center" justify="center">
-      <YStack gap="$2" items="center">
-        <BodyText>Step 4: Date of birth</BodyText>
-        <Pressable onPress={() => setShowPicker(true)}>
-          <Input
-            pointerEvents="none" // prevents Input from catching touches
-            editable={false}
-            placeholder="Date of Birth"
-            value={dogDateOfBirth ? new Date(dogDateOfBirth).toLocaleDateString() : ""}
-          />
-        </Pressable>
-
-        {/* Android opens up the native datepicker dialog immediately on mount */}
-        {Platform.OS == 'android' ? (
-          showPicker && (
-            <DateTimePicker
-              value={tempDate}
-              mode="date"
-              maximumDate={new Date()}
-              onChange={onAndroidPickerChange}
-              display="default"
-              themeVariant={colorScheme}
-            />
-          )
-        ) : (
-          <CustomSheet open={showPicker} setOpen={setShowPicker}>
-            {(setShowPicker) => (
-              <>
-                {showPicker && (
-                  <DateTimePicker
-                    value={tempDate}
-                    mode="date"
-                    maximumDate={new Date()}
-                    onChange={(e, selectedDate) => {
-                      if (selectedDate) setTempDate(selectedDate)
-                    }}
-                    display={Platform.OS === "ios" ? "inline" : "default"}
-                    themeVariant={colorScheme}
-                  />
-                )}
-                <PrimaryButton
-                  mt="$4"
-                  onPress={() => {
-                    setValue("dogDateOfBirth", tempDate)
-                    setShowPicker(false)
-                  }}
-                  tone={tempDate ? "success" : "disabled"}
-                >
-                  Confirm
-                </PrimaryButton>
-              </>
-            )}
-          </CustomSheet>
-        )}
+    <View items="center" justify="center" gap="$6">
+      <YStack gap="$2" maxW={300} width="100%">
+        <CustomInputLabel>{dogName}'s physical form</CustomInputLabel>
+        <SelectInput
+          value={dogActivityLevel !== undefined && dogActivityLevel !== null ? String(dogActivityLevel) : ''}
+          items={physicalFormOptions}
+          groupHeader="Physical form"
+          onChange={val => setValue("dogActivityLevel", val as DogActivityLevel)}
+        />
       </YStack>
+
+      <YStack gap="$2" maxW={300} width="100%">
+        <CustomInputLabel>{dogName}'s weight</CustomInputLabel>
+        <BorderedInput
+          keyboardType="numeric"
+          value={dogWeightKg !== undefined && dogWeightKg !== null ? String(dogWeightKg) : ''}
+          valueType="kg"
+          placeholder="Enter weight..."
+          onChangeText={val => {
+            const num = val.replace(/[^0-9.]/g, '')
+            if (val === '') {
+              setValue("dogWeightKg", undefined)
+              return
+            }
+            setValue("dogWeightKg", num ? Number(num) : undefined)
+          }} />
+
+      </YStack>
+
+      <YStack gap="$2" maxW={300} width="100%">
+        <CustomInputLabel>{dogName}'s target weight</CustomInputLabel>
+        <BorderedInput
+          keyboardType="numeric"
+          placeholder="Enter target weight..."
+          valueType="kg"
+          value={dogTargetWeightKg !== undefined && dogTargetWeightKg !== null ? String(dogTargetWeightKg) : ''}
+          onChangeText={val => {
+            const num = val.replace(/[^0-9.]/g, '')
+            if (val === '') {
+              setValue("dogTargetWeightKg", undefined)
+              return
+            }
+            setValue("dogTargetWeightKg", num ? Number(num) : undefined)
+          }}
+        />
+      </YStack>
+      {/*
+      <YStack gap="$2" maxW={300} width="100%">
+        <CustomInputLabel>{dogName}'s height</CustomInputLabel>
+        <BorderedInput
+          valueType="cm"
+          keyboardType="numeric"
+          placeholder="Enter height..."
+          value={dogHeightCm !== undefined && dogHeightCm !== null ? String(dogHeightCm) : ''}
+          onChangeText={val => {
+            const num = val.replace(/[^0-9.]/g, '')
+            if (val === '') {
+              setValue("dogHeightCm", undefined)
+              return
+            }
+            setValue("dogHeightCm", num ? Number(num) : undefined)
+          }}
+        />
+      </YStack>
+
+      <YStack gap="$2" maxW={300} width="100%">
+        <CustomInputLabel>{dogName}'s target weight (kg)</CustomInputLabel>
+        <BorderedInput
+          keyboardType="numeric"
+          placeholder="Enter target weight..."
+          valueType="kg"
+          value={dogTargetWeightKg !== undefined && dogTargetWeightKg !== null ? String(dogTargetWeightKg) : ''}
+          onChangeText={val => {
+            const num = val.replace(/[^0-9.]/g, '')
+            if (val === '') {
+              setValue("dogTargetWeightKg", undefined)
+              return
+            }
+            setValue("dogTargetWeightKg", num ? Number(num) : undefined)
+          }}
+        />
+      </YStack>
+      */}
     </View>
   )
 }

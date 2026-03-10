@@ -6,7 +6,6 @@ interface AddDogFormState {
   dogGender: string
   dogDateOfBirth: Date | null
   dogWeight: number
-  dogHeight: number
   currentStep: number
 }
 
@@ -16,7 +15,6 @@ const initialState: AddDogFormState = {
   dogGender: '',
   dogDateOfBirth: null,
   dogWeight: 0,
-  dogHeight: 0,
   currentStep: 1,
 }
 

@@ -10,6 +10,7 @@ import { ChevronRightIcon } from "src/assets/icons/ChevronRight"
 import { CustomInput } from "src/styled/input/CustomInput"
 import { SearchIcon } from "src/assets/icons/Search"
 import { CustomH3 } from "src/styled/headings/CustomH3"
+import { BorderedInput } from "../input/BorderedInput"
 
 type FetchItems<T> = (query: string, page: number, pageSize: number) => Promise<{ items: T[]; total: number }>
 
@@ -61,30 +62,19 @@ export function SearchableSelectList<T>({
   const [query, setQuery] = useState('')
 
   return (
-    <View width="100%" flex={1} items="center">
+    <YStack width="100%" flex={1} items="center" gap="$4">
       {title && 
-        <CustomH3 mx="auto" mb="$4">{title}</CustomH3>
+        <CustomH3 mx="auto">{title}</CustomH3>
       }
 
-      <XStack
-        maxW={300}
-        items="center"
-        rounded="$4"
-        borderWidth="$0.5"
-        borderColor="$borderColor"
-        bg="$inputBg"
-        px="$4"
-        mb="$4"
-      >
-        <SearchIcon strokeWidth={1.75} size='$1' color="$primaryText" />
-        <CustomInput
-          borderWidth={0}
-          flex={1}
-          value={query}
-          onChangeText={setQuery}
-          placeholder={searchPlaceholder}
-        />
-      </XStack>
+      <BorderedInput
+        borderWidth={0}
+        flex={1}
+        value={query}
+        onChangeText={setQuery}
+        placeholder={searchPlaceholder}
+        icon={<SearchIcon strokeWidth={1.75} size='$1' color="$primaryText" />}
+      />
 
       <SelectList<T>
         query={query}
@@ -99,7 +89,7 @@ export function SearchableSelectList<T>({
         showTotalCount={showTotalCount}
         showTotalCountSuffix={showTotalCountSuffix}
       />
-    </View>
+    </YStack>
   )
 }
 

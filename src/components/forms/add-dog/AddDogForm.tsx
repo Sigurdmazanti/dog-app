@@ -1,30 +1,32 @@
 import { useState } from 'react'
 import { useForm, FormProvider, useWatch } from 'react-hook-form'
-import { Button, XStack } from 'tamagui'
+import { Button, View, XStack } from 'tamagui'
 import { PrimaryButton } from 'src/styled/button/PrimaryButton'
 import { ContentContainer } from 'src/styled/container/ContentContainer'
 import { FormStep, DogFormValues } from './AddDog.types'
 import { StepOne, StepTwo, StepThree, StepFour, StepFive, Summary } from './steps'
-import { DogBreed } from 'src/services/dogs/dogs.breeds.models'
-import { DogBreedType } from 'src/services/dogs/dogs.models'
+import { FormProgressBar } from './FormProgressBar'
+import { ChevronRightIcon } from 'src/assets/icons/ChevronRight'
+import { BodyText } from 'src/styled/text/BodyText'
+import { ChevronLeftIcon } from 'src/assets/icons/ChevronLeft'
 
 export const getSteps = (formValues: DogFormValues): FormStep[] => {
   return [
     {
       content: <StepOne />,
-      canProceed: () => !!formValues.dogBreedType,
+      canProceed: () => !!formValues.dogName
     },
     {
       content: <StepTwo />,
-      canProceed: () => Array.isArray(formValues.dogBreed) && formValues.dogBreed.length > 0,
+      canProceed: () => !!formValues.dogGender && !!formValues.dogDateOfBirth && typeof formValues.dogIsNeutered === 'boolean',
     },
     {
       content: <StepThree />,
-      canProceed: () => !!formValues.dogName,
+      canProceed: () => !!formValues.dogBreedType && Array.isArray(formValues.dogBreed) && formValues.dogBreed.length > 0 && formValues.dogBreed.length < 3
     },
     {
       content: <StepFour />,
-      canProceed: () => !!formValues.dogDateOfBirth,
+      canProceed: () => !!formValues.dogActivityLevel && !!formValues.dogWeightKg && !!formValues.dogTargetWeightKg,
     },
     {
       content: <StepFive />,
@@ -42,17 +44,16 @@ export default function AddDogForm() {
   const [currentStep, setCurrentStep] = useState(1)
   const methods = useForm<DogFormValues>({
     defaultValues: {
-      dogName: '',
-      dogDateOfBirth: new Date(),
-      dogBreedType: null,
+      dogName: undefined,
+      dogDateOfBirth: undefined,
+      dogBreedType: undefined,
       dogBreed: [],
-      dogGender: null,
-      isNeutered: false,
-      dogHeightCm: 0,
-      dogWeightKg: 0,
-      dogTargetWeightKg: 0,
-      dogActivityLevel: null,
-      dogAvatar: ''
+      dogGender: undefined,
+      dogIsNeutered: undefined,
+      dogWeightKg: undefined,
+      dogTargetWeightKg: undefined,
+      dogActivityLevel: undefined,
+      dogAvatar: undefined
     },
   })
 
@@ -72,40 +73,50 @@ export default function AddDogForm() {
 
   return (
     <FormProvider {...methods}>
-      <ContentContainer>
-        {currentStepData.content}
-
-        <XStack mt="$4" gap="$2" justify="center">
-          <PrimaryButton
-            onPress={() => {
-              if (isBackButtonEnabled) {
-                goBack()
-              }
-            }}
-            tone={isBackButtonEnabled ? "success" : "disabled"}
-          >
-            Back
-          </PrimaryButton>
-
-          {!isLastStep && (
+      <ContentContainer flex={1}>
+        <View flex={1} flexDirection="column" justify="space-between" height="100%">
+          <View>
+            <FormProgressBar currentStep={currentStep} totalSteps={maxStep} />
+            {currentStepData.content}
+          </View>
+          <XStack mt="$4" px="$8" gap="$8" items="center">
             <PrimaryButton
               onPress={() => {
-                if (canProceed) {
-                  goNext()
+                if (isBackButtonEnabled) {
+                  goBack()
                 }
               }}
-              tone={canProceed ? "success" : "disabled"}
+              tone={isBackButtonEnabled ? "inactive" : "disabled"}
             >
-              Next
+              <XStack items="center" justify="center" gap='$1' ml='$-2'>
+                <ChevronLeftIcon size="$1" mt={1} color={isBackButtonEnabled ? "$primaryText" : "$disabledText"} />
+                <BodyText tone={isBackButtonEnabled ? "inactive" : "disabled"}>Back</BodyText>
+              </XStack>
             </PrimaryButton>
-          )}
-
-          {isLastStep && (
-            <Button onPress={methods.handleSubmit((data) => console.log('Submit:', data))}>
-              Submit
-            </Button>
-          )}
-        </XStack>
+            
+            <View flex={1} />
+            
+            {!isLastStep && (
+              <PrimaryButton
+                onPress={() => {
+                  if (canProceed)
+                    goNext()
+                }}
+                tone={canProceed ? "success" : "disabled"}
+              >
+                <XStack items="center" justify="center" gap='$1' mr='$-2'>
+                  <BodyText tone={canProceed ? "default" : "disabled"}>Next</BodyText>
+                  <ChevronRightIcon size="$1" mt={1} color={canProceed ? "$primaryText" : "$disabledText"} />
+                </XStack>
+              </PrimaryButton>
+            )}
+            {isLastStep && (
+              <Button onPress={methods.handleSubmit((data) => console.log('Submit:', data))}>
+                Submit
+              </Button>
+            )}
+          </XStack>
+        </View>
       </ContentContainer>
     </FormProvider>
   )

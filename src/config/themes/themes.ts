@@ -17,7 +17,9 @@ export const customThemes = {
     disabledText: customTokens.color.disabledTextLight,
     placeholderText: customTokens.color.placeholderTextLight,
     borderColor: customTokens.color.borderColorLight,
-    inputBg: customTokens.color.inputBgLight
+    inputBg: customTokens.color.inputBgLight,
+    inputFocusBorder: customTokens.color.inputFocusBorderLight,
+    inputFocusOutline: customTokens.color.inputFocusOutlineLight,
   },
   dark: {
     background: customTokens.color.backgroundDark,
@@ -33,6 +35,8 @@ export const customThemes = {
     disabledText: customTokens.color.disabledTextDark,
     placeholderText: customTokens.color.placeholderTextDark,
     borderColor: customTokens.color.borderColorDark,
-    inputBg: customTokens.color.inputBgDark
+    inputBg: customTokens.color.inputBgDark,
+    inputFocusBorder: customTokens.color.inputFocusBorderDark,
+    inputFocusOutline: customTokens.color.inputFocusOutlineDark,
   },
 }

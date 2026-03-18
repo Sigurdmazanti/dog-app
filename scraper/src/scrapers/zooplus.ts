@@ -5,6 +5,7 @@ import { NutritionData, MineralsData } from "../interfaces/productComposition";
 import { percentageStringToInt } from "../helpers/percentageStringToInt";
 import { ScrapeRequest } from "../interfaces/scrapeRequest";
 import { nutritionKeyMap, mineralsKeyMap } from "../helpers/productCompositionKeyMap";
+import { matchesAlias } from "../helpers/matchesAlias";
 
 export async function scrapeZooPlus(scrapeRequest: ScrapeRequest): Promise<ScrapeResult> {
   try {
@@ -30,12 +31,12 @@ export async function scrapeZooPlus(scrapeRequest: ScrapeRequest): Promise<Scrap
         const value = percentageStringToInt($(cells[1]).text());
 
         for (const [canonical, aliases] of Object.entries(nutritionKeyMap)) {
-          if (aliases.some(alias => name.includes(alias))) {
+          if (aliases.some(alias => matchesAlias(name, alias))) {
             nutritionData[canonical as keyof NutritionData] = value;
           }
         }
         for (const [canonical, aliases] of Object.entries(mineralsKeyMap)) {
-          if (aliases.some(alias => name.includes(alias))) {
+          if (aliases.some(alias => matchesAlias(name, alias))) {
             mineralsData[canonical as keyof MineralsData] = value;
           }
         }

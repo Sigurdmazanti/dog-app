@@ -4,7 +4,7 @@ import { scrapeZooPlus } from './scrapers/zooplus';
 import { FoodType } from './interfaces/foodTypes';
 import { ScrapeRequest } from './interfaces/scrapeRequest';
 import { getDefaultWaterAmount } from './helpers/waterAmountMapper';
-import { calculateGrossEnergy, calculateNFE } from './helpers/nutritionCalculator';
+import { calculateMetabolizableEnergy, calculateNFE } from './helpers/nutritionCalculator';
 import { appendRowToGoogleSheets } from './helpers/googleSheetsAppender';
 import * as dotenv from 'dotenv';
 
@@ -36,7 +36,7 @@ async function scrapeUrl(scrapeRequest: ScrapeRequest): Promise<ScrapeDataRow> {
     }
 
 		if (data.nutritionData.kiloJoule === undefined || data.nutritionData.kiloJoule === 0) {
-			const kiloJouleAmount: number = calculateGrossEnergy(data.nutritionData);
+			const kiloJouleAmount: number = calculateMetabolizableEnergy(data.nutritionData);
 			data.nutritionData.kiloJoule = kiloJouleAmount;
 			noteText.push(`Ingen energi-værdi. Udregnet til ${kiloJouleAmount} kJ.`);
 		}

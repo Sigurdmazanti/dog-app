@@ -9,19 +9,31 @@ export function calculateNFE(data: NutritionData): number {
 }
 
 /**
- * Calculates Gross Energy (kJ)
- * Gross Energy (kJ) = (protein * 23.8) + (fat * 39.7) + (NFE * 17.9) + (fiber * 8)
+ * Calculates Metabolizable Energy (ME) in kJ per 100 g of product.
+ *
+ * Uses the FEDIAF (European Pet Food Industry Federation) formula for complete
+ * pet food, which applies modified Atwater coefficients together with a
+ * digestibility correction and a urinary-loss deduction:
+ *
+ *   ME = ((((23.8 × protein) + (39.3 × fat) + (17.1 × (NFE + fibre)))
+ *          × (91.2 − (1.43 × fibre))) / 100)
+ *        − (4.35 × protein)
+ *
+ * Component notes:
+ *  - 23.8, 39.3, 17.1  Modified Atwater combustion coefficients (kJ/g) for
+ *                       protein, fat, and carbohydrates (NFE + fibre)
+ *  - (91.2 − 1.43 × %fibre) / 100  Digestibility correction factor — fibre
+ *                       reduces overall digestibility
+ *  - 4.35 × %protein   Urinary energy loss correction (urea excretion)
+ *  - NFE is derived via calculateNFE: 100 − water − protein − fat − fibre − ash
  */
-export function calculateGrossEnergy(data: NutritionData): number {
+export function calculateMetabolizableEnergy(data: NutritionData): number {
   const nfe = calculateNFE(data);
 
-  const grossEnergy =
-    (data.protein * 23.8) +
-    (data.fat * 39.7) +
-    (nfe * 17.9) +
-    (data.fiber * 8);
+  const me =
+    ((((23.8 * data.protein) + (39.3 * data.fat) + (17.1 * (nfe + data.fiber)))
+      * (91.2 - (1.43 * data.fiber))) / 100)
+    - (4.35 * data.protein);
 
-    console.log('gross energy:' + grossEnergy);
-
-  return Math.round(grossEnergy);
+  return Math.round(me);
 }

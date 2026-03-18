@@ -1,0 +1,57 @@
+schema: spec-driven
+
+context: |
+  ## Project: Dog App (React Native / Expo)
+  A mobile-first pet management app for tracking dogs — health, nutrition, activity, and care — built for iOS and Android.
+
+  ## Tech Stack
+  - React 19.1 + React Native 0.81.4
+  - Expo 54 (EAS development builds — NOT Expo Go)
+  - Expo Router 6 (file-based routing, typed routes enabled)
+  - Tamagui 1.126.13 (UI component system and styling)
+  - TypeScript 5.9.2
+  - React Hook Form 7.56.4 (all forms)
+  - Supabase 2.57.4 (auth + database backend)
+  - Yarn 4.9.1 (package manager — always use yarn, never npm)
+
+  ## Key Conventions
+  - All styling via Tamagui — never use StyleSheet.create or inline styles
+  - Design tokens: src/config/tokens/tokens.ts — themes: src/config/themes/themes.ts
+  - Reusable styled primitives live in src/styled/ — extend before creating new ones
+  - Icons are standalone SVG components in src/assets/icons/ — no icon libraries
+  - All forms use React Hook Form with FormProvider + useFormContext
+  - Multi-step forms: one component per step under src/components/forms/<form-name>/steps/
+  - Routing: file-based via Expo Router in app/ — no programmatic route registration
+  - Tab navigation at app/(tabs)/
+  - Supabase client is a singleton at src/services/supabase/supabaseClient.ts
+  - Auth state via src/AuthProvider.tsx context only — never call Supabase directly from components
+  - DB operations in src/services/ split by domain; raw rows mapped via *.models.ts mapper functions
+  - Root providers wired in src/Provider.tsx — not in app/_layout.tsx
+  - Redux is pending removal — do NOT add new Redux slices; prefer React Context
+
+  ## Packages to Avoid
+  - react-redux, @reduxjs/toolkit, expo-web-browser
+
+  ## Environment Variables
+  - EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_KEY (never hardcode)
+
+rules:
+  proposal:
+    - Frame changes in terms of user-facing impact on the dog/pet management experience where relevant
+    - Always call out cross-platform concerns (iOS vs Android) if the change touches native behaviour
+    - Flag any changes that affect auth flow or Supabase schema as high-impact
+    - Note if the change requires a new EAS build vs hot-reload only
+  design:
+    - Prefer React Context over new state libraries; never introduce Redux
+    - All UI decisions must use Tamagui primitives — call out any case where a custom primitive is needed
+    - "Security decisions must address: credential storage (expo-secure-store only), input validation, Supabase RLS"
+  specs:
+    - Scenarios must be testable on both iOS and Android
+    - Use SHALL/MUST for normative requirements — avoid "should" or "may"
+    - Any requirement touching auth must include an unauthenticated scenario
+    - Any requirement touching forms must include a validation failure scenario
+  tasks:
+    - Group tasks by file or domain area, not by phase
+    - Each task must be completable and verifiable in a single coding session
+    - Always include a verification task at the end of each group
+    - Yarn commands only — never npm

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.js.map
+
+# Secrets
+.env
+credentials.json
+.DS_Store

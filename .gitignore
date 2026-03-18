@@ -36,12 +36,12 @@ node_modules
 .tamagui
 .idea
 
-.env
 # local env files
 .env.local
 .env.development.local
 .env.test.localp
 .env.production.local
+.env
 
 .expo
 ios

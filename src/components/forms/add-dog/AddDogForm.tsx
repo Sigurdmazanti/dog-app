@@ -9,6 +9,8 @@ import { FormProgressBar } from './FormProgressBar'
 import { ChevronRightIcon } from 'src/assets/icons/ChevronRight'
 import { BodyText } from 'src/styled/text/BodyText'
 import { ChevronLeftIcon } from 'src/assets/icons/ChevronLeft'
+import { useAuth } from 'src/AuthProvider'
+import { createDog } from 'src/services/dogs/dogs.service'
 
 export const getSteps = (formValues: DogFormValues): FormStep[] => {
   return [
@@ -41,6 +43,7 @@ export const getSteps = (formValues: DogFormValues): FormStep[] => {
 
 
 export default function AddDogForm() {
+  const { user } = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
   const methods = useForm<DogFormValues>({
     defaultValues: {
@@ -111,7 +114,7 @@ export default function AddDogForm() {
               </PrimaryButton>
             )}
             {isLastStep && (
-              <Button onPress={methods.handleSubmit((data) => console.log('Submit:', data))}>
+              <Button onPress={methods.handleSubmit((data) => createDog(user!.id, data))}>
                 Submit
               </Button>
             )}

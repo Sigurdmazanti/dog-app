@@ -15,6 +15,18 @@ export async function createDog(
     .single<DogRow>()
 
   if (error) throw error
+
+  if (formData.dogBreed.length > 0) {
+    const breedLinks = formData.dogBreed.map(breed => ({
+      dog_id: data.id,
+      dog_breed_id: breed.id,
+    }))
+    const { error: breedError } = await supabase
+      .from("dog_breed_links")
+      .insert(breedLinks)
+    if (breedError) throw breedError
+  }
+
   return mapDogRowToDog(data);
 }
 

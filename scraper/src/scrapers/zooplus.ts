@@ -1,11 +1,18 @@
 import axios from "axios";
 import * as cheerio from 'cheerio';
 import { ScrapeResult } from "../interfaces/scrapeResult";
-import { NutritionData, MineralsData } from "../interfaces/productComposition";
-import { percentageStringToInt } from "../helpers/percentageStringToInt";
+import {
+  AminoAcidsData,
+  FattyAcidsData,
+  MineralsData,
+  NutritionData,
+  SaltsData,
+  SugarAlcoholsData,
+  VitaminLikeData,
+  VitaminsData,
+} from "../interfaces/productComposition";
 import { ScrapeRequest } from "../interfaces/scrapeRequest";
-import { nutritionKeyMap, mineralsKeyMap } from "../helpers/productCompositionKeyMap";
-import { matchesAlias } from "../helpers/matchesAlias";
+import { mapProductCompositionWithAI } from '../helpers/aiProductCompositionMapper';
 
 export async function scrapeZooPlus(scrapeRequest: ScrapeRequest): Promise<ScrapeResult> {
   try {
@@ -21,29 +28,45 @@ export async function scrapeZooPlus(scrapeRequest: ScrapeRequest): Promise<Scrap
       .replace(/^Ingredienser[:\\s]*/i, '')
       .trim();
 
-    const nutritionData = {} as NutritionData;
-    const mineralsData = {} as MineralsData;
+    const compositionEntries: Array<{ name: string; valueText: string }> = [];
 
     $('table[data-zta="constituentsTable"] tr').each((_, el) => {
       const cells = $(el).find('td');
       if (cells.length === 2) {
-        const name = $(cells[0]).text().toLowerCase().trim();
-        const value = percentageStringToInt($(cells[1]).text());
-
-        for (const [canonical, aliases] of Object.entries(nutritionKeyMap)) {
-          if (aliases.some(alias => matchesAlias(name, alias))) {
-            nutritionData[canonical as keyof NutritionData] = value;
-          }
-        }
-        for (const [canonical, aliases] of Object.entries(mineralsKeyMap)) {
-          if (aliases.some(alias => matchesAlias(name, alias))) {
-            mineralsData[canonical as keyof MineralsData] = value;
-          }
-        }
+        compositionEntries.push({
+          name: $(cells[0]).text().toLowerCase().trim(),
+          valueText: $(cells[1]).text(),
+        });
       }
     });
+
+    const mappingResult = await mapProductCompositionWithAI(compositionEntries);
+    for (const note of mappingResult.notes) {
+      console.warn(`[composition-mapper] ${note}`);
+    }
+
+    const nutritionData = mappingResult.mappedSections.nutritionData as NutritionData;
+    const mineralsData = mappingResult.mappedSections.mineralsData as MineralsData;
+    const saltsData = mappingResult.mappedSections.saltsData as SaltsData;
+    const vitaminsData = mappingResult.mappedSections.vitaminsData as VitaminsData;
+    const aminoAcidsData = mappingResult.mappedSections.aminoAcidsData as AminoAcidsData;
+    const vitaminLikeData = mappingResult.mappedSections.vitaminLikeData as VitaminLikeData;
+    const fattyAcidsData = mappingResult.mappedSections.fattyAcidsData as FattyAcidsData;
+    const sugarAlcoholsData = mappingResult.mappedSections.sugarAlcoholsData as SugarAlcoholsData;
     
-    return { url, title, ingredientsDescription, nutritionData, mineralsData };
+    return {
+      url,
+      title,
+      ingredientsDescription,
+      nutritionData,
+      mineralsData,
+      saltsData,
+      vitaminsData,
+      aminoAcidsData,
+      vitaminLikeData,
+      fattyAcidsData,
+      sugarAlcoholsData,
+    };
 
   } catch (err) {
     throw err;

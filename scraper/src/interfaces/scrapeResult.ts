@@ -1,4 +1,13 @@
-import { NutritionData, MineralsData } from "./productComposition";
+import {
+  AminoAcidsData,
+  FattyAcidsData,
+  MineralsData,
+  NutritionData,
+  SaltsData,
+  SugarAlcoholsData,
+  VitaminLikeData,
+  VitaminsData,
+} from "./productComposition";
 
 export interface ScrapeResult {
   url: string;
@@ -6,6 +15,12 @@ export interface ScrapeResult {
   ingredientsDescription: string;
   nutritionData: NutritionData;
   mineralsData: MineralsData;
+  saltsData: SaltsData;
+  vitaminsData: VitaminsData;
+  aminoAcidsData: AminoAcidsData;
+  vitaminLikeData: VitaminLikeData;
+  fattyAcidsData: FattyAcidsData;
+  sugarAlcoholsData: SugarAlcoholsData;
 }
 
 export interface ScrapeDataRow extends ScrapeResult {

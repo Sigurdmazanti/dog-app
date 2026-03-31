@@ -6,6 +6,7 @@ export interface NutritionData {
   fiber: number;
   crudeAsh: number;
   nfe: number;
+  sugar: number;
 }
 
 export interface MineralsData {
@@ -16,6 +17,7 @@ export interface MineralsData {
   sodium: number;
   chlorine: number;
   sulphur: number;
+  mercury: number;
   cobalt: number;
   molybdenum: number;
   fluorine: number;
@@ -47,8 +49,14 @@ export interface SaltsData {
 export interface VitaminsData {
   aVitamin: number;
   dVitamin: number;
+  dVitamin3: number;
+  dVitamin2: number;
+  hydroxyVitaminD3: number;
+  hydroxyVitaminD2: number;
   eVitamin: number;
   kVitamin: number;
+  k1Vitamin: number;
+  k2Vitamin: number;
   bVitamin: number;
   b1: number;
   b2: number;
@@ -78,4 +86,5 @@ export interface FattyAcidsData {
 
 export interface SugarAlcoholsData {
   glycerin: number;
+  sorbitol: number;
 }

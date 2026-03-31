@@ -15,18 +15,30 @@ The extraction key map MUST normalize source labels using canonical-first alias 
 - **THEN** the parser stores the value under the canonical field key without creating duplicate keys
 
 ### Requirement: Fallback-safe scrape output
-The scraping pipeline MUST emit structurally stable outputs for the expanded composition fields even when one or more source values are absent.
+The scraping pipeline MUST emit structurally stable outputs for the expanded composition fields even when one or more source values are absent or when AI-based mapping fails validation.
 
 #### Scenario: Missing value does not break output shape
 - **WHEN** a product page omits one or more expanded composition attributes
 - **THEN** the resulting scrape payload still includes all expected fields with fallback-safe defaults
 
-### Requirement: Google Sheets export includes expanded fields
-The Google Sheets appender MUST include the expanded composition fields in row serialization and preserve deterministic column order.
+#### Scenario: AI mapping failure preserves stable shape
+- **WHEN** the AI mapper returns invalid JSON, schema-invalid data, or times out
+- **THEN** the resulting scrape payload still includes all expected fields with fallback-safe defaults and no structural regression
 
-#### Scenario: Export row contains new composition columns
-- **WHEN** a scrape result with expanded composition data is appended
-- **THEN** the output row contains each new composition value in the intended column positions
+### Requirement: Google Sheets export includes expanded fields
+The Google Sheets appender MUST serialize output rows using the complete chronological `item_*` column contract and include all expanded composition fields in deterministic order, regardless of whether values were sourced by manual parsing or AI-assisted mapping.
+
+#### Scenario: Export row contains all chronological schema columns
+- **WHEN** a scrape result is appended to Google Sheets
+- **THEN** the output row contains each configured `item_*` field in the exact chronological order defined by the target schema
+
+#### Scenario: Renamed and newly added columns are populated when available
+- **WHEN** canonical composition data includes values for renamed or newly added nutrient fields
+- **THEN** the appender maps those values to their corresponding new `item_*` columns without shifting neighboring columns
+
+#### Scenario: Null-safe export preserves positional integrity
+- **WHEN** one or more expanded composition values are missing or null
+- **THEN** the appender emits explicit empty/null-safe cells for those positions and preserves deterministic column alignment across the full row
 
 ### Requirement: Backward compatibility for existing scraper flow
 The expanded composition extraction MUST preserve existing successful scrape behavior for previously supported fields and row appends.

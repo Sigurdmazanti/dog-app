@@ -17,23 +17,9 @@ import {
   vitaminsKeyMap,
 } from './helpers/productCompositionKeyMap';
 import * as dotenv from 'dotenv';
+import { scrapeAcanaEu } from './scrapers/acana-eu';
 
 dotenv.config();
-
-function applyNumericFallbacks<T extends { [K in keyof T]: number }>(
-  sectionName: string,
-  data: T,
-  keyMap: Record<keyof T, string[]>,
-  noteText: string[]
-): void {
-  for (const key of Object.keys(keyMap) as Array<keyof T>) {
-    const value = data[key];
-    if (value === undefined || Number.isNaN(value)) {
-      data[key] = 0 as T[keyof T];
-      noteText.push(`${sectionName}.${String(key)} manglede. Sat til 0.`);
-    }
-  }
-}
 
 async function scrapeUrl(scrapeRequest: ScrapeRequest): Promise<ScrapeDataRow> {
   try {
@@ -44,6 +30,7 @@ async function scrapeUrl(scrapeRequest: ScrapeRequest): Promise<ScrapeDataRow> {
     let noteText: string[] = [];
 
     if (url.includes('zooplus')) data = await scrapeZooPlus(scrapeRequest);
+    if (url.includes('emea.acana')) data = await scrapeAcanaEu(scrapeRequest);
     else throw new Error('Unsupported URL');
 
     noteText.push(...checkMissingFields(data));
@@ -66,15 +53,6 @@ async function scrapeUrl(scrapeRequest: ScrapeRequest): Promise<ScrapeDataRow> {
 			noteText.push(`Ingen energi-værdi. Udregnet til ${kiloJouleAmount} kJ.`);
 		}
 
-    applyNumericFallbacks('nutritionData', data.nutritionData, nutritionKeyMap, noteText);
-    applyNumericFallbacks('mineralsData', data.mineralsData, mineralsKeyMap, noteText);
-    applyNumericFallbacks('saltsData', data.saltsData, saltsKeyMap, noteText);
-    applyNumericFallbacks('vitaminsData', data.vitaminsData, vitaminsKeyMap, noteText);
-    applyNumericFallbacks('aminoAcidsData', data.aminoAcidsData, aminoAcidsKeyMap, noteText);
-    applyNumericFallbacks('vitaminLikeData', data.vitaminLikeData, vitaminLikeKeyMap, noteText);
-    applyNumericFallbacks('fattyAcidsData', data.fattyAcidsData, fattyAcidsKeyMap, noteText);
-    applyNumericFallbacks('sugarAlcoholsData', data.sugarAlcoholsData, sugarAlcoholsKeyMap, noteText);
-			
 		const dataRow: ScrapeDataRow = {
 			...data,
 			foodType,

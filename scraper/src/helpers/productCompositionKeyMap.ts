@@ -16,7 +16,8 @@ export const nutritionKeyMap: Record<keyof NutritionData, string[]> = {
   fat: ['fat', 'fedt', 'råfedt', 'crude fat'],
   fiber: ['fibre', 'fiber', 'råfibre', 'træstof', 'crude fibre'],
   crudeAsh: ['ash', 'råaske', 'aske', 'crude ash'],
-  nfe: ['nfe', 'carbohydrates', 'kulhydrater', 'carbohydrate', 'kulhydrat']
+  nfe: ['nfe', 'carbohydrates', 'kulhydrater', 'carbohydrate', 'kulhydrat'],
+  sugar: ['sugar', 'sukker', 'sugars', 'sukkerarter', 'total sugar', 'total sukker'],
 };
 
 export const mineralsKeyMap: Record<keyof MineralsData, string[]> = {
@@ -27,6 +28,7 @@ export const mineralsKeyMap: Record<keyof MineralsData, string[]> = {
   sodium: ['sodium', 'natrium', 'na'],
   chlorine: ['chlorine', 'chloride', 'chlorid', 'klor', 'cl', 'cl-', 'cl⁻'],
   sulphur: ['sulphur', 'sulfur', 'svovl', 's'],
+  mercury: ['mercury', 'kviksølv', 'quicksilver', 'hg'],
   cobalt: ['cobalt', 'cobolt', 'co'],
   molybdenum: ['molybdenum', 'molybdæn', 'molybdaen', 'mo'],
   fluorine: ['fluorine', 'fluoride', 'fluor', 'fluorid', 'f', 'f-', 'f⁻'],
@@ -81,6 +83,10 @@ export const vitaminsKeyMap: Record<keyof VitaminsData, string[]> = {
     'd-2 vitamin',
     'ergosterol',
   ],
+  dVitamin3: ['vitamin d3', 'd3-vitamin', 'd-3 vitamin', 'cholecalciferol'],
+  dVitamin2: ['vitamin d2', 'd2-vitamin', 'd-2 vitamin', 'ergocalciferol'],
+  hydroxyVitaminD3: ['25-hydroxy vitamin d3', '25 hydroxy vitamin d3', '25-oh-d3', 'calcifediol'],
+  hydroxyVitaminD2: ['25-hydroxy vitamin d2', '25 hydroxy vitamin d2', '25-oh-d2'],
   eVitamin: [
     'e-vitamin',
     'vitamin e',
@@ -90,6 +96,8 @@ export const vitaminsKeyMap: Record<keyof VitaminsData, string[]> = {
     'delta-tocopherol',
   ],
   kVitamin: ['k-vitamin', 'vitamin k', 'phylloquinone', 'phyllokinon', 'menaquinone', 'menakinon', 'menadione'],
+  k1Vitamin: ['vitamin k1', 'k1-vitamin', 'phylloquinone', 'phyllokinon'],
+  k2Vitamin: ['vitamin k2', 'k2-vitamin', 'menaquinone', 'menakinon'],
   bVitamin: ['b-vitamin', 'vitamin b'],
   b1: ['b1', 'b1-vitamin', 'vitamin b1', 'thiamin', 'thiamine'],
   b2: ['b2', 'b2-vitamin', 'vitamin b2', 'riboflavin'],
@@ -127,4 +135,5 @@ export const fattyAcidsKeyMap: Record<keyof FattyAcidsData, string[]> = {
 
 export const sugarAlcoholsKeyMap: Record<keyof SugarAlcoholsData, string[]> = {
   glycerin: ['glycerin', 'glycerol', 'vegetabilsk glycerin'],
+  sorbitol: ['sorbitol', 'sorbitol syrup', 'sorbitsirup'],
 };

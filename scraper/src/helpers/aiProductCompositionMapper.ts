@@ -1,6 +1,5 @@
 import OpenAI from 'openai';
 import { percentageStringToInt } from './percentageStringToInt';
-import { matchesAlias } from './matchesAlias';
 import {
   AminoAcidsData,
   FattyAcidsData,
@@ -21,11 +20,6 @@ import {
   vitaminLikeKeyMap,
   vitaminsKeyMap,
 } from './productCompositionKeyMap';
-
-export interface CompositionEntry {
-  name: string;
-  valueText: string;
-}
 
 export interface CompositionSections {
   nutritionData: Partial<NutritionData>;
@@ -57,6 +51,85 @@ const SECTION_KEY_MAPS = {
   sugarAlcoholsData: sugarAlcoholsKeyMap,
 } as const;
 
+// Expected output unit for every canonical field. Used to annotate the schema template so the AI knows the target unit without guessing.
+const CANONICAL_FIELD_UNITS: Record<string, string> = {
+  // nutritionData
+  kiloJoule: 'kJ/100g',
+  water: 'g/100g',
+  protein: 'g/100g',
+  fat: 'g/100g',
+  fiber: 'g/100g',
+  crudeAsh: 'g/100g',
+  nfe: 'g/100g',
+  sugar: 'g/100g',
+  // mineralsData
+  calcium: 'mg/100g',
+  phosphorus: 'mg/100g',
+  magnesium: 'mg/100g',
+  potassium: 'mg/100g',
+  sodium: 'mg/100g',
+  chlorine: 'mg/100g',
+  sulphur: 'mg/100g',
+  iron: 'mg/100g',
+  copper: 'mg/100g',
+  manganese: 'mg/100g',
+  zinc: 'mg/100g',
+  silicon: 'mg/100g',
+  clinoptilolite: 'mg/100g',
+  iodine: 'ug/100g',
+  selenium: 'ug/100g',
+  cobalt: 'ug/100g',
+  molybdenum: 'ug/100g',
+  fluorine: 'ug/100g',
+  chromium: 'ug/100g',
+  vanadium: 'ug/100g',
+  nickel: 'ug/100g',
+  tin: 'ug/100g',
+  arsenic: 'ug/100g',
+  lead: 'ug/100g',
+  cadmium: 'ug/100g',
+  mercury: 'ug/100g',
+  // saltsData
+  sodiumChloride: 'g/100g',
+  potassiumChloride: 'mg/100g',
+  ferrousSulfate: 'mg/100g',
+  copperSulfate: 'mg/100g',
+  pentasodiumTriphosphate: 'mg/100g',
+  // vitaminsData — IU fields include conversion factor in the annotation
+  aVitamin: 'ug/100g (if in IU: multiply by 0.3 to get ug, then scale to per 100g)',
+  dVitamin: 'ug/100g (if in IU: multiply by 0.025 to get ug, then scale to per 100g)',
+  dVitamin3: 'ug/100g (if in IU: multiply by 0.025 to get ug, then scale to per 100g)',
+  dVitamin2: 'ug/100g (if in IU: multiply by 0.025 to get ug, then scale to per 100g)',
+  hydroxyVitaminD3: 'ug/100g (if in IU: multiply by 0.025 to get ug, then scale to per 100g)',
+  hydroxyVitaminD2: 'ug/100g (if in IU: multiply by 0.025 to get ug, then scale to per 100g)',
+  eVitamin: 'mg/100g (if in IU: multiply by 0.67 to get mg, then scale to per 100g)',
+  kVitamin: 'ug/100g',
+  k1Vitamin: 'ug/100g',
+  k2Vitamin: 'ug/100g',
+  bVitamin: 'mg/100g',
+  b1: 'mg/100g',
+  b2: 'mg/100g',
+  b3: 'mg/100g',
+  b5: 'mg/100g',
+  b6: 'mg/100g',
+  b7: 'ug/100g',
+  b9: 'ug/100g',
+  b12: 'ug/100g',
+  cVitamin: 'mg/100g',
+  // aminoAcidsData
+  lLysine: 'g/100g',
+  taurine: 'g/100g',
+  // vitaminLikeData
+  lCarnitine: 'mg/100g',
+  choline: 'mg/100g',
+  // fattyAcidsData
+  omega3: 'g/100g',
+  omega6: 'g/100g',
+  // sugarAlcoholsData
+  glycerin: 'g/100g',
+  sorbitol: 'g/100g',
+};
+
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-5-nano';
 const DEFAULT_TIMEOUT_MS = 8_000;
 const DEFAULT_MAX_RETRIES = 1;
@@ -71,7 +144,7 @@ const parseNumberEnv = (value: string | undefined, fallback: number): number => 
 };
 
 function createEmptySections(): CompositionSections {
-  return {
+  const sections = {
     nutritionData: {},
     mineralsData: {},
     saltsData: {},
@@ -80,18 +153,29 @@ function createEmptySections(): CompositionSections {
     vitaminLikeData: {},
     fattyAcidsData: {},
     sugarAlcoholsData: {},
-  };
-}
-
-function createCanonicalSchemaTemplate(): Record<SectionName, Record<string, null>> {
-  const template = {} as Record<SectionName, Record<string, null>>;
+  } as CompositionSections;
 
   for (const sectionName of Object.keys(SECTION_KEY_MAPS) as SectionName[]) {
-    const sectionTemplate: Record<string, null> = {};
+    const section = sections[sectionName] as Record<string, number | undefined>;
     const keyMap = SECTION_KEY_MAPS[sectionName] as Record<string, string[]>;
 
     for (const canonicalField of Object.keys(keyMap)) {
-      sectionTemplate[canonicalField] = null;
+      section[canonicalField] = undefined;
+    }
+  }
+
+  return sections;
+}
+
+function createCanonicalSchemaTemplate(): Record<SectionName, Record<string, string>> {
+  const template = {} as Record<SectionName, Record<string, string>>;
+
+  for (const sectionName of Object.keys(SECTION_KEY_MAPS) as SectionName[]) {
+    const sectionTemplate: Record<string, string> = {};
+    const keyMap = SECTION_KEY_MAPS[sectionName] as Record<string, string[]>;
+
+    for (const canonicalField of Object.keys(keyMap)) {
+      sectionTemplate[canonicalField] = CANONICAL_FIELD_UNITS[canonicalField] ?? 'number';
     }
 
     template[sectionName] = sectionTemplate;
@@ -100,48 +184,29 @@ function createCanonicalSchemaTemplate(): Record<SectionName, Record<string, nul
   return template;
 }
 
-function mapEntriesByAliases(entries: CompositionEntry[]): CompositionSections {
-  const sections = createEmptySections();
-
-  for (const entry of entries) {
-    const normalizedName = entry.name.toLowerCase().trim();
-    const numericValue = percentageStringToInt(entry.valueText);
-
-    if (!Number.isFinite(numericValue)) {
-      continue;
-    }
-
-    for (const sectionName of Object.keys(SECTION_KEY_MAPS) as SectionName[]) {
-      const keyMap = SECTION_KEY_MAPS[sectionName] as Record<string, string[]>;
-
-      for (const [canonical, aliases] of Object.entries(keyMap)) {
-        if (aliases.some((alias) => matchesAlias(normalizedName, alias))) {
-          (sections[sectionName] as Record<string, number>)[canonical] = numericValue;
-        }
-      }
-    }
-  }
-
-  return sections;
-}
-
-function createPrompt(entries: CompositionEntry[]): string {
+function createPrompt(rawText: string): string {
   const schemaTemplate = createCanonicalSchemaTemplate();
 
   return [
-    'You are a data extraction API.',
-    '',
-    'Return ONLY valid JSON.',
-    '',
+    'You map nutrient text to a fixed JSON schema.',
+    'Return ONLY valid JSON. No prose or markdown.',
     'Rules:',
-    '- Use null when missing',
-    '- Do not guess values',
-    '- Convert percentages to numbers (e.g. "29%" -> 29)',
-    '- Use exactly this top-level shape and keys:',
-    JSON.stringify(schemaTemplate, null, 2),
-    '',
-    'Input rows:',
-    JSON.stringify(entries),
+    '- Use exactly this top-level shape and keys. Do not add or remove keys.',
+    JSON.stringify(schemaTemplate),
+    '- Values must be numbers or null. The schema value shows the expected unit for each field.',
+    '- Do not guess values. Use null when missing.',
+    '- Convert percentages to numbers (e.g. "29%" -> 29).',
+    '- VERY IMPORTANT: Output each field as a plain number in the unit shown in the schema. Apply all conversions before writing the value.',
+    '- Values expressed per kg must be divided by 10 to get per 100g (e.g. 700 mg/kg -> 70 mg/100g).',
+    '- IU conversions — apply these before the per-unit scaling:',
+    '  - aVitamin: if in IU, multiply by 0.3 to get ug, then divide by 10 if per kg. Output ug/100g.',
+    '  - dVitamin / dVitamin3 / dVitamin2 / hydroxyVitaminD3 / hydroxyVitaminD2: if in IU, multiply by 0.025 to get ug, then divide by 10 if per kg. Output ug/100g.',
+    '  - eVitamin: if in IU, multiply by 0.67 to get mg, then divide by 10 if per kg. Output mg/100g.',
+    '- Energy (kiloJoule): always output in kJ/100g. If given in kcal, multiply by 4.184. If per kg, divide by 10.',
+    '- dVitamin: use total vitamin D if present; otherwise sum dVitamin3, dVitamin2, hydroxyVitaminD3, hydroxyVitaminD2.',
+    '- kVitamin: use total vitamin K if present; otherwise sum k1Vitamin, k2Vitamin.',
+    'Input text:',
+    rawText,
   ].join('\n');
 }
 
@@ -261,28 +326,6 @@ export function parseAndValidateAIMapping(payload: unknown): CompositionSections
   return parsedSections;
 }
 
-function mergeSections(primary: CompositionSections, secondary: CompositionSections): CompositionSections {
-  const merged = createEmptySections();
-
-  for (const sectionName of Object.keys(SECTION_KEY_MAPS) as SectionName[]) {
-    const keyMap = SECTION_KEY_MAPS[sectionName] as Record<string, string[]>;
-    const mergedSection = merged[sectionName] as Record<string, number>;
-    const primarySection = primary[sectionName] as Record<string, number | undefined>;
-    const secondarySection = secondary[sectionName] as Record<string, number | undefined>;
-
-    for (const key of Object.keys(keyMap)) {
-      const primaryValue = primarySection[key];
-      const secondaryValue = secondarySection[key];
-      if (typeof primaryValue === 'number' && Number.isFinite(primaryValue)) {
-        mergedSection[key] = primaryValue;
-      } else if (typeof secondaryValue === 'number' && Number.isFinite(secondaryValue)) {
-        mergedSection[key] = secondaryValue;
-      }
-    }
-  }
-
-  return merged;
-}
 
 async function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -306,29 +349,25 @@ async function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T
   }
 }
 
-async function requestAIMapping(entries: CompositionEntry[]): Promise<CompositionSections> {
+async function requestAIMapping(rawText: string): Promise<CompositionSections> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is not set');
   }
 
-  const timeoutMs = parseNumberEnv(process.env.OPENAI_TIMEOUT_MS, DEFAULT_TIMEOUT_MS);
+  const timeoutMs = parseNumberEnv(process.env.OPENAI_TIMEOUT_MS, 20000);
   const maxRetries = parseNumberEnv(process.env.OPENAI_MAX_RETRIES, DEFAULT_MAX_RETRIES);
-  const prompt = createPrompt(entries);
+  const prompt = createPrompt(rawText);
   const client = new OpenAI({ apiKey });
 
   let lastError: unknown = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
     try {
-      const response = await withTimeout(
-        client.chat.completions.create({
-          model: DEFAULT_MODEL,
-          messages: [{ role: 'user', content: prompt }],
-          temperature: 0,
-        }),
-        timeoutMs
-      );
+      const response = await client.chat.completions.create({
+        model: DEFAULT_MODEL,
+        messages: [{ role: 'user', content: prompt }],
+      })
 
       const messageContent = response.choices[0]?.message?.content;
       const rawText = extractMessageText(messageContent);
@@ -357,32 +396,41 @@ async function requestAIMapping(entries: CompositionEntry[]): Promise<Compositio
   throw lastError instanceof Error ? lastError : new Error('Unknown AI mapping error');
 }
 
-export async function mapProductCompositionWithAI(entries: CompositionEntry[]): Promise<CompositionMappingResult> {
-  const manualMapped = mapEntriesByAliases(entries);
+export async function mapProductCompositionWithAI(rawText: string): Promise<CompositionMappingResult> {
+  const emptyMapped = createEmptySections();
   const notes: string[] = [];
 
-  if (!process.env.OPENAI_API_KEY) {
-    notes.push('AI mapping disabled because OPENAI_API_KEY is not configured. Using alias-based fallback mapping.');
+  if (!rawText.trim()) {
+    notes.push('AI mapping skipped because raw composition text is empty. Returning empty canonical sections.');
     return {
-      mappedSections: manualMapped,
+      mappedSections: emptyMapped,
+      usedAI: false,
+      notes,
+    };
+  }
+
+  if (!process.env.OPENAI_API_KEY) {
+    notes.push('AI mapping disabled because OPENAI_API_KEY is not configured. Returning empty canonical sections.');
+    return {
+      mappedSections: emptyMapped,
       usedAI: false,
       notes,
     };
   }
 
   try {
-    const aiMapped = await requestAIMapping(entries);
+    const aiMapped = await requestAIMapping(rawText);
     return {
-      mappedSections: mergeSections(aiMapped, manualMapped),
+      mappedSections: aiMapped,
       usedAI: true,
       notes,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown AI mapping failure';
-    notes.push(`AI mapping failed (${message}). Falling back to alias-based mapping.`);
+    notes.push(`AI mapping failed (${message}). Returning empty canonical sections.`);
 
     return {
-      mappedSections: manualMapped,
+      mappedSections: emptyMapped,
       usedAI: false,
       notes,
     };

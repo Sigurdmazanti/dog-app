@@ -1,4 +1,8 @@
-## ADDED Requirements
+## Purpose
+
+Define the monorepo git structure: a single repository root tracking all sub-projects with preserved history and remote configuration.
+
+## Requirements
 
 ### Requirement: Single git root covers entire workspace
 The workspace SHALL have exactly one `.git/` directory located at the repository root (`c:\Repos\dogapp\.git`), tracking all sub-projects: `app/`, `openspec/`, and `scraper/`.

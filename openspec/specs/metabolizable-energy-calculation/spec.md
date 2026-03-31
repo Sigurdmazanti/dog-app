@@ -1,3 +1,9 @@
+## Purpose
+
+Define how metabolizable energy is calculated for dog food products using the FEDIAF formula.
+
+## Requirements
+
 ### Requirement: Metabolizable energy calculation
 The scraper helper module SHALL expose a `calculateMetabolizableEnergy` function that computes ME (kJ per 100 g) for a dog food product using the FEDIAF formula:
 

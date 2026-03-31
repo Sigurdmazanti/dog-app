@@ -1,4 +1,8 @@
-## ADDED Requirements
+## Purpose
+
+Define how the product composition mapper accepts unstructured raw text and produces canonical composition sections via AI extraction with fallback-safe behavior.
+
+## Requirements
 
 ### Requirement: Mapper SHALL accept raw composition text input
 The product composition mapper MUST accept unstructured source text as input and produce canonical composition sections without requiring a pre-parsed nutrient row array.

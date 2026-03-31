@@ -12,20 +12,55 @@ Monorepo note:
 
 ## Usage
 
-1. Place your `sitemap.xml` or a text file with one URL per line in the project folder.
-2. Run the scraper:
+### Single URL (simplest)
+
+Scrape one product and auto-append to Google Sheets (food type defaults to `dry`):
 
 ```
-node scraper.js sitemap sitemap.xml
-```
-Or for a list of URLs:
-```
-node scraper.js list urls.txt
+npm run dev -- https://emea.acana.com/en/dogs/dog-food/eu-aca-grasslands.html
 ```
 
-- Scraped data will be saved to `output.json` and `output.csv`.
-- Adjust the scraping logic in `scraper.js` to extract the data you need (e.g., use regex or Cheerio selectors).
-- The concurrency limit is set to 5 by default to avoid bans; you can change this in the script.
+Override food type or skip sheets:
+
+```
+npm run dev -- https://example.com/product --food-type wet --no-sheets
+```
+
+### Batch from sitemap
+
+Process all product URLs from a sitemap XML file (local or remote):
+
+```
+npm run dev -- --sitemap ./sitemap.xml
+npm run dev -- --sitemap https://example.com/sitemap.xml
+```
+
+### Batch from URL list
+
+Process URLs from a plain text or markdown file. Blank lines and `#` comments/headings are ignored. Markdown bullet lists (`- `, `* `), numbered lists (`1. `), and link syntax (`[text](url)`) are supported:
+
+```
+npm run dev -- --urls ./products.txt
+npm run dev -- --urls ./products.md
+```
+
+Full example with all flags:
+
+```
+npm run dev -- --urls ./products.md --food-type wet --concurrency 5 --no-sheets
+```
+
+### Flags
+
+| Flag | Default | Description |
+|---|---|---|
+| `--food-type <dry\|wet>` | `dry` | Food type for all URLs in the run |
+| `--no-sheets` | _(sheets on)_ | Skip Google Sheets append |
+| `--concurrency <n>` | `3` | Max concurrent scrapes in batch mode |
+| `--sitemap <path-or-url>` | — | Sitemap XML input for batch mode |
+| `--urls <file>` | — | URL list file input for batch mode |
+
+Unrecognised URLs in batch mode are skipped (not errored). A progress line is printed per URL, and a summary is shown at the end.
 
 ## Dependencies
 - axios
@@ -52,7 +87,7 @@ Behavior:
 
 ## Google Sheets Export Contract
 
-When `--append-sheets` is enabled, row serialization is driven by the canonical ordered schema in [src/helpers/googleSheetsAppender.ts](src/helpers/googleSheetsAppender.ts):
+Results are appended to Google Sheets by default. Opt out with `--no-sheets`. Row serialization is driven by the canonical ordered schema in [src/helpers/googleSheetsAppender.ts](src/helpers/googleSheetsAppender.ts):
 
 - The output order is fixed and chronological from `item_id` to `item_note`.
 - Every append writes exactly the same number of cells as schema columns.

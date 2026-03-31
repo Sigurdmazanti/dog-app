@@ -1,3 +1,9 @@
+## Purpose
+
+Define whole-word boundary matching for alias lookups so compound words and partial matches are correctly rejected.
+
+## Requirements
+
 ### Requirement: Whole-word alias matching
 The scraper helper module SHALL expose a `matchesAlias(name: string, alias: string): boolean` function that returns `true` only when `alias` appears in `name` as a complete word, meaning there is no Unicode letter (`\p{L}`) immediately before or after the matched region.
 

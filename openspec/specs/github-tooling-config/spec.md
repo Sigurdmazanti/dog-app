@@ -1,4 +1,8 @@
-## ADDED Requirements
+## Purpose
+
+Ensure GitHub Copilot tooling configuration files reference correct paths, tools, and attribution after migration from Claude Code.
+
+## Requirements
 
 ### Requirement: Copilot instructions file has correct attribution
 `copilot-instructions.md` SHALL use "Copilot Instructions" as its title and SHALL reference GitHub Copilot rather than Claude Code or claude.ai.

@@ -2,6 +2,7 @@ import { FoodType } from './interfaces/foodTypes';
 import { findSource } from './sourceRegistry';
 import { scrapeUrl } from './scraper';
 import { appendRowToGoogleSheets } from './helpers/googleSheetsAppender';
+import { log, logWarn, logError } from './helpers/logger';
 
 export interface BatchOptions {
   foodType: FoodType;
@@ -31,16 +32,16 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
   }
 
   for (const url of skippedUrls) {
-    console.log(`Skipped (unrecognised source): ${url}`);
+    log('', `Skipped (unrecognised source): ${url}`);
   }
 
   if (processable.length === 0) {
-    console.warn('Warning: No processable URLs found matching registered sources.');
+    logWarn('', 'Warning: No processable URLs found matching registered sources.');
     return { succeeded: 0, failed: 0, skipped: skippedUrls.length };
   }
 
   const total = processable.length;
-  console.log(`[scraper] ${urls.length} urls found, ${total} processable, ${skippedUrls.length} skipped`);
+  log('', `[scraper] ${urls.length} urls found, ${total} processable, ${skippedUrls.length} skipped`);
 
   const limit = pLimit(options.concurrency);
   let succeeded = 0;
@@ -51,26 +52,27 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
     limit(async () => {
       completed++;
       const current = completed;
+      const logPrefix = `[${current}/${total}]`;
       const taskStart = Date.now();
-      console.log(`[${current}/${total}] → ${url}`);
+      log(logPrefix, `→ ${url}`);
       try {
-        const result = await scrapeUrl({ url, foodType: options.foodType });
+        const result = await scrapeUrl({ url, foodType: options.foodType, logPrefix });
         const elapsed = Date.now() - taskStart;
 
         if (options.appendToSheets && options.sheetsConfig) {
           try {
-            await appendRowToGoogleSheets(options.sheetsConfig, result);
+            await appendRowToGoogleSheets(options.sheetsConfig, result, logPrefix);
           } catch (sheetsError) {
-            console.error(`[${current}/${total}] ⚠ Sheets append failed for ${url}: ${sheetsError}`);
+            logError(logPrefix, `⚠ Sheets append failed for ${url}: ${sheetsError}`);
           }
         }
 
-        console.log(`[${current}/${total}] ✓ ${result.title || url} (${elapsed}ms)`);
+        log(logPrefix, `✓ ${result.title || url} (${elapsed}ms)`);
         succeeded++;
       } catch (error) {
         const elapsed = Date.now() - taskStart;
         const message = error instanceof Error ? error.message : String(error);
-        console.log(`[${current}/${total}] ✗ ${url} — ${message} (${elapsed}ms)`);
+        log(logPrefix, `✗ ${url} — ${message} (${elapsed}ms)`);
         failed++;
       }
     })
@@ -78,6 +80,6 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
 
   await Promise.all(tasks);
 
-  console.log(`\nDone: ${succeeded} succeeded, ${failed} failed, ${skippedUrls.length} skipped`);
+  log('', `\nDone: ${succeeded} succeeded, ${failed} failed, ${skippedUrls.length} skipped`);
   return { succeeded, failed, skipped: skippedUrls.length };
 }

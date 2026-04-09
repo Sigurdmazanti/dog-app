@@ -3,6 +3,7 @@ import { JWT } from 'google-auth-library';
 import { ScrapeDataRow } from '../interfaces/scrapeResult';
 import * as path from 'path';
 import * as fs from 'fs';
+import { log, logError } from './logger';
 
 interface GoogleSheetsConfig {
   spreadsheetId: string;
@@ -242,7 +243,8 @@ async function getAuthClient(credentialsPath: string): Promise<JWT> {
 
 export async function appendRowToGoogleSheets(
   config: GoogleSheetsConfig,
-  dataRow: ScrapeDataRow
+  dataRow: ScrapeDataRow,
+  logPrefix = '',
 ): Promise<void> {
   try {
     const auth = await getAuthClient(config.credentialsPath);
@@ -259,9 +261,9 @@ export async function appendRowToGoogleSheets(
       },
     });
 
-    console.log(`Row appended to Google Sheets: ${dataRow.title}`);
+    log(logPrefix, `Row appended to Google Sheets: ${dataRow.title}`);
   } catch (error) {
-    console.error('Error appending to Google Sheets:', error);
+    logError(logPrefix, 'Error appending to Google Sheets:', error);
     throw error;
   }
 }

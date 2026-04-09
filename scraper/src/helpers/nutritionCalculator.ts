@@ -5,6 +5,9 @@ import { NutritionData } from "../interfaces/productComposition";
  * NFE = 100 - water - protein - fat - fiber - crudeAsh
  */
 export function calculateNFE(data: NutritionData): number {
+  if (data.water == null || data.protein == null || data.fat == null || data.fiber == null || data.crudeAsh == null) {
+    return 0;
+  }
   return 100 - data.water - data.protein - data.fat - data.fiber - data.crudeAsh;
 }
 
@@ -28,6 +31,9 @@ export function calculateNFE(data: NutritionData): number {
  *  - NFE is derived via calculateNFE: 100 − water − protein − fat − fibre − ash
  */
 export function calculateMetabolizableEnergy(data: NutritionData): number {
+  if (data.protein == null || data.fat == null || data.fiber == null) {
+    return 0;
+  }
   const nfe = calculateNFE(data);
 
   const me =

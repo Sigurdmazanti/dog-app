@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { log, logWarn } from './logger';
 import { percentageStringToInt } from './percentageStringToInt';
 import {
   AminoAcidsData,
@@ -131,8 +132,8 @@ const CANONICAL_FIELD_UNITS: Record<string, string> = {
 };
 
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-5-nano';
-const DEFAULT_TIMEOUT_MS = 8_000;
-const DEFAULT_MAX_RETRIES = 1;
+const DEFAULT_TIMEOUT_MS = 60_000;
+const DEFAULT_MAX_RETRIES = 2;
 
 const parseNumberEnv = (value: string | undefined, fallback: number): number => {
   if (!value) {
@@ -349,13 +350,13 @@ async function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T
   }
 }
 
-async function requestAIMapping(rawText: string): Promise<CompositionSections> {
+async function requestAIMapping(rawText: string, logPrefix = ''): Promise<CompositionSections> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is not set');
   }
 
-  const timeoutMs = parseNumberEnv(process.env.OPENAI_TIMEOUT_MS, 20000);
+  const timeoutMs = parseNumberEnv(process.env.OPENAI_TIMEOUT_MS, DEFAULT_TIMEOUT_MS);
   const maxRetries = parseNumberEnv(process.env.OPENAI_MAX_RETRIES, DEFAULT_MAX_RETRIES);
   const prompt = createPrompt(rawText);
   const client = new OpenAI({ apiKey });
@@ -363,11 +364,18 @@ async function requestAIMapping(rawText: string): Promise<CompositionSections> {
   let lastError: unknown = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    const callStart = Date.now();
     try {
-      const response = await client.chat.completions.create({
-        model: DEFAULT_MODEL,
-        messages: [{ role: 'user', content: prompt }],
-      })
+      const response = await withTimeout(
+        client.chat.completions.create({
+          model: DEFAULT_MODEL,
+          messages: [{ role: 'user', content: prompt }],
+        }),
+        timeoutMs,
+      );
+
+      const elapsed = Date.now() - callStart;
+      log(logPrefix, `[ai-mapper] done in ${elapsed}ms`);
 
       const messageContent = response.choices[0]?.message?.content;
       const rawText = extractMessageText(messageContent);
@@ -385,10 +393,22 @@ async function requestAIMapping(rawText: string): Promise<CompositionSections> {
 
       return parsed;
     } catch (error) {
+      const elapsed = Date.now() - callStart;
       lastError = error;
 
+      const message = error instanceof Error ? error.message : String(error);
+      const isTimeout = message.includes('timed out after');
+
+      if (isTimeout) {
+        log(logPrefix, `[ai-mapper] timed out after ${timeoutMs}ms`);
+      } else {
+        log(logPrefix, `[ai-mapper] error after ${elapsed}ms — ${message}`);
+      }
+
       if (attempt < maxRetries) {
-        await wait(300 * (attempt + 1));
+        const delay = 1000 * (attempt + 1);
+        log(logPrefix, `[ai-mapper] retry ${attempt + 1}/${maxRetries} after ${delay}ms`);
+        await wait(delay);
       }
     }
   }
@@ -396,7 +416,7 @@ async function requestAIMapping(rawText: string): Promise<CompositionSections> {
   throw lastError instanceof Error ? lastError : new Error('Unknown AI mapping error');
 }
 
-export async function mapProductCompositionWithAI(rawText: string): Promise<CompositionMappingResult> {
+export async function mapProductCompositionWithAI(rawText: string, logPrefix = ''): Promise<CompositionMappingResult> {
   const emptyMapped = createEmptySections();
   const notes: string[] = [];
 
@@ -419,7 +439,7 @@ export async function mapProductCompositionWithAI(rawText: string): Promise<Comp
   }
 
   try {
-    const aiMapped = await requestAIMapping(rawText);
+    const aiMapped = await requestAIMapping(rawText, logPrefix);
     return {
       mappedSections: aiMapped,
       usedAI: true,

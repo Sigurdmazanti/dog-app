@@ -14,6 +14,7 @@ import {
 } from "../interfaces/productComposition";
 import { ScrapeRequest } from "../interfaces/scrapeRequest";
 import { mapProductCompositionWithAI } from './aiProductCompositionMapper';
+import { log, logWarn } from './logger';
 
 export interface ScraperExtractors {
   extractTitle: ($: CheerioAPI) => string;
@@ -23,6 +24,7 @@ export interface ScraperExtractors {
 
 export async function runScraper(scrapeRequest: ScrapeRequest, extractors: ScraperExtractors): Promise<ScrapeResult> {
   const url = scrapeRequest.url;
+  const logPrefix = scrapeRequest.logPrefix ?? '';
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
 
@@ -30,11 +32,11 @@ export async function runScraper(scrapeRequest: ScrapeRequest, extractors: Scrap
   const ingredientsDescription = extractors.extractIngredientsDescription($);
   const compositionText = extractors.extractCompositionText($, ingredientsDescription);
 
-  console.log(`[ai-mapper] calling AI for ${url}`);
-  const mappingResult = await mapProductCompositionWithAI(compositionText);
+  log(logPrefix, `[ai-mapper] calling AI for ${url}`);
+  const mappingResult = await mapProductCompositionWithAI(compositionText, logPrefix);
 
   for (const note of mappingResult.notes) {
-    console.warn(`[composition-mapper] ${note}`);
+    logWarn(logPrefix, `[composition-mapper] ${note}`);
   }
 
   const nutritionData = mappingResult.mappedSections.nutritionData as NutritionData;

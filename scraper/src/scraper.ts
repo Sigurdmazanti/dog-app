@@ -9,6 +9,7 @@ import { findSource } from './sourceRegistry';
 import { parseSitemapUrls } from './helpers/sitemapParser';
 import { parseUrlListFile } from './helpers/urlListParser';
 import { runBatch } from './batchScraper';
+import { log, logWarn, logError } from './helpers/logger';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -83,19 +84,19 @@ async function main(): Promise<void> {
   const appendToSheets = !noSheets;
 
   if (!Object.values(FoodType).includes(foodTypeArg as FoodType)) {
-    console.error('Invalid food type. Must be one of:', Object.values(FoodType).join(', '));
+    logError('', 'Invalid food type. Must be one of:', Object.values(FoodType).join(', '));
     process.exit(1);
   }
   const foodType = foodTypeArg as FoodType;
 
   const sheetsConfig = appendToSheets ? getSheetsConfig() : null;
   if (appendToSheets && !sheetsConfig) {
-    console.warn('Warning: Google Sheets config missing (GOOGLE_SPREADSHEET_ID, GOOGLE_SHEET_NAME, GOOGLE_CREDENTIALS_PATH). Skipping sheets append.');
+    logWarn('', 'Warning: Google Sheets config missing (GOOGLE_SPREADSHEET_ID, GOOGLE_SHEET_NAME, GOOGLE_CREDENTIALS_PATH). Skipping sheets append.');
   }
 
   // Batch mode: --sitemap
   if (sitemapPath) {
-    console.log(`[scraper] mode=sitemap  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
+    log('', `[scraper] mode=sitemap  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const urls = await parseSitemapUrls(sitemapPath);
     const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
     process.exit(summary.failed > 0 ? 1 : 0);
@@ -104,7 +105,7 @@ async function main(): Promise<void> {
 
   // Batch mode: --urls
   if (urlsPath) {
-    console.log(`[scraper] mode=urls  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
+    log('', `[scraper] mode=urls  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const urls = parseUrlListFile(urlsPath);
     const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
     process.exit(summary.failed > 0 ? 1 : 0);
@@ -116,26 +117,26 @@ async function main(): Promise<void> {
   const url = positionalArgs[0];
 
   if (!url) {
-    console.log('Usage:');
-    console.log('  npm run dev -- <url> [--food-type dry|wet] [--no-sheets]');
-    console.log('  npm run dev -- --sitemap <path-or-url> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
-    console.log('  npm run dev -- --urls <file> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
+    log('', 'Usage:');
+    log('', '  npm run dev -- <url> [--food-type dry|wet] [--no-sheets]');
+    log('', '  npm run dev -- --sitemap <path-or-url> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
+    log('', '  npm run dev -- --urls <file> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
     process.exit(1);
   }
 
-  console.log(`[scraper] mode=single  food-type=${foodType}  url=${url}`);
+  log('', `[scraper] mode=single  food-type=${foodType}  url=${url}`);
   const scrapeRequest: ScrapeRequest = { url, foodType };
   const result = await scrapeUrl(scrapeRequest);
   const elapsed = Date.now() - startTime;
-  console.log(`✓ ${result.title || url} (${elapsed}ms)`);
+  log('', `✓ ${result.title || url} (${elapsed}ms)`);
   console.log(JSON.stringify(result, null, 2));
 
   if (appendToSheets && sheetsConfig) {
-    console.log('Appending result to Google Sheets...');
+    log('', 'Appending result to Google Sheets...');
     try {
       await appendRowToGoogleSheets(sheetsConfig, result);
     } catch (error) {
-      console.error('Failed to append to Google Sheets:', error);
+      logError('', 'Failed to append to Google Sheets:', error);
       process.exit(1);
     }
   }

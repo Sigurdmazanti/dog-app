@@ -1,0 +1,13 @@
+https://www.acana.com/en-US/dogs/dog-food/classics-p%C3%A2t%C3%A9%2C-chicken-recipe/classics-pate-chicken-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/classics-p%C3%A2t%C3%A9%2C-beef-recipe/classics-pate-beef-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/classics-p%C3%A2t%C3%A9%2C-fish-recipe/classics-pate-fish-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/acana-premium-p%C3%A2t%C3%A9%2C-poultry-recipe/premium-pate-poultry-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/acana-premium-p%C3%A2t%C3%A9%2C-beef-recipe/premium-pate-dog-beef-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/acana-premium-p%C3%A2t%C3%A9%2C-duck-recipe/premium-pate-duck-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/acana-premium-p%C3%A2t%C3%A9%2C-lamb-recipe/premium-pate-lamb-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-p%C3%A2t%C3%A9%2C-puppy-recipe-in-bone-broth/premium-chunks-puppy-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-chunks%2C-poultry-recipe-in-bone-broth/premium-chunks-poultry-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-chunks%2C-beef-recipe-in-bone-broth/premium-chunks-beef-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-chunks%2C-duck-recipe-in-bone-broth/premium-chunks-duck-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-chunks%2C-lamb-recipe-in-bone-broth/premium-chunks-lamb-recipe.html
+https://www.acana.com/en-US/dogs/dog-food/premium-chunks%2C-pork-recipe-in-bone-broth/premium-chunks-pork-recipe.html

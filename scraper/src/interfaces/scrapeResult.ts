@@ -26,4 +26,6 @@ export interface ScrapeResult {
 export interface ScrapeDataRow extends ScrapeResult {
   foodType: string;
   noteText: string;
+  dataSource: string;
+  brand: string;
 }

@@ -48,6 +48,8 @@ export async function scrapeUrl(scrapeRequest: ScrapeRequest): Promise<ScrapeDat
 			...data,
 			foodType,
 			noteText: noteText.filter(Boolean).join('\n'), // TODO: \n eller .join(' ')? til CSV
+			dataSource: source.domain,
+			brand: source.brand,
 		};
 
 	  return dataRow;
@@ -71,6 +73,7 @@ function getSheetsConfig(): { spreadsheetId: string; sheetName: string; credenti
 }
 
 async function main(): Promise<void> {
+  const startTime = Date.now();
   const sitemapPath = getFlag('--sitemap');
   const urlsPath = getFlag('--urls');
   const foodTypeArg = getFlag('--food-type') ?? 'dry';
@@ -92,6 +95,7 @@ async function main(): Promise<void> {
 
   // Batch mode: --sitemap
   if (sitemapPath) {
+    console.log(`[scraper] mode=sitemap  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const urls = await parseSitemapUrls(sitemapPath);
     const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
     process.exit(summary.failed > 0 ? 1 : 0);
@@ -100,6 +104,7 @@ async function main(): Promise<void> {
 
   // Batch mode: --urls
   if (urlsPath) {
+    console.log(`[scraper] mode=urls  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const urls = parseUrlListFile(urlsPath);
     const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
     process.exit(summary.failed > 0 ? 1 : 0);
@@ -118,9 +123,11 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
+  console.log(`[scraper] mode=single  food-type=${foodType}  url=${url}`);
   const scrapeRequest: ScrapeRequest = { url, foodType };
   const result = await scrapeUrl(scrapeRequest);
-  console.log('Scraping complete. Result:');
+  const elapsed = Date.now() - startTime;
+  console.log(`✓ ${result.title || url} (${elapsed}ms)`);
   console.log(JSON.stringify(result, null, 2));
 
   if (appendToSheets && sheetsConfig) {

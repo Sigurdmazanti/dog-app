@@ -11,9 +11,29 @@ interface GoogleSheetsConfig {
 }
 
 type ColumnValue = string | number;
+
+function formatCopenhagenTimestamp(date: Date): string {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Copenhagen',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZoneName: 'longOffset',
+  }).formatToParts(date);
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
+  const offset = get('timeZoneName').replace('GMT', '') || '+00:00';
+  return `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}${offset}`;
+}
+
 export const GOOGLE_SHEETS_SCHEMA = [
   'item_id',
   'item_name',
+  'item_brand',
   'item_url',
   'item_unit_weight_grams',
   'item_food_type',
@@ -75,6 +95,8 @@ export const GOOGLE_SHEETS_SCHEMA = [
   'item_ingredients_description',
   'item_data_source',
   'item_note',
+  'item_created_at',
+  'item_updated_at',
 ] as const;
 
 export const EXPECTED_GOOGLE_SHEETS_COLUMN_COUNT = GOOGLE_SHEETS_SCHEMA.length;
@@ -94,9 +116,11 @@ function toColumnValue(value: string | number | undefined | null): ColumnValue {
 }
 
 function createColumnResolvers(dataRow: ScrapeDataRow): Record<GoogleSheetsColumn, ColumnValue> {
+  const scrapedAt = new Date();
   return {
     item_id: '',
     item_name: toColumnValue(dataRow.title),
+    item_brand: toColumnValue(dataRow.brand),
     item_url: toColumnValue(dataRow.url),
     item_unit_weight_grams: 100,
     item_food_type: toColumnValue(dataRow.foodType),
@@ -156,8 +180,10 @@ function createColumnResolvers(dataRow: ScrapeDataRow): Record<GoogleSheetsColum
     item_vitamin_k2_ug_per_100g: toColumnValue(dataRow.vitaminsData.k2Vitamin),
     item_sorbitol_g_per_100g: toColumnValue(dataRow.sugarAlcoholsData.sorbitol),
     item_ingredients_description: toColumnValue(dataRow.ingredientsDescription),
-    item_data_source: '',
+    item_data_source: toColumnValue(dataRow.dataSource),
     item_note: toColumnValue(dataRow.noteText),
+    item_created_at: formatCopenhagenTimestamp(scrapedAt),
+    item_updated_at: formatCopenhagenTimestamp(scrapedAt),
   };
 }
 

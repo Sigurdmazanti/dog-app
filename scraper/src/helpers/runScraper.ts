@@ -30,6 +30,7 @@ export async function runScraper(scrapeRequest: ScrapeRequest, extractors: Scrap
   const ingredientsDescription = extractors.extractIngredientsDescription($);
   const compositionText = extractors.extractCompositionText($, ingredientsDescription);
 
+  console.log(`[ai-mapper] calling AI for ${url}`);
   const mappingResult = await mapProductCompositionWithAI(compositionText);
 
   for (const note of mappingResult.notes) {

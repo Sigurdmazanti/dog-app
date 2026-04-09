@@ -40,6 +40,8 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
   }
 
   const total = processable.length;
+  console.log(`[scraper] ${urls.length} urls found, ${total} processable, ${skippedUrls.length} skipped`);
+
   const limit = pLimit(options.concurrency);
   let succeeded = 0;
   let failed = 0;
@@ -49,8 +51,11 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
     limit(async () => {
       completed++;
       const current = completed;
+      const taskStart = Date.now();
+      console.log(`[${current}/${total}] → ${url}`);
       try {
         const result = await scrapeUrl({ url, foodType: options.foodType });
+        const elapsed = Date.now() - taskStart;
 
         if (options.appendToSheets && options.sheetsConfig) {
           try {
@@ -60,11 +65,12 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
           }
         }
 
-        console.log(`[${current}/${total}] ✓ ${result.title || url}`);
+        console.log(`[${current}/${total}] ✓ ${result.title || url} (${elapsed}ms)`);
         succeeded++;
       } catch (error) {
+        const elapsed = Date.now() - taskStart;
         const message = error instanceof Error ? error.message : String(error);
-        console.log(`[${current}/${total}] ✗ ${url} — ${message}`);
+        console.log(`[${current}/${total}] ✗ ${url} — ${message} (${elapsed}ms)`);
         failed++;
       }
     })

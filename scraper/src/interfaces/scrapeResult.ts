@@ -8,6 +8,7 @@ import {
   VitaminLikeData,
   VitaminsData,
 } from "./productComposition";
+import { FoodType } from "./foodTypes";
 
 export interface ScrapeResult {
   url: string;
@@ -24,7 +25,7 @@ export interface ScrapeResult {
 }
 
 export interface ScrapeDataRow extends ScrapeResult {
-  foodType: string;
+  foodType: FoodType;
   noteText: string;
   dataSource: string;
   brand: string;

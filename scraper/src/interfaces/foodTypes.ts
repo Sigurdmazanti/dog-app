@@ -3,4 +3,6 @@ export enum FoodType {
     Wet = "wet",
     Treats = "treats",
     FreezeDried = "freeze-dried",
+    Misc = "misc",
+    Barf = "barf",
 }

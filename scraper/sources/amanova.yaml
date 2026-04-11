@@ -2,13 +2,50 @@ scraper: amanova
 brand: Amanova
 domain: amanova.com
 productCounts:
-  dry: 0
-  wet: 0
-  treats: 0
+  dry: 22
+  wet: 9
+  treats: 2
   freeze-dried: 0
-  total: 0
+  misc: 0
+  barf: 0
+  total: 33
 products:
-  dry: []
-  wet: []
-  treats: []
+  dry:
+    - https://onlyfresh.com/en/products/adult-sensitive-salmon-deluxe?_pos=1&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-digestive-divine-rabbit?_pos=2&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-obesity-turkey-delight?_pos=3&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-sensitive-salmon-deluxe?_pos=4&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-medium-exquisite-chicken?_pos=5&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-digestive-divine-rabbit?_pos=6&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-exquisite-chicken?_pos=7&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-exigent-iberian-pork?_pos=8&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-exigent-iberian-pork-cerdo-iberico-fresco?_pos=9&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-sensitive-delicious-lamb?_pos=10&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-obesity-turkey-delight-pavo-fresco?_pos=11&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-large-exquisite-chicken?_pos=12&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/puppy-mini-exquisite-chicken?_pos=13&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/puppy-sensitive-salmon-deluxe?_pos=14&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-sensitive-delicious-lamb-cordero-fresco?_pos=15&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mobility-fish-delicacy?_pos=16&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/puppy-digestive-divine-rabbit?_pos=17&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mature-fish-delicacy?_pos=18&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/puppy-large-exquisite-chicken?_pos=19&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-exigent-venison-supreme-venado-fresco?_pos=20&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mature-mini-fish-delicacy-pescado-blanco-fresco?_pos=21&_fid=d028c784b&_ss=c
+    - https://onlyfresh.com/en/products/adult-mini-white-hair-special?_pos=22&_fid=d028c784b&_ss=c
+  wet:
+    - https://onlyfresh.com/en/products/tasty-salmon-turkey-salmon-y-pavo-frescos-100g?_pos=1&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/iberian-pork-cerdo-iberico-100g?_pos=2&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/exquisite-chicken-pollo-fresco-100g?_pos=3&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/irresistible-beef-ternera-fresca-100g?_pos=4&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/turkey-delight-pavo-fresco-100g?_pos=5&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/luscious-lamb-pork-cerdo-iberico-y-cordero-100g?_pos=6&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/brilliant-beef-ternera-y-pollo-100g?_pos=7&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/p15-adult-dog-delicious-lamb-alimento-humedo?_pos=8&_fid=e86ffdf90&_ss=c
+    - https://onlyfresh.com/en/products/puppy-exquisite-chicken-pollo-fresco-100g?_pos=9&_fid=e86ffdf90&_ss=c
+  treats:
+    - https://onlyfresh.com/en/products/dental-chews-snack-dentales-small-mini?_pos=1&_fid=dda5d9c81&_ss=c
+    - https://onlyfresh.com/en/products/dental-chews-snack-dentales-7-stick?_pos=2&_fid=dda5d9c81&_ss=c
   freeze-dried: []
+  misc: []
+  barf: []

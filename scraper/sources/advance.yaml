@@ -6,6 +6,8 @@ productCounts:
   wet: 19
   treats: 0
   freeze-dried: 0
+  misc: 0
+  barf: 0
   total: 56
 products:
   dry:
@@ -68,3 +70,5 @@ products:
     - https://petfood.advancepet.com.au/products/advance-advance-adult-wet-dog-food-with-turkey-roll-2kg
   treats: []
   freeze-dried: []
+  misc: []
+  barf: []

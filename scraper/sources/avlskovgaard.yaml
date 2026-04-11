@@ -1,0 +1,24 @@
+scraper: avlskovgaard
+brand: Avlskovgaard
+domain: avlskovgaard.dk
+productCounts:
+  dry: 0
+  wet: 0
+  treats: 0
+  freeze-dried: 0
+  misc: 3
+  barf: 2
+  total: 5
+products:
+  dry: []
+  wet: []
+  treats: []
+  freeze-dried: []
+  misc:
+    - https://avlskovgaard.dk/products/torfodder-topping-med-okse
+    - https://avlskovgaard.dk/products/torfoder-topping-med-kylling
+    - https://avlskovgaard.dk/products/torfoder-topping-med-lam
+  misc: []
+  barf:
+    - https://avlskovgaard.dk/products/torfodder-topping-med-okse
+    - https://avlskovgaard.dk/products/boffelhud

@@ -32,7 +32,7 @@ The system MUST default the food type to `dry` when not explicitly provided.
 
 #### Scenario: Invalid food type rejected
 - **WHEN** the CLI is invoked with `--food-type invalid`
-- **THEN** the system prints an error listing valid food types and exits with a non-zero code
+- **THEN** the system prints an error listing valid food types (`dry`, `wet`, `treats`, `freeze-dried`, `misc`, `barf`) and exits with a non-zero code
 
 ### Requirement: Single-URL backward compatibility
 The system MUST continue to accept a bare URL as the first positional argument for single-URL scraping.
@@ -44,3 +44,10 @@ The system MUST continue to accept a bare URL as the first positional argument f
 #### Scenario: Bare URL with all flags
 - **WHEN** the CLI is invoked with `npm run dev -- https://example.com/product --food-type wet --no-sheets`
 - **THEN** the system scrapes that single URL with food type `wet` and no sheets append
+
+### Requirement: barf is accepted as a valid food type argument
+The CLI MUST accept `barf` as a valid `--food-type` value.
+
+#### Scenario: barf food type argument accepted
+- **WHEN** the CLI is invoked with `--food-type barf`
+- **THEN** the system accepts it as a valid food type and begins scraping with food type `barf`

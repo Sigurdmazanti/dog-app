@@ -6,9 +6,13 @@ productCounts:
   wet: 0
   treats: 0
   freeze-dried: 0
+  misc: 0
+  barf: 0
   total: 0
 products:
   dry: []
   wet: []
   treats: []
   freeze-dried: []
+  misc: []
+  barf: []

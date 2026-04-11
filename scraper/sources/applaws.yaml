@@ -1,0 +1,56 @@
+scraper: applaws
+brand: Applaws
+domain: applaws.com
+productCounts:
+  dry: 0
+  wet: 38
+  treats: 0
+  freeze-dried: 0
+  misc: 0
+  barf: 0
+  total: 38
+products:
+  dry: []
+  wet:
+    - https://applaws.com/uk/dog/products/chicken-selection-in-gravy-3/
+    - https://applaws.com/uk/dog/products/chicken-breast-in-broth-16x156g/
+    - https://applaws.com/uk/dog/products/variety-selection-in-broth-24-x-85g/
+    - https://applaws.com/uk/dog/products/variety-selection-bone-broth/
+    - https://applaws.com/uk/dog/products/lamb-bone-broth-with-turmeric-parsley/
+    - https://applaws.com/uk/dog/products/beef-bone-broth-with-turmeric-parsley/
+    - https://applaws.com/uk/dog/products/chicken-bone-broth-with-turmeric-parsley/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-gravy-24-x-85g/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-broth-3/
+    - https://applaws.com/uk/dog/products/puppy-chicken-breast-in-broth-https-hsc-staging-area-applaws-com-uk-dog-products-puppy-chicken-breast-in-broth-8-x-156g/
+    - https://applaws.com/uk/dog/products/puppy-chicken-breast-with-vegetables-in-broth-3/
+    - https://applaws.com/uk/dog/products/puppy-chicken-breast-in-broth-6-x-156g/
+    - https://applaws.com/uk/dog/products/puppy-chicken-breast-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-jelly/
+    - https://applaws.com/uk/dog/products/puppy-chicken-breast-with-vegetables-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-broth-16-x-156g/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-beef-liver-vegetables-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-ham-vegetables-in-broth-156g/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-ham-vegetables-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-salmon-vegetables-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-lamb-in-gravy-2/
+    - https://applaws.com/uk/dog/products/chicken-breast-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-beef-in-gravy/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-duck-in-gravy/
+    - https://applaws.com/uk/dog/products/chicken-selection-in-gravy/
+    - https://applaws.com/uk/dog/products/beef-stew-with-vegetables/
+    - https://applaws.com/uk/dog/products/stew-variety-selection/
+    - https://applaws.com/uk/dog/products/beef-with-chicken-breast-vegetables-in-jelly/
+    - https://applaws.com/uk/dog/products/variety-selection-in-jelly/
+    - https://applaws.com/uk/dog/products/variety-selection-in-gravy/
+    - https://applaws.com/uk/dog/products/variety-selection-in-broth/
+    - https://applaws.com/uk/dog/products/whitefish-with-salmon-green-beans-lentils-in-gravy/
+    - https://applaws.com/uk/dog/products/lamb-with-courgette-carrots-chickpeas-in-gravy/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-white-beans-pumpkin-peas-in-gravy/
+    - https://applaws.com/uk/dog/products/tuna-fillet-with-pumpkin-chickpeas-kale-in-broth/
+    - https://applaws.com/uk/dog/products/beef-with-green-beans-sweet-potato-red-pepper-in-broth/
+    - https://applaws.com/uk/dog/products/chicken-breast-with-broccoli-apple-quinoa-in-broth/
+  treats: []
+  freeze-dried: []
+  misc: []
+  barf: []

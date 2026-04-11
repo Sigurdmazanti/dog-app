@@ -6,7 +6,7 @@ productCounts:
   wet: 13
   treats: 6
   freeze-dried: 11
-  total: 58
+  misc: 0  barf: 0  total: 58
 products:
   dry:
     - https://www.acana.com/en-US/dogs/dog-food/classics%2C-chicken-and-barley-recipe/ds-aca-classics-chicken-barley.html
@@ -70,3 +70,5 @@ products:
     - https://www.acana.com/en-US/duck-and-pear-freeze-dried-treats/ds-aca-fdt-duck-pear.html
     - https://www.acana.com/en-US/dogs/dog-food/lamb-and-apple-freeze-dried-treats/ds-aca-fdt-lamb-apple.html
     - https://www.acana.com/en-US/beef-and-pumpkin-freeze-dried-treats/ds-aca-fdt-beef-pumpkin.html
+  misc: []
+  barf: []

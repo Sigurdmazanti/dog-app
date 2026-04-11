@@ -1,0 +1,53 @@
+scraper: arion
+brand: Arion
+domain: arion-petfood.dk
+productCounts:
+  dry: 35
+  wet: 0
+  treats: 0
+  freeze-dried: 0
+  misc: 0
+  barf: 0
+  total: 35
+products:
+  dry:
+    - https://arion-petfood.dk/produkt/adult-grain-free-chicken-potato/
+    - https://arion-petfood.dk/produkt/adult-grain-free-salmon-potato/
+    - https://arion-petfood.dk/produkt/arion-original-growth-chicken-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-growth-chicken-medium-2/
+    - https://arion-petfood.dk/produkt/arion-original-growth-chicken-small-2/
+    - https://arion-petfood.dk/produkt/arion-original-growth-fish-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-growth-fish-medium-2/
+    - https://arion-petfood.dk/produkt/arion-original-growth-fish-small-2/
+    - https://arion-petfood.dk/produkt/arion-original-high-energy-all-breed-2/
+    - https://arion-petfood.dk/produkt/arion-original-light-all-breed-2/
+    - https://arion-petfood.dk/produkt/arion-original-maintenance-small-2/
+    - https://arion-petfood.dk/produkt/arion-original-maintenance-giant-2/
+    - https://arion-petfood.dk/produkt/arion-original-maintenance-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-maintenance-medium-2/
+    - https://arion-petfood.dk/produkt/arion-original-mature-7-medium-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-mature-7-small/
+    - https://arion-petfood.dk/produkt/arion-original-sensitive-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-sensitive-medium-2/
+    - https://arion-petfood.dk/produkt/arion-original-sensitive-small-2/
+    - https://arion-petfood.dk/produkt/arion-original-skin-coat-large-2/
+    - https://arion-petfood.dk/produkt/arion-original-skin-coat-medium-2/
+    - https://arion-petfood.dk/produkt/skincoatsmall/
+    - https://arion-petfood.dk/produkt/care-digestion-1/
+    - https://arion-petfood.dk/produkt/care-hypoallergenic-1/
+    - https://arion-petfood.dk/produkt/care-care-hypoallergenic-small-breed/
+    - https://arion-petfood.dk/produkt/care-joint-1/
+    - https://arion-petfood.dk/produkt/care-weight-1/
+    - https://arion-petfood.dk/produkt/fresh-adult-active/
+    - https://arion-petfood.dk/produkt/fresh-adult-sensitive/
+    - https://arion-petfood.dk/produkt/fresh-adult-small/
+    - https://arion-petfood.dk/produkt/fresh-junior/
+    - https://arion-petfood.dk/produkt/fresh-medium-large/
+    - https://arion-petfood.dk/produkt/fresh-senior-light/
+    - https://arion-petfood.dk/produkt/natural-hund-15-kg/
+    - https://arion-petfood.dk/produkt/natural-hvalp/
+  wet: []
+  treats: []
+  freeze-dried: []
+  misc: []
+  barf: []

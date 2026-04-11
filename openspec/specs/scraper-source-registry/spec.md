@@ -12,7 +12,7 @@ The system MUST support a per-brand YAML source file format at `scraper/sources/
 - **THEN** the file is parsed without error and its product URL lists are accessible by food type key
 
 #### Scenario: Food type key maps to FoodType enum value
-- **WHEN** a YAML source file contains a `products` map with keys `dry`, `wet`, `treats`, or `freeze-dried`
+- **WHEN** a YAML source file contains a `products` map with keys `dry`, `wet`, `treats`, `freeze-dried`, `misc`, or `barf`
 - **THEN** each key corresponds to a valid `FoodType` enum value and its URL list is accessible by that type
 
 #### Scenario: Missing food type key defaults to empty list
@@ -38,8 +38,8 @@ The system MUST provide a `loadSourceUrls(yamlPath: string, foodType: FoodType):
 - **WHEN** `loadSourceUrls` is called with a path that does not exist
 - **THEN** it throws an error indicating the file was not found
 
-### Requirement: FoodType enum covers all four supported food categories
-The `FoodType` enum MUST include values for `dry`, `wet`, `treats`, and `freeze-dried` to cover all food categories tracked by the scraper.
+### Requirement: FoodType enum covers all supported food categories
+The `FoodType` enum MUST include values for `dry`, `wet`, `treats`, `freeze-dried`, `misc`, and `barf` to cover all food categories tracked by the scraper.
 
 #### Scenario: Treats food type is valid
 - **WHEN** `--food-type treats` is passed to the CLI
@@ -48,3 +48,25 @@ The `FoodType` enum MUST include values for `dry`, `wet`, `treats`, and `freeze-
 #### Scenario: Freeze-dried food type is valid
 - **WHEN** `--food-type freeze-dried` is passed to the CLI
 - **THEN** the scraper accepts it as a valid food type and processes URLs accordingly
+
+#### Scenario: Misc food type is valid
+- **WHEN** `--food-type misc` is passed to the CLI
+- **THEN** the scraper accepts it as a valid food type and processes URLs accordingly
+
+#### Scenario: Barf food type is valid
+- **WHEN** `--food-type barf` is passed to the CLI
+- **THEN** the scraper accepts it as a valid food type and processes URLs accordingly
+
+### Requirement: Source registry dispatches Arion URLs
+The source registry SHALL route any URL containing `arion-petfood.dk` to the Arion scraper.
+
+#### Scenario: Arion URL is dispatched to Arion scraper
+- **WHEN** `findSource` is called with a URL containing `arion-petfood.dk`
+- **THEN** the returned entry SHALL use the `scrapeArion` function and have brand `Arion`
+
+### Requirement: Source registry dispatches Avlskovgaard URLs
+The source registry SHALL route any URL containing `avlskovgaard.dk` to the Avlskovgaard scraper.
+
+#### Scenario: Avlskovgaard URL is dispatched to Avlskovgaard scraper
+- **WHEN** `findSource` is called with a URL containing `avlskovgaard.dk`
+- **THEN** the returned entry SHALL use the `scrapeAvlskovgaard` function and have brand `Avlskovgaard`

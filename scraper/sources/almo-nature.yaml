@@ -6,6 +6,8 @@ productCounts:
   wet: 55
   treats: 2
   freeze-dried: 0
+  misc: 0
+  barf: 0
   total: 83
 products:
   dry:
@@ -95,3 +97,5 @@ products:
     - https://www.almonature.com/en/dog-products/520
     - https://www.almonature.com/en/dog-products/521
   freeze-dried: []
+  misc: []
+  barf: []

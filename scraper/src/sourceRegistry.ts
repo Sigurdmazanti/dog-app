@@ -7,6 +7,10 @@ import { scrapeAdvance } from './scrapers/advance';
 import { scrapeAlmoNature } from './scrapers/almo-nature';
 import { scrapeAmanova } from './scrapers/amanova';
 import { scrapeAnimonda } from './scrapers/animonda';
+import { scrapeAntos } from './scrapers/antos';
+import { scrapeApplaws } from './scrapers/applaws';
+import { scrapeArion } from './scrapers/arion';
+import { scrapeAvlskovgaard } from './scrapers/avlskovgaard';
 
 export interface SourceEntry {
   domain: string;
@@ -22,6 +26,10 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'almonature.com', brand: 'Almo Nature', scrape: scrapeAlmoNature },
   { domain: 'amanova', brand: 'Amanova', scrape: scrapeAmanova },
   { domain: 'animonda', brand: 'Animonda', scrape: scrapeAnimonda },
+  { domain: 'antos.eu', brand: 'Antos', scrape: scrapeAntos },
+  { domain: 'applaws.com', brand: 'Applaws', scrape: scrapeApplaws },
+  { domain: 'arion-petfood.dk', brand: 'Arion', scrape: scrapeArion },
+  { domain: 'avlskovgaard.dk', brand: 'Avlskovgaard', scrape: scrapeAvlskovgaard },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {

@@ -3,10 +3,12 @@ brand: Animonda
 domain: animonda.de
 productCounts:
   dry: 26
-  wet: 74
+  wet: 98
   treats: 22
   freeze-dried: 0
-  total: 122
+  misc: 0
+  barf: 0
+  total: 146
 products:
   dry:
     - https://animonda.de/en/product/bugbell-skinhero-dry-food/84659-0
@@ -84,6 +86,30 @@ products:
     - https://animonda.de/en/product/grancarno-with-turkey/82475-0
     - https://animonda.de/en/product/grancarno-with-turkey/82485-0
     - https://animonda.de/en/product/grancarno-with-game/82478-0
+    - https://animonda.de/en/product/grancarno-with-heart/82477-0
+    - https://animonda.de/en/product/vom-feinsten-with-poultry-liver/82657-0
+    - https://animonda.de/en/product/vom-feinsten-with-beef-poultry/82620-0
+    - https://animonda.de/en/product/vom-feinsten-with-poultry-turkey-hearts/82621-0
+    - https://animonda.de/en/product/grancarno-pure-lamb-single-protein-supreme/82428-0
+    - https://animonda.de/en/product/vom-feinsten-with-poultry-lamb/82623-0
+    - https://animonda.de/en/product/grancarno-beef-goose-pumpkin/82350-0
+    - https://animonda.de/en/product/grancarno-pure-beef-potatoes-sensitiv/82417-0
+    - https://animonda.de/en/product/grancarno-with-turkey/82480-0
+    - https://animonda.de/en/product/grancarno-pure-lamb-single-protein-supreme/82433-0
+    - https://animonda.de/en/product/grancarno-with-heart/82482-0
+    - https://animonda.de/en/product/grancarno-chicken-game-pasnip/82352-0
+    - https://animonda.de/en/product/grancarno-pure-chicken-potatoes-sensitiv/82419-0
+    - https://animonda.de/en/product/vom-feinsten-with-beef-chicken/82322-0
+    - https://animonda.de/en/product/vom-feinsten-with-poultry-lamb/84180-0
+    - https://animonda.de/en/product/grancarno-beef-beetroot-blackberries-dandelion-superfoods/82440-0
+    - https://animonda.de/en/product/vom-feinsten-with-turkey-lamb/84124-0
+    - https://animonda.de/en/product/grancarno-beef-venison-swede/82353-0
+    - https://animonda.de/en/product/vom-feinsten-gourmet-centre-with-chicken-liver/82300-0
+    - https://animonda.de/en/product/vom-feinsten-gourmet-centre-with-chicken-egg-ham/82646-0
+    - https://animonda.de/en/product/grancarno-turkey-trout-potato/82351-0
+    - https://animonda.de/en/product/vom-feinsten-with-poultry-veal/84120-0
+    - https://animonda.de/en/product/grancarno-pure-beef-single-protein/82432-0
+    - https://animonda.de/en/product/vom-feinsten-with-turkey-duck-in-sauce/82310-0
     - https://animonda.de/en/product/grancarno-chicken-spinach-raspberries-pumpkin-seeds-superfoods/82439-0
     - https://animonda.de/en/product/vom-feinsten-gourmet-centre-with-beef-egg-ham/82667-0
     - https://animonda.de/en/product/vom-feinsten-with-beef-turkey-hearts/84126-0
@@ -134,3 +160,5 @@ products:
     - https://animonda.de/en/product/bugbell-happymood-soft-functional-snack/84687-0
     - https://animonda.de/en/product/bugbell-bonepower-soft-functional-snack/84683-0
   freeze-dried: []
+  misc: []
+  barf: []

@@ -6,7 +6,7 @@
  * @param parentKey Used internally for nested keys
  */
 
-import { ScrapeResult } from '../interfaces/scrapeResult';
+import { ScrapeResult } from '../../interfaces/scrapeResult';
 
 export function checkMissingFields(result: ScrapeResult): string[] {
   const warnings: string[] = [];

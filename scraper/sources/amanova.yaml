@@ -1,0 +1,14 @@
+scraper: amanova
+brand: Amanova
+domain: amanova.com
+productCounts:
+  dry: 0
+  wet: 0
+  treats: 0
+  freeze-dried: 0
+  total: 0
+products:
+  dry: []
+  wet: []
+  treats: []
+  freeze-dried: []

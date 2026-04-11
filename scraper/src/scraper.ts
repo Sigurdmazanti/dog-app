@@ -1,15 +1,16 @@
-import { checkMissingFields } from './helpers/checkMissingFields';
+import { checkMissingFields } from './helpers/utils/checkMissingFields';
 import { ScrapeDataRow, ScrapeResult } from './interfaces/scrapeResult';
 import { FoodType } from './interfaces/foodTypes';
 import { ScrapeRequest } from './interfaces/scrapeRequest';
-import { getDefaultWaterAmount } from './helpers/waterAmountMapper';
-import { calculateMetabolizableEnergy, calculateNFE } from './helpers/nutritionCalculator';
-import { appendRowToGoogleSheets } from './helpers/googleSheetsAppender';
+import { getDefaultWaterAmount } from './helpers/nutrition/waterAmountMapper';
+import { calculateMetabolizableEnergy, calculateNFE } from './helpers/nutrition/nutritionCalculator';
+import { appendRowToGoogleSheets } from './helpers/output/googleSheetsAppender';
 import { findSource } from './sourceRegistry';
-import { parseSitemapUrls } from './helpers/sitemapParser';
-import { parseUrlListFile } from './helpers/urlListParser';
+import { parseSitemapUrls } from './helpers/parsing/sitemapParser';
+import { parseUrlListFile } from './helpers/parsing/urlListParser';
+import { loadSourceUrls } from './helpers/utils/loadSourceUrls';
 import { runBatch } from './batchScraper';
-import { log, logWarn, logError } from './helpers/logger';
+import { log, logWarn, logError } from './helpers/utils/logger';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -106,7 +107,8 @@ async function main(): Promise<void> {
   // Batch mode: --urls
   if (urlsPath) {
     log('', `[scraper] mode=urls  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
-    const urls = parseUrlListFile(urlsPath);
+    const isYaml = urlsPath.endsWith('.yaml') || urlsPath.endsWith('.yml');
+    const urls = isYaml ? loadSourceUrls(urlsPath, foodType) : parseUrlListFile(urlsPath);
     const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
     process.exit(summary.failed > 0 ? 1 : 0);
     return;

@@ -1,0 +1,70 @@
+scraper: advance
+brand: Advance
+domain: petfood.advancepet.com.au
+productCounts:
+  dry: 37
+  wet: 19
+  treats: 0
+  freeze-dried: 0
+  total: 56
+products:
+  dry:
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-sensitive-skin-digestion-small-puppy-turkey-and-rice
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-sensitive-skin-digestion-large-puppy-turkey-and-rice
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-sensitive-skin-digestion-medium-puppy-turkey-and-rice
+    - https://petfood.advancepet.com.au/products/advance-puppy-growth-medium-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-puppy-growth-large-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-puppy-growth-small-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-medium-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-oodles-puppy-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-small-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-large-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advancea-adult-medium-breed-lamb-with-rice
+    - https://petfood.advancepet.com.au/products/advance-terriers-adult-medium-breed-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-small-breed-lamb-with-rice
+    - https://petfood.advancepet.com.au/products/advance-healthy-ageing-medium-breed-chicken-and-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-large-breed-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance-healthy-ageing-large-breed-chicken-rice
+    - https://petfood.advancepet.com.au/products/advance-healthy-weight-adult-large-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-shepherds-adult-large-breed-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance-weight-control-medium-breed-chicken-rice
+    - https://petfood.advancepet.com.au/products/advance-dental-care-triple-action-adult-small-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-large-breed-lamb-with-rice
+    - https://petfood.advancepet.com.au/products/advance-active-adult-all-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-small-breed-adult-turkey-rice
+    - https://petfood.advancepet.com.au/products/advance-healthy-ageing-small-breed-chicken-rice
+    - https://petfood.advancepet.com.au/products/advance-mobility-adult-medium-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-adult-medium-breed-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance-healthy-weight-adult-small-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-mobility-adult-large-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-dental-care-triple-action-adult-medium-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-dental-care-triple-action-large-breed-chicken-with-rice
+    - https://petfood.advancepet.com.au/products/advance-maltese-cross-adult-turkey-with-rice
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-retrievers-adult-dry-dog-food-chicken-with-rice-13kg
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-sensitive-skin-digestion-adult-dry-dog-food-turkey-with-rice-13kg
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-small-oodles-dry-dog-food-turkey-with-rice-13kg
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-large-oodles-dry-dog-food-turkey-with-rice-13kg
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-all-breeds-adult-dry-dog-food-lamb-with-rice
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-all-breeds-adult-dry-dog-food-chicken-with-rice
+  wet:
+    - https://petfood.advancepet.com.au/products/advance-puppy-plus-growth-chicken-and-rice-cans
+    - https://petfood.advancepet.com.au/products/advance-puppy-lamb-and-rice-trays
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-sensitive-chicken-rice-cans
+    - https://petfood.advancepet.com.au/products/advance-puppy-plus-growth-lamb-and-rice-cans
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-chicken-salmon-cans
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-chicken-turkey-and-rice-cans
+    - https://petfood.advancepet.com.au/products/advance-dog-adult-oodles-with-salmon-trays
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-weight-control-chicken-rice-cans
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-chicken-casserole-cans
+    - https://petfood.advancepet.com.au/products/advance-healthy-ageing-adult-all-breed-chicken-with-rice-trays
+    - https://petfood.advancepet.com.au/products/advance-all-breed-adult-lamb-casserole-cans
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-salmon-casserole-trays
+    - https://petfood.advancepet.com.au/products/advance-adult-all-breed-turkey-trays
+    - https://petfood.advancepet.com.au/products/advance-healthy-weight-adult-all-breed-turkey-with-rice-trays
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-puppy-oodles-wet-dog-food-with-turkey-and-rice
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-sensitive-skin-digestion-adult-wet-dog-food-chicken-roll-2kg-1
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-adult-wet-dog-food-with-kangaroo-roll-2kg
+    - https://petfood.advancepet.com.au/products/advance%E2%84%A2-joint-health-adult-wet-dog-food-with-salmon-roll-2kg
+    - https://petfood.advancepet.com.au/products/advance-advance-adult-wet-dog-food-with-turkey-roll-2kg
+  treats: []
+  freeze-dried: []

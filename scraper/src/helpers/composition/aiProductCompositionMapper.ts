@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
-import { log, logWarn } from './logger';
-import { percentageStringToInt } from './percentageStringToInt';
+import { log, logWarn } from '../utils/logger';
+import { percentageStringToInt } from '../parsing/percentageStringToInt';
 import {
   AminoAcidsData,
   FattyAcidsData,
@@ -10,7 +10,7 @@ import {
   SugarAlcoholsData,
   VitaminLikeData,
   VitaminsData,
-} from '../interfaces/productComposition';
+} from '../../interfaces/productComposition';
 import {
   aminoAcidsKeyMap,
   fattyAcidsKeyMap,

@@ -1,0 +1,33 @@
+scraper: acana-eu
+brand: Acana
+domain: emea.acana.com
+productCounts:
+  dry: 19
+  wet: 0
+  treats: 0
+  freeze-dried: 0
+  total: 19
+products:
+  dry:
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-adult.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-puppy-junior.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-adult-small.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-adult-large.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-puppy-small.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-puppy-large.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-senior.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-light-fit.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-sport-agility.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-singles-duck-new.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-singles-pork-new.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-singles-lamb-new.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-wildcoast.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-prairiepoultry.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-classicred.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-ranchlands.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-wild-prairie.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-pacifica.html
+    - https://emea.acana.com/en/dogs/dog-food/eu-aca-grasslands.html
+  wet: []
+  treats: []
+  freeze-dried: []

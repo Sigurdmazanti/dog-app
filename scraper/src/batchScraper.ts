@@ -1,8 +1,8 @@
 import { FoodType } from './interfaces/foodTypes';
 import { findSource } from './sourceRegistry';
 import { scrapeUrl } from './scraper';
-import { appendRowToGoogleSheets } from './helpers/googleSheetsAppender';
-import { log, logWarn, logError } from './helpers/logger';
+import { appendRowToGoogleSheets } from './helpers/output/googleSheetsAppender';
+import { log, logWarn, logError } from './helpers/utils/logger';
 
 export interface BatchOptions {
   foodType: FoodType;

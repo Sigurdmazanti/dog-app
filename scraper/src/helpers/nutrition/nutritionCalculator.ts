@@ -1,4 +1,4 @@
-import { NutritionData } from "../interfaces/productComposition";
+import { NutritionData } from "../../interfaces/productComposition";
 
 /**
  * Calculates NFE (Nitrogen-Free Extract)

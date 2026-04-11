@@ -7,7 +7,7 @@ import {
   SugarAlcoholsData,
   VitaminLikeData,
   VitaminsData,
-} from "../interfaces/productComposition";
+} from "../../interfaces/productComposition";
 
 export const nutritionKeyMap: Record<keyof NutritionData, string[]> = {
   kiloJoule: ['kilojoule'/*, 'kj', 'energi', 'gross energy'*/],

@@ -13,8 +13,8 @@ import {
   VitaminsData,
 } from "../interfaces/productComposition";
 import { ScrapeRequest } from "../interfaces/scrapeRequest";
-import { mapProductCompositionWithAI } from './aiProductCompositionMapper';
-import { log, logWarn } from './logger';
+import { mapProductCompositionWithAI } from './composition/aiProductCompositionMapper';
+import { log, logWarn } from './utils/logger';
 
 export interface ScraperExtractors {
   extractTitle: ($: CheerioAPI) => string;

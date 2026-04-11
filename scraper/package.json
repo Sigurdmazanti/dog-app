@@ -9,12 +9,14 @@
     "dev": "ts-node src/scraper.ts"
   },
   "dependencies": {
+    "@types/js-yaml": "^4.0.9",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",
     "csv-writer": "^1.6.0",
     "dotenv": "^17.3.1",
     "google-auth-library": "^10.6.1",
     "googleapis": "^171.4.0",
+    "js-yaml": "^4.1.1",
     "openai": "^6.32.0",
     "p-limit": "^4.0.0",
     "xml2js": "^0.4.23"

@@ -1,4 +1,4 @@
-import { FoodType } from '../interfaces/foodTypes';
+import { FoodType } from '../../interfaces/foodTypes';
 
 export const defaultWaterByFoodType: Partial<Record<FoodType, number>> = {
   [FoodType.Wet]: 80,

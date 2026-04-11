@@ -1,9 +1,9 @@
 import { google } from 'googleapis';
 import { JWT } from 'google-auth-library';
-import { ScrapeDataRow } from '../interfaces/scrapeResult';
+import { ScrapeDataRow } from '../../interfaces/scrapeResult';
 import * as path from 'path';
 import * as fs from 'fs';
-import { log, logError } from './logger';
+import { log, logError } from '../utils/logger';
 
 interface GoogleSheetsConfig {
   spreadsheetId: string;

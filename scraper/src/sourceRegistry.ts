@@ -11,6 +11,9 @@ import { scrapeAntos } from './scrapers/antos';
 import { scrapeApplaws } from './scrapers/applaws';
 import { scrapeArion } from './scrapers/arion';
 import { scrapeAvlskovgaard } from './scrapers/avlskovgaard';
+import { scrapeBarfworld } from './scrapers/barfworld';
+import { scrapeBelcando } from './scrapers/belcando';
+import { scrapeBellfor } from './scrapers/bellfor';
 
 export interface SourceEntry {
   domain: string;
@@ -30,6 +33,9 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'applaws.com', brand: 'Applaws', scrape: scrapeApplaws },
   { domain: 'arion-petfood.dk', brand: 'Arion', scrape: scrapeArion },
   { domain: 'avlskovgaard.dk', brand: 'Avlskovgaard', scrape: scrapeAvlskovgaard },
+  { domain: 'barfworld.com', brand: 'Barf World', scrape: scrapeBarfworld },
+  { domain: 'belcando.com', brand: 'Belcando', scrape: scrapeBelcando },
+  { domain: 'bellfor.info', brand: 'Bellfor', scrape: scrapeBellfor },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {

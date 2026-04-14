@@ -1,0 +1,50 @@
+scraper: barfworld
+brand: Barf World
+domain: barfworld.com
+productCounts:
+  dry: 0
+  wet: 0
+  treats: 16
+  freeze-dried: 5
+  misc: 1
+  barf: 10
+  total: 32
+products:
+  dry: []
+  wet: []
+  treats:
+    - https://barfworld.com/products/barf-beef-liver-snacks
+    - https://barfworld.com/products/freeze-dried-raw-turkey-hearts
+    - https://barfworld.com/products/salmon-sprinkles
+    - https://barfworld.com/products/barf-beef-trachea-tubes
+    - https://barfworld.com/products/freeze-dried-raw-lamb-hearts-treat-or-topper
+    - https://barfworld.com/products/freeze-dried-minnow
+    - https://barfworld.com/products/chicken-breast-sprinkles
+    - https://barfworld.com/products/small-beef-pizzle
+    - https://barfworld.com/products/thin-beef-pizzles
+    - https://barfworld.com/products/safari-raw-tripe-twists
+    - https://barfworld.com/products/freeze-dried-shrimp-bits-topper-and-treat
+    - https://barfworld.com/products/large-beef-pizzles
+    - https://barfworld.com/products/jumbo-split-2-pack-elk-antlers
+    - https://barfworld.com/products/medium-split-2-pack-elk-antlers
+    - https://barfworld.com/products/savory-freeze-dried-salmon-bites
+    - https://barfworld.com/products/barf-freeze-dried-chicken-breast-snacks
+  freeze-dried:
+    - https://barfworld.com/products/freeze-dried-beef-nuggets
+    - https://barfworld.com/products/freeze-dried-chicken-nuggets
+    - https://barfworld.com/products/freeze-dried-turkey-nuggets
+    - https://barfworld.com/products/freeze-dried-land-sea-nuggets
+    - https://barfworld.com/products/freeze-dried-lamb-nuggets
+  misc:
+    - https://barfworld.com/products/e-barf-plus
+  barf:
+    - https://barfworld.com/products/chicken-diet-patties
+    - https://barfworld.com/products/beef-diet-patties
+    - https://barfworld.com/products/chicken-diet-chubs
+    - https://barfworld.com/products/beef-diet-chubs
+    - https://barfworld.com/products/land-sea-patties
+    - https://barfworld.com/products/lamb-diet-patties
+    - https://barfworld.com/products/turkey-diet-patties
+    - https://barfworld.com/products/lamb-diet-chubs
+    - https://barfworld.com/products/meat-eater-diet-chubs
+    - https://barfworld.com/products/land-sea-raw-meat-chubs-for-dogs-cats

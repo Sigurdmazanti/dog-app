@@ -22,7 +22,7 @@ export async function scrapeAntos(scrapeRequest: ScrapeRequest): Promise<ScrapeR
           }
         }
         if (inComposition && node.type === 'text') {
-          const t = (node as Text).data?.trim() ?? '';
+          const t = (node as { data?: string }).data?.trim() ?? '';
           if (t) textParts.push(t);
         }
       });

@@ -206,6 +206,7 @@ function createPrompt(rawText: string): string {
     '- Energy (kiloJoule): always output in kJ/100g. If given in kcal, multiply by 4.184. If per kg, divide by 10.',
     '- dVitamin: use total vitamin D if present; otherwise sum dVitamin3, dVitamin2, hydroxyVitaminD3, hydroxyVitaminD2.',
     '- kVitamin: use total vitamin K if present; otherwise sum k1Vitamin, k2Vitamin.',
+    '- Product name and brand name fields MUST NOT include trademark (™), copyright (©), registered (®), or any other legal or special symbols. Return clean, trimmed name values with no extra surrounding whitespace.',
     'Input text:',
     rawText,
   ].join('\n');

@@ -14,6 +14,8 @@ import { scrapeAvlskovgaard } from './scrapers/avlskovgaard';
 import { scrapeBarfworld } from './scrapers/barfworld';
 import { scrapeBelcando } from './scrapers/belcando';
 import { scrapeBellfor } from './scrapers/bellfor';
+import { scrapeBluebuffalo } from './scrapers/bluebuffalo';
+import { scrapeBosch } from './scrapers/bosch';
 
 export interface SourceEntry {
   domain: string;
@@ -36,6 +38,8 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'barfworld.com', brand: 'Barf World', scrape: scrapeBarfworld },
   { domain: 'belcando.com', brand: 'Belcando', scrape: scrapeBelcando },
   { domain: 'bellfor.info', brand: 'Bellfor', scrape: scrapeBellfor },
+  { domain: 'bluebuffalo.com', brand: 'Blue Buffalo', scrape: scrapeBluebuffalo },
+  { domain: 'bosch-tiernahrung.de', brand: 'Bosch', scrape: scrapeBosch },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {

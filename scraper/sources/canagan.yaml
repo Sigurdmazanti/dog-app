@@ -1,0 +1,68 @@
+scraper: canagan
+brand: Canagan
+domain: canagan.com
+productCounts:
+  dry: 18
+  wet: 19
+  treats: 15
+  toppers: 2
+  total: 54
+products:
+  dry:
+    - https://canagan.com/uk/dog-food/dry-dog-food/canagan-small-breed-light-senior-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/free-range-chicken-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/dental-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/scottish-salmon-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/grass-fed-lamb-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/highland-feast-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/country-game-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/free-range-chicken-small-breed-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/free-range-chicken-light-senior-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/dental-small-breed-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/country-game-small-breed-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/scottish-salmon-small-breed-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/free-range-chicken-large-breed-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/free-range-chicken-dry-puppy-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/petite-chicken-duck-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/petite-chicken-salmon-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/canagan-working-dog-dry-dog-food/
+    - https://canagan.com/uk/dog-food/dry-dog-food/insect-dry-dog-food/
+  wet:
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-turkey-duck-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-chicken-hotpot-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-country-game-hotpot-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-beef-stew-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-lamb-casserole-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-cod-herring-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/petite-chicken-wild-boar-pate-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/puppy-feast-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/free-run-chicken-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/country-game-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/beef-stew-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/lamb-casserole-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/chicken-hotpot-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/shepherds-pie-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/turkey-duck-dinner-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/salmon-herring-supper-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/venison-wild-boar-stew-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/chicken-wild-boar-casserole-wet-dog-food/
+    - https://canagan.com/uk/dog-food/wet-dog-food/senior-feast-wet-dog-food/
+  treats:
+    - https://canagan.com/uk/dog-food/dog-treats/wild-bites-beef-pork-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/wild-bites-chicken-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/wild-bites-chicken-pork-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-beef-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-chicken-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-lamb-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-fish-treats-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-chicken-topper-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/raw-freeze-dried-fish-topper-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/chicken-dog-treat-biscuit-bakes/
+    - https://canagan.com/uk/dog-food/dog-treats/salmon-dog-treat-biscuit-bakes/
+    - https://canagan.com/uk/dog-food/dog-treats/chicken-softies-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/salmon-softies-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/quail-softies-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-treats/duck-softies-for-dogs/
+  toppers:
+    - https://canagan.com/uk/dog-food/dog-toppers/raw-freeze-dried-chicken-topper-for-dogs/
+    - https://canagan.com/uk/dog-food/dog-toppers/raw-freeze-dried-fish-topper-for-dogs/

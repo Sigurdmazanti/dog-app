@@ -68,3 +68,77 @@ Do not write new code that depends on these:
 - `react-redux`
 - `@reduxjs/toolkit`
 - `expo-web-browser`
+
+---
+
+## Scraper Project
+
+The `scraper/` directory is a **separate Node.js CLI project** for scraping dog food product data. It has its own `package.json`, `tsconfig.json`, and dependencies — completely independent from the React Native app.
+
+### Scraper Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| TypeScript + ts-node | Language & runtime |
+| Cheerio | HTML parsing (CSS selectors) |
+| Axios | HTTP requests |
+| googleapis | Google Sheets export |
+| OpenAI | AI composition mapping |
+| csv-writer | CSV output |
+
+### Commands
+
+```bash
+npm run dev -- "<url>"                                          # Run scraper via npm script
+npx ts-node src/scraper.ts "<url>" --food-type <type> --no-sheets  # Run directly (skip Sheets export)
+npx ts-node src/batchScraper.ts --source <brand>                # Batch scrape a source
+```
+
+Package manager is **npm** (`package-lock.json`). Always use `npm`/`npx` in `scraper/`, **never `yarn`**.
+
+### Creating a New Scraper
+
+Follow this exact 3-step workflow — create files only, do not run verification scripts:
+
+1. **Source YAML** — `scraper/sources/<brand>.yaml`
+   ```yaml
+   scraper: <brand>
+   brand: <Brand Name>
+   domain: <domain.com>
+   productCounts:
+     dry: 0
+     wet: 0
+     treats: 0
+     freeze-dried: 0
+     misc: 0
+     barf: 0
+     total: 0
+   products:
+     dry:
+       - https://...
+   ```
+
+2. **Scraper file** — `scraper/src/scrapers/<brand>.ts`
+   ```typescript
+   import { ScrapeResult } from "../interfaces/scrapeResult";
+   import { ScrapeRequest } from "../interfaces/scrapeRequest";
+   import { runScraper } from '../helpers/runScraper';
+
+   export async function scrape<BrandPascal>(scrapeRequest: ScrapeRequest): Promise<ScrapeResult> {
+     return runScraper(scrapeRequest, {
+       extractTitle: ($) => $('...').text().trim(),
+       extractIngredientsDescription: ($) => { /* ... */ },
+       extractCompositionText: ($, ingredientsDescription) => { /* ... */ },
+     });
+   }
+   ```
+
+3. **Register** — add the domain → scraper mapping in `scraper/src/sourceRegistry.ts`
+
+### Scraper Rules
+
+- **DO NOT** use `yarn` — the scraper project uses `npm`
+- **DO NOT** run ad-hoc verification scripts, `--eval` snippets, or create temporary `.ts` files to test scrapers
+- **DO NOT** install or add packages — the scraper's dependencies are stable
+- When the user asks to test a scraper, use only: `npx ts-node src/scraper.ts "<url>" --food-type <type> --no-sheets`
+- Copy patterns from existing scrapers in `src/scrapers/` — read one first if unsure about selector structure

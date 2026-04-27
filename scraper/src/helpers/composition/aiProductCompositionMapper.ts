@@ -35,6 +35,7 @@ export interface CompositionSections {
 
 export interface CompositionMappingResult {
   mappedSections: CompositionSections;
+  ingredientsDescriptionEnglish?: string | null;
   usedAI: boolean;
   notes: string[];
 }
@@ -69,7 +70,7 @@ const CANONICAL_FIELD_UNITS: Record<string, string> = {
   magnesium: 'mg/100g',
   potassium: 'mg/100g',
   sodium: 'mg/100g',
-  chlorine: 'mg/100g',
+  chloride: 'mg/100g',
   sulphur: 'mg/100g',
   iron: 'mg/100g',
   copper: 'mg/100g',
@@ -132,7 +133,7 @@ const CANONICAL_FIELD_UNITS: Record<string, string> = {
 };
 
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-5-nano';
-const DEFAULT_TIMEOUT_MS = 60_000;
+const DEFAULT_TIMEOUT_MS = 120_000;
 const DEFAULT_MAX_RETRIES = 2;
 
 const parseNumberEnv = (value: string | undefined, fallback: number): number => {
@@ -207,6 +208,7 @@ function createPrompt(rawText: string): string {
     '- dVitamin: use total vitamin D if present; otherwise sum dVitamin3, dVitamin2, hydroxyVitaminD3, hydroxyVitaminD2.',
     '- kVitamin: use total vitamin K if present; otherwise sum k1Vitamin, k2Vitamin.',
     '- Product name and brand name fields MUST NOT include trademark (™), copyright (©), registered (®), or any other legal or special symbols. Return clean, trimmed name values with no extra surrounding whitespace.',
+    '- Add one extra top-level field: "ingredientsDescriptionEnglish" (string or null). If the input text contains an ingredient list in a non-English language, translate it to English and return it here. If the input is already in English, return the same text. If no ingredient list is identifiable, return null.',
     'Input text:',
     rawText,
   ].join('\n');
@@ -282,9 +284,10 @@ export function parseAndValidateAIMapping(payload: unknown): CompositionSections
 
   const payloadRecord = payload as Record<string, unknown>;
   const allowedSections = new Set(Object.keys(SECTION_KEY_MAPS));
+  const EXTRA_ALLOWED_KEYS = new Set(['ingredientsDescriptionEnglish']);
 
   for (const topLevelKey of Object.keys(payloadRecord)) {
-    if (!allowedSections.has(topLevelKey)) {
+    if (!allowedSections.has(topLevelKey) && !EXTRA_ALLOWED_KEYS.has(topLevelKey)) {
       return null;
     }
   }
@@ -351,7 +354,12 @@ async function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T
   }
 }
 
-async function requestAIMapping(rawText: string, logPrefix = ''): Promise<CompositionSections> {
+interface AIRequestResult {
+  sections: CompositionSections;
+  ingredientsDescriptionEnglish?: string | null;
+}
+
+async function requestAIMapping(rawText: string, logPrefix = ''): Promise<AIRequestResult> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is not set');
@@ -392,7 +400,12 @@ async function requestAIMapping(rawText: string, logPrefix = ''): Promise<Compos
         throw new Error('AI mapping response failed schema validation');
       }
 
-      return parsed;
+      const ingredientsDescriptionEnglish =
+        payload && typeof payload === 'object' && typeof payload.ingredientsDescriptionEnglish === 'string'
+          ? payload.ingredientsDescriptionEnglish
+          : null;
+
+      return { sections: parsed, ingredientsDescriptionEnglish };
     } catch (error) {
       const elapsed = Date.now() - callStart;
       lastError = error;
@@ -440,9 +453,10 @@ export async function mapProductCompositionWithAI(rawText: string, logPrefix = '
   }
 
   try {
-    const aiMapped = await requestAIMapping(rawText, logPrefix);
+    const aiResult = await requestAIMapping(rawText, logPrefix);
     return {
-      mappedSections: aiMapped,
+      mappedSections: aiResult.sections,
+      ingredientsDescriptionEnglish: aiResult.ingredientsDescriptionEnglish,
       usedAI: true,
       notes,
     };

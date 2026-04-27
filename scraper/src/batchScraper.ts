@@ -1,11 +1,10 @@
-import { FoodType } from './interfaces/foodTypes';
+import { UrlWithFoodType } from './interfaces/urlWithFoodType';
 import { findSource } from './sourceRegistry';
 import { scrapeUrl } from './scraper';
 import { appendRowToGoogleSheets } from './helpers/output/googleSheetsAppender';
 import { log, logWarn, logError } from './helpers/utils/logger';
 
 export interface BatchOptions {
-  foodType: FoodType;
   concurrency: number;
   appendToSheets: boolean;
   sheetsConfig: { spreadsheetId: string; sheetName: string; credentialsPath: string } | null;
@@ -17,17 +16,17 @@ export interface BatchSummary {
   skipped: number;
 }
 
-export async function runBatch(urls: string[], options: BatchOptions): Promise<BatchSummary> {
+export async function runBatch(urls: UrlWithFoodType[], options: BatchOptions): Promise<BatchSummary> {
   const { default: pLimit } = await import('p-limit');
 
-  const processable: string[] = [];
+  const processable: UrlWithFoodType[] = [];
   const skippedUrls: string[] = [];
 
-  for (const url of urls) {
-    if (findSource(url)) {
-      processable.push(url);
+  for (const entry of urls) {
+    if (findSource(entry.url)) {
+      processable.push(entry);
     } else {
-      skippedUrls.push(url);
+      skippedUrls.push(entry.url);
     }
   }
 
@@ -48,31 +47,31 @@ export async function runBatch(urls: string[], options: BatchOptions): Promise<B
   let failed = 0;
   let completed = 0;
 
-  const tasks = processable.map((url) =>
+  const tasks = processable.map((entry) =>
     limit(async () => {
       completed++;
       const current = completed;
       const logPrefix = `[${current}/${total}]`;
       const taskStart = Date.now();
-      log(logPrefix, `→ ${url}`);
+      log(logPrefix, `→ ${entry.url}`);
       try {
-        const result = await scrapeUrl({ url, foodType: options.foodType, logPrefix });
+        const result = await scrapeUrl({ url: entry.url, foodType: entry.foodType, logPrefix });
         const elapsed = Date.now() - taskStart;
 
         if (options.appendToSheets && options.sheetsConfig) {
           try {
             await appendRowToGoogleSheets(options.sheetsConfig, result, logPrefix);
           } catch (sheetsError) {
-            logError(logPrefix, `⚠ Sheets append failed for ${url}: ${sheetsError}`);
+            logError(logPrefix, `⚠ Sheets append failed for ${entry.url}: ${sheetsError}`);
           }
         }
 
-        log(logPrefix, `✓ ${result.title || url} (${elapsed}ms)`);
+        log(logPrefix, `✓ ${result.title || entry.url} (${elapsed}ms)`);
         succeeded++;
       } catch (error) {
         const elapsed = Date.now() - taskStart;
         const message = error instanceof Error ? error.message : String(error);
-        log(logPrefix, `✗ ${url} — ${message} (${elapsed}ms)`);
+        log(logPrefix, `✗ ${entry.url} — ${message} (${elapsed}ms)`);
         failed++;
       }
     })

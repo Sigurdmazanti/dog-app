@@ -1,0 +1,58 @@
+scraper: canex
+brand: Canex
+domain: canex-shop.dk
+productCounts:
+  dry: 20
+  wet: 0
+  treats: 24
+  freeze-dried: 0
+  misc: 0
+  barf: 0
+  total: 44
+products:
+  dry:
+    - https://canex-shop.dk/produkter/puppy-junior-brocks-12-kg/
+    - https://canex-shop.dk/produkter/puppy-junior-brocks-maxi-12-kg/
+    - https://canex-shop.dk/produkter/puppy-junior-fish-rice-12-kg/
+    - https://canex-shop.dk/produkter/puppy-junior-fish-rice-maxi-12kg/
+    - https://canex-shop.dk/produkter/puppy-junior-grainfree-12-kg/
+    - https://canex-shop.dk/produkter/adult-brocks-mini-3-kg/
+    - https://canex-shop.dk/produkter/adult-mini-high-in-lamb-rice-3-kg/
+    - https://canex-shop.dk/produkter/adult-mini-grainfree-salmon-3-kg/
+    - https://canex-shop.dk/produkter/adult-brocks-12-kg/
+    - https://canex-shop.dk/produkter/adult-brocks-maxi-12kg/
+    - https://canex-shop.dk/produkter/adult-with-salmon-12-kg/
+    - https://canex-shop.dk/produkter/adult-with-lamb-12-kg/
+    - https://canex-shop.dk/produkter/adult-chicken-rice-12-kg/
+    - https://canex-shop.dk/produkter/adult-high-in-lamb-rice-12-kg/
+    - https://canex-shop.dk/produkter/adult-fish-rice-12-kg/
+    - https://canex-shop.dk/produkter/adult-fish-rice-maxi-12-kg/
+    - https://canex-shop.dk/produkter/adult-grainfree-12-kg/
+    - https://canex-shop.dk/produkter/adult-grainfree-salmon-12-kg/
+    - https://canex-shop.dk/produkter/senior-brocks-12-kg/
+    - https://canex-shop.dk/produkter/senior-fish-rice-12-kg/
+  treats:
+    - https://canex-shop.dk/produkter/canex-salmon-godbidder-250-g/
+    - https://canex-shop.dk/produkter/canex-rabbit-godbidder-250-g-kopier/
+    - https://canex-shop.dk/produkter/canex-lamb-godbidder-250g/
+    - https://canex-shop.dk/produkter/canex-duck-godbidder-250g/
+    - https://canex-shop.dk/produkter/canex-chicken-godbidder-250g/
+    - https://canex-shop.dk/produkter/canex-beef-godbidder-250g/
+    - https://canex-shop.dk/produkter/canex-rolls-salmon-400-g/
+    - https://canex-shop.dk/produkter/canex-rolls-rabbit-400-g/
+    - https://canex-shop.dk/produkter/canex-rolls-lamb-400-g/
+    - https://canex-shop.dk/produkter/canex-rolls-duck-400-g/
+    - https://canex-shop.dk/produkter/canex-rolls-beef-400-g/
+    - https://canex-shop.dk/produkter/canex-rolls-chicken-400-g/
+    - https://canex-shop.dk/produkter/canex-mini-mix-500-g/
+    - https://canex-shop.dk/produkter/canex-star-trainers-500-g/
+    - https://canex-shop.dk/produkter/canex-party-mix-500-g/
+    - https://canex-shop.dk/produkter/canex-party-mix-1800-g/
+    - https://canex-shop.dk/produkter/canex-duo-bones-chicken-500-g/
+    - https://canex-shop.dk/produkter/canex-duo-lamb-500-g/
+    - https://canex-shop.dk/produkter/canex-duo-salmon-500-g/
+    - https://canex-shop.dk/produkter/canex-maxi-bones-500-g/
+    - https://canex-shop.dk/produkter/canex-maxi-bones-1800-g/
+    - https://canex-shop.dk/produkter/politistave-pressede-tyggeben-10-stk/
+    - https://canex-shop.dk/produkter/stort-tyggeben-presset-raahud-32cm-450g/
+    - https://canex-shop.dk/produkter/tyggeben-presset-raahud-165-cm-90-100-g/

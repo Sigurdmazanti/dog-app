@@ -81,3 +81,24 @@ The `sourceRegistry` array in `scraper/src/sourceRegistry.ts` SHALL include an e
 #### Scenario: findSource resolves a belcando.com URL
 - **WHEN** `findSource` is called with a URL that contains `belcando.com`
 - **THEN** it SHALL return the Belcando source entry (not `undefined`)
+
+### Requirement: Source registry dispatches Calibra URLs
+The source registry SHALL route any URL containing `calibrastore.co.uk` to the Calibra scraper.
+
+#### Scenario: Calibra URL is dispatched to Calibra scraper
+- **WHEN** `findSource` is called with a URL containing `calibrastore.co.uk`
+- **THEN** the returned entry SHALL use the `scrapeCalibra` function and have brand `Calibra`
+
+### Requirement: Source registry dispatches Canagan URLs
+The source registry SHALL route any URL containing `canagan.com` to the Canagan scraper.
+
+#### Scenario: Canagan URL is dispatched to Canagan scraper
+- **WHEN** `findSource` is called with a URL containing `canagan.com`
+- **THEN** the returned entry SHALL use the `scrapeCanagan` function and have `brand` set to `"Canagan"`
+
+### Requirement: ScrapeDataRow.foodType is typed as FoodType
+The `foodType` field on `ScrapeDataRow` MUST be typed as `FoodType` (not `string`) to ensure only valid enum values are assignable.
+
+#### Scenario: FoodType enum value assigned to ScrapeDataRow
+- **WHEN** `scrapeUrl` builds a `ScrapeDataRow` with a valid food type argument
+- **THEN** `ScrapeDataRow.foodType` holds a `FoodType` enum value and a raw string not in the enum SHALL cause a TypeScript compile error

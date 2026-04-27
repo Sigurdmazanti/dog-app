@@ -26,7 +26,7 @@ export const mineralsKeyMap: Record<keyof MineralsData, string[]> = {
   magnesium: ['magnesium', 'mg', 'magnesiumoxid', 'magnesiumsulfat'],
   potassium: ['potassium', 'kalium', 'k'],
   sodium: ['sodium', 'natrium', 'na'],
-  chlorine: ['chlorine', 'chloride', 'chlorid', 'klor', 'cl', 'cl-', 'cl⁻'],
+  chloride: ['chlorine', 'chloride', 'chlorid', 'klor', 'cl', 'cl-', 'cl⁻'],
   sulphur: ['sulphur', 'sulfur', 'svovl', 's'],
   mercury: ['mercury', 'kviksølv', 'quicksilver', 'hg'],
   cobalt: ['cobalt', 'cobolt', 'co'],

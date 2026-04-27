@@ -39,6 +39,8 @@ export async function runScraper(scrapeRequest: ScrapeRequest, extractors: Scrap
     logWarn(logPrefix, `[composition-mapper] ${note}`);
   }
 
+  const finalIngredientsDescription = mappingResult.ingredientsDescriptionEnglish ?? ingredientsDescription;
+
   const nutritionData = mappingResult.mappedSections.nutritionData as NutritionData;
   const mineralsData = mappingResult.mappedSections.mineralsData as MineralsData;
   const saltsData = mappingResult.mappedSections.saltsData as SaltsData;
@@ -51,7 +53,7 @@ export async function runScraper(scrapeRequest: ScrapeRequest, extractors: Scrap
   return {
     url,
     title,
-    ingredientsDescription,
+    ingredientsDescription: finalIngredientsDescription,
     nutritionData,
     mineralsData,
     saltsData,

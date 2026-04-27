@@ -15,7 +15,7 @@ export interface MineralsData {
   magnesium: number;
   potassium: number;
   sodium: number;
-  chlorine: number;
+  chloride: number;
   sulphur: number;
   mercury: number;
   cobalt: number;

@@ -10,6 +10,7 @@ import { parseSitemapUrls } from './helpers/parsing/sitemapParser';
 import { parseUrlListFile } from './helpers/parsing/urlListParser';
 import { loadSourceUrls } from './helpers/utils/loadSourceUrls';
 import { runBatch } from './batchScraper';
+import { UrlWithFoodType } from './interfaces/urlWithFoodType';
 import { log, logWarn, logError } from './helpers/utils/logger';
 import * as dotenv from 'dotenv';
 
@@ -78,38 +79,50 @@ async function main(): Promise<void> {
   const startTime = Date.now();
   const sitemapPath = getFlag('--sitemap');
   const urlsPath = getFlag('--urls');
-  const foodTypeArg = getFlag('--food-type') ?? 'dry';
+  const foodTypeArg = getFlag('--food-type');
+  const hasFoodTypeFlag = foodTypeArg !== undefined;
   const noSheets = process.argv.includes('--no-sheets');
   const concurrency = Number(getFlag('--concurrency') ?? '3');
 
   const appendToSheets = !noSheets;
 
-  if (!Object.values(FoodType).includes(foodTypeArg as FoodType)) {
+  const resolvedFoodTypeArg = foodTypeArg ?? 'dry';
+  if (!Object.values(FoodType).includes(resolvedFoodTypeArg as FoodType)) {
     logError('', 'Invalid food type. Must be one of:', Object.values(FoodType).join(', '));
     process.exit(1);
   }
-  const foodType = foodTypeArg as FoodType;
+  const foodType = resolvedFoodTypeArg as FoodType;
 
   const sheetsConfig = appendToSheets ? getSheetsConfig() : null;
   if (appendToSheets && !sheetsConfig) {
     logWarn('', 'Warning: Google Sheets config missing (GOOGLE_SPREADSHEET_ID, GOOGLE_SHEET_NAME, GOOGLE_CREDENTIALS_PATH). Skipping sheets append.');
   }
 
+  const batchOptions = { concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig };
+
   // Batch mode: --sitemap
   if (sitemapPath) {
     log('', `[scraper] mode=sitemap  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const urls = await parseSitemapUrls(sitemapPath);
-    const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
+    const entries: UrlWithFoodType[] = urls.map((url) => ({ url, foodType }));
+    const summary = await runBatch(entries, batchOptions);
     process.exit(summary.failed > 0 ? 1 : 0);
     return;
   }
 
   // Batch mode: --urls
   if (urlsPath) {
-    log('', `[scraper] mode=urls  food-type=${foodType}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
     const isYaml = urlsPath.endsWith('.yaml') || urlsPath.endsWith('.yml');
-    const urls = isYaml ? loadSourceUrls(urlsPath, foodType) : parseUrlListFile(urlsPath);
-    const summary = await runBatch(urls, { foodType, concurrency, appendToSheets: appendToSheets && !!sheetsConfig, sheetsConfig });
+    let entries: UrlWithFoodType[];
+    if (isYaml) {
+      entries = hasFoodTypeFlag ? loadSourceUrls(urlsPath, foodType) : loadSourceUrls(urlsPath);
+    } else {
+      const urls = parseUrlListFile(urlsPath);
+      entries = urls.map((url) => ({ url, foodType }));
+    }
+    const foodTypeLabel = isYaml && !hasFoodTypeFlag ? 'all (from YAML)' : String(foodType);
+    log('', `[scraper] mode=urls  food-type=${foodTypeLabel}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
+    const summary = await runBatch(entries, batchOptions);
     process.exit(summary.failed > 0 ? 1 : 0);
     return;
   }
@@ -122,7 +135,9 @@ async function main(): Promise<void> {
     log('', 'Usage:');
     log('', '  npm run dev -- <url> [--food-type dry|wet] [--no-sheets]');
     log('', '  npm run dev -- --sitemap <path-or-url> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
-    log('', '  npm run dev -- --urls <file> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
+    log('', '  npm run dev -- --urls <file.yaml> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
+    log('', '');
+    log('', 'When using a YAML source file, --food-type is optional. If omitted, all food types are scraped.');
     process.exit(1);
   }
 

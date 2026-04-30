@@ -18,11 +18,11 @@ The copilot instructions file SHALL include a clearly scoped section stating tha
 - **THEN** the existing Yarn instructions MUST still apply
 
 ### Requirement: Scraper creation workflow documented
-The copilot instructions SHALL include the exact step-by-step workflow for creating a new scraper, covering: source YAML file creation, scraper TypeScript file creation, and source registry entry.
+The copilot instructions SHALL include the exact step-by-step workflow for creating a new scraper, covering: source JSON file creation, scraper TypeScript file creation, and source registry entry.
 
 #### Scenario: Creating a new scraper
 - **WHEN** the user asks to create a scraper for a new brand
-- **THEN** Copilot MUST follow the documented workflow: create `sources/<brand>.yaml`, create `src/scrapers/<brand>.ts`, register in `src/sourceRegistry.ts`
+- **THEN** Copilot MUST follow the documented workflow: create `sources/<brand>.json`, create `src/scrapers/<brand>.ts`, register in `src/sourceRegistry.ts`
 
 #### Scenario: Scraper file follows established pattern
 - **WHEN** a new scraper file is created

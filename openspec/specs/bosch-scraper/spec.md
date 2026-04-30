@@ -1,6 +1,6 @@
 ## Purpose
 
-Defines the requirements for scraping product data from `bosch-tiernahrung.de`, including page extraction logic, source registry routing, YAML source scaffold, and selector reference documentation.
+Defines the requirements for scraping product data from `bosch-tiernahrung.de`, including page extraction logic, source registry routing, JSON source scaffold, and selector reference documentation.
 
 ## Requirements
 
@@ -42,16 +42,12 @@ The source registry SHALL route any URL containing `bosch-tiernahrung.de` to the
 - **WHEN** `findSource` is called with a URL containing `bosch-tiernahrung.de`
 - **THEN** the returned entry SHALL use the `scrapeBosch` function
 
-### Requirement: Bosch source YAML defines product URL scaffold
-The scraper SHALL have a source file at `scraper/sources/bosch.yaml` with `scraper: bosch`, `domain: bosch-tiernahrung.de`, and product lists for food types `dry`, `wet`, `treats`, and `misc`. A `productCounts` map SHALL be present; all counts MAY be zero when URLs have not yet been populated.
+### Requirement: Bosch source JSON defines product URL scaffold
+The scraper SHALL have a source file at `scraper/sources/bosch.json` with `scraper: bosch`, `domain: bosch-tiernahrung.de`, and product lists for food types `dry`, `wet`, `treats`, and `misc`.
 
-#### Scenario: Bosch YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `bosch.yaml` and a valid food type
+#### Scenario: Bosch JSON is loaded without error
+- **WHEN** `loadSource` is called with `bosch.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
-
-#### Scenario: productCounts totals match list lengths
-- **WHEN** `bosch.yaml` is read
-- **THEN** each value in `productCounts` SHALL equal the length of the corresponding `products` list, and `productCounts.total` SHALL equal the sum of all per-category counts
 
 ### Requirement: Bosch selector reference documents HTML selectors
 A file at `scraper/sources/bosch.selectors.md` SHALL document the homepage URL, a representative HTML snippet, and the selectors used to extract title, ingredients description, and analytical constituents from `bosch-tiernahrung.de` product pages.

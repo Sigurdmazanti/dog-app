@@ -47,4 +47,4 @@
 
 - Shopify-based storefront — accordion structure uses `<details>`/`<summary>` elements
 - Two accordions relevant: "Ingredients" (first) and "Components" (nutritional data)
-- No product URLs added yet — add to `amanova.yaml` when products are identified
+- No product URLs added yet — add to `amanova.json` when products are identified

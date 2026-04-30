@@ -1,0 +1,24 @@
+{
+  "scraper": "cavom",
+  "brand": "Cavom",
+  "domain": "cavom.com",
+  "discovery": {
+    "listings": [],
+    "productLinkSelector": ""
+  },
+  "products": {
+    "dry": [
+      "https://www.cavom.com/product/compleet-midi-english/",
+      "https://www.cavom.com/product/compleet-pup-junior/",
+      "https://www.cavom.com/product/compleet-adult/",
+      "https://www.cavom.com/product/compleet-senior/",
+      "https://www.cavom.com/product/compleet-zalm/",
+      "https://www.cavom.com/product/cavom-lam-rijst/",
+      "https://www.cavom.com/product/compleet-light/",
+      "https://www.cavom.com/product/compleet-diner/",
+      "https://www.cavom.com/product/compleet-midi/",
+      "https://www.cavom.com/product/compleet-sport/"
+    ]
+  },
+  "needsReview": []
+}

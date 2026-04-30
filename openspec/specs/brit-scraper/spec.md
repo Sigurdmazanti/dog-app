@@ -1,6 +1,6 @@
 ## Purpose
 
-Defines the requirements for scraping product data from `brit-petfood.com`, including page extraction logic, source registry routing, YAML source scaffold, and selector reference documentation.
+Defines the requirements for scraping product data from `brit-petfood.com`, including page extraction logic, source registry routing, JSON source scaffold, and selector reference documentation.
 
 ## Requirements
 
@@ -38,16 +38,12 @@ The source registry SHALL route any URL containing `brit-petfood.com` to the Bri
 - **WHEN** `findSource` is called with a URL containing `brit-petfood.com`
 - **THEN** the returned entry SHALL use the `scrapeBrit` function and have `brand` set to `"Brit"`
 
-### Requirement: Brit source YAML defines product URL scaffold
-The scraper SHALL have a source file at `scraper/sources/brit.yaml` with `scraper: brit`, `domain: brit-petfood.com`, and product lists for food types `dry`, `wet`, `treats`, and `misc`. A `productCounts` map SHALL be present and SHALL match the length of each product list.
+### Requirement: Brit source JSON defines product URL scaffold
+The scraper SHALL have a source file at `scraper/sources/brit.json` with `scraper: brit`, `domain: brit-petfood.com`, and product lists for food types `dry`, `wet`, `treats`, and `misc`.
 
-#### Scenario: Brit YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `brit.yaml` and a valid food type
+#### Scenario: Brit JSON is loaded without error
+- **WHEN** `loadSource` is called with `brit.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
-
-#### Scenario: productCounts totals match list lengths
-- **WHEN** `brit.yaml` is read
-- **THEN** each value in `productCounts` SHALL equal the length of the corresponding `products` list, and `productCounts.total` SHALL equal the sum of all per-category counts
 
 ### Requirement: Brit selector reference documents HTML selectors
 A file at `scraper/sources/brit.selectors.md` SHALL document the homepage URL, a representative HTML snippet from a `brit-petfood.com` product page, and the selectors used to extract title, ingredients description, and analytical constituents.

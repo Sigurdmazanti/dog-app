@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the scraping behaviour, source registry routing, source YAML configuration, and selector documentation for `calibrastore.co.uk` product pages.
+Define the scraping behaviour, source registry routing, source JSON configuration, and selector documentation for `calibrastore.co.uk` product pages.
 
 ## Requirements
 
@@ -29,23 +29,23 @@ The scraper SHALL extract the product title, ingredients description, and compos
 - **WHEN** a `calibrastore.co.uk` product page is scraped and the composition body does not contain `"Analytical constituents:"`
 - **THEN** the full body text SHALL be returned as the ingredients description and the composition text SHALL be an empty string
 
-### Requirement: Calibra source YAML defines product URLs by food type
-The scraper SHALL have a source file at `scraper/sources/calibra.yaml` listing product URLs grouped by food type, using `scraper: calibra`, `brand: Calibra`, `domain: calibrastore.co.uk`, and populated `dry`, `wet`, and `treats` lists with accurate `productCounts`.
+### Requirement: Calibra source JSON defines product URLs by food type
+The scraper SHALL have a source file at `scraper/sources/calibra.json` listing product URLs grouped by food type, using `scraper: calibra`, `brand: Calibra`, `domain: calibrastore.co.uk`, and populated `dry`, `wet`, and `treats` lists.
 
-#### Scenario: Calibra YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `calibra.yaml` and a valid food type
+#### Scenario: Calibra JSON is loaded without error
+- **WHEN** `loadSource` is called with `calibra.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
 
 #### Scenario: Dry product URLs are present
-- **WHEN** `loadSourceUrls` is called with `calibra.yaml` and food type `dry`
+- **WHEN** `loadSource` is called with `calibra.json` and food type `dry`
 - **THEN** it SHALL return 77 URLs, all beginning with `https://calibrastore.co.uk/`
 
 #### Scenario: Wet product URLs are present
-- **WHEN** `loadSourceUrls` is called with `calibra.yaml` and food type `wet`
+- **WHEN** `loadSource` is called with `calibra.json` and food type `wet`
 - **THEN** it SHALL return 29 URLs, all beginning with `https://calibrastore.co.uk/`
 
 #### Scenario: Treats product URLs are present
-- **WHEN** `loadSourceUrls` is called with `calibra.yaml` and food type `treats`
+- **WHEN** `loadSource` is called with `calibra.json` and food type `treats`
 - **THEN** it SHALL return 38 URLs, all beginning with `https://calibrastore.co.uk/`
 
 ### Requirement: Calibra selector reference documents HTML selectors

@@ -24,18 +24,18 @@ The system MUST accept a `--sitemap <path-or-url>` flag that reads a sitemap XML
 - **THEN** the system prints a parse error message and exits with a non-zero code
 
 ### Requirement: Batch processing from URL list file
-The system MUST accept a `--urls <path>` flag. When the path points to a `.yaml` or `.yml` file, it SHALL be treated as a brand source file. If `--food-type` is provided, only URLs for that food type SHALL be loaded from the `products.<food-type>` key. If `--food-type` is omitted, URLs from ALL food-type keys in the `products` map SHALL be loaded, each paired with its corresponding food type. When the path points to any other file type, the existing plain-text/markdown URL list behaviour is preserved. Markdown list prefixes (`- `, `* `, `1. `), markdown link syntax (`[text](url)`), headings, and blank lines MUST be handled transparently for non-YAML files.
+The system MUST accept a `--urls <path>` flag. When the path points to a `.json` file, it SHALL be treated as a brand source file. If `--food-type` is provided, only URLs for that food type SHALL be loaded from the `products.<food-type>` key. If `--food-type` is omitted, URLs from ALL food-type keys in the `products` map SHALL be loaded, each paired with its corresponding food type. When the path points to any other file type, the existing plain-text/markdown URL list behaviour is preserved. Markdown list prefixes (`- `, `* `, `1. `), markdown link syntax (`[text](url)`), headings, and blank lines MUST be handled transparently for non-JSON files.
 
-#### Scenario: YAML source file processed with food type filter
-- **WHEN** the CLI is invoked with `--urls sources/acana-eu.yaml --food-type dry`
+#### Scenario: JSON source file processed with food type filter
+- **WHEN** the CLI is invoked with `--urls sources/acana-eu.json --food-type dry`
 - **THEN** the system loads only the URLs under `products.dry` in that file and processes them with `foodType: 'dry'`
 
-#### Scenario: YAML source file processed without food type filter
-- **WHEN** the CLI is invoked with `--urls sources/acana-eu.yaml` and no `--food-type` flag
-- **THEN** the system loads URLs from all non-empty food-type keys in the YAML and processes each URL with its corresponding food type
+#### Scenario: JSON source file processed without food type filter
+- **WHEN** the CLI is invoked with `--urls sources/acana-eu.json` and no `--food-type` flag
+- **THEN** the system loads URLs from all non-empty food-type keys in the JSON and processes each URL with its corresponding food type
 
-#### Scenario: YAML source file with no entries for food type produces empty batch
-- **WHEN** the CLI is invoked with `--urls sources/acana-eu.yaml --food-type treats` and the file has an empty `treats` list
+#### Scenario: JSON source file with no entries for food type produces empty batch
+- **WHEN** the CLI is invoked with `--urls sources/acana-eu.json --food-type treats` and the file has an empty `treats` list
 - **THEN** the system prints a warning that no URLs were found and exits without error
 
 #### Scenario: URL list file processed

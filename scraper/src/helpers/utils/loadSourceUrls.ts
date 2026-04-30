@@ -1,31 +1,28 @@
-import * as fs from 'fs';
 import * as path from 'path';
-import * as yaml from 'js-yaml';
 import { FoodType } from '../../interfaces/foodTypes';
 import { UrlWithFoodType } from '../../interfaces/urlWithFoodType';
+import { loadSourceFromPath } from './loadSource';
 
-interface BrandSourceFile {
-  scraper: string;
-  brand: string;
-  domain: string;
-  products: Partial<Record<FoodType, string[]>>;
-}
-
-export function loadSourceUrls(yamlPath: string, foodType?: FoodType): UrlWithFoodType[] {
-  const resolved = path.resolve(yamlPath);
-  if (!fs.existsSync(resolved)) {
-    throw new Error(`Source file not found: ${resolved}`);
+/**
+ * Legacy entry-point kept for back-compat with the existing `--urls` CLI:
+ * loads a brand source JSON file and flattens it into the
+ * `UrlWithFoodType[]` shape the batch runner expects.
+ */
+export function loadSourceUrls(jsonPath: string, foodType?: FoodType): UrlWithFoodType[] {
+  if (jsonPath.endsWith('.yaml') || jsonPath.endsWith('.yml')) {
+    throw new Error(
+      `Source files are JSON now. Pass ${path.basename(jsonPath, path.extname(jsonPath))}.json instead of ${path.basename(jsonPath)}.`,
+    );
   }
 
-  const content = fs.readFileSync(resolved, 'utf-8');
-  const parsed = yaml.load(content) as BrandSourceFile;
+  const source = loadSourceFromPath(jsonPath);
 
   if (foodType) {
-    return (parsed?.products?.[foodType] ?? []).map((url) => ({ url, foodType }));
+    return (source.products[foodType] ?? []).map((url) => ({ url, foodType }));
   }
 
   const results: UrlWithFoodType[] = [];
-  for (const [key, urls] of Object.entries(parsed?.products ?? {})) {
+  for (const [key, urls] of Object.entries(source.products)) {
     if (urls && urls.length > 0) {
       for (const url of urls) {
         results.push({ url, foodType: key as FoodType });

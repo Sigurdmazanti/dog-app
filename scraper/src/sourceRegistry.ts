@@ -21,6 +21,9 @@ import { scrapeBrit } from './scrapers/brit';
 import { scrapeCalibra } from './scrapers/calibra';
 import { scrapeCanagan } from './scrapers/canagan';
 import { scrapeCanex } from './scrapers/canex';
+import { scrapeCarnilove } from './scrapers/carnilove';
+import { scrapeCavom } from './scrapers/cavom';
+import { scrapeCesar } from './scrapers/cesar';
 
 export interface SourceEntry {
   domain: string;
@@ -50,6 +53,9 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'calibrastore.co.uk', brand: 'Calibra', scrape: scrapeCalibra },
   { domain: 'canagan.com', brand: 'Canagan', scrape: scrapeCanagan },
   { domain: 'canex-shop.dk', brand: 'Canex', scrape: scrapeCanex },
+  { domain: 'carnilove.com', brand: 'Carnilove', scrape: scrapeCarnilove },
+  { domain: 'cavom.com', brand: 'Cavom', scrape: scrapeCavom },
+  { domain: 'cesar.com', brand: 'Cesar', scrape: scrapeCesar },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {

@@ -1,0 +1,21 @@
+{
+  "scraper": "avlskovgaard",
+  "brand": "Avlskovgaard",
+  "domain": "avlskovgaard.dk",
+  "discovery": {
+    "listings": [],
+    "productLinkSelector": ""
+  },
+  "products": {
+    "misc": [
+      "https://avlskovgaard.dk/products/torfodder-topping-med-okse",
+      "https://avlskovgaard.dk/products/torfoder-topping-med-kylling",
+      "https://avlskovgaard.dk/products/torfoder-topping-med-lam"
+    ],
+    "barf": [
+      "https://avlskovgaard.dk/products/torfodder-topping-med-okse",
+      "https://avlskovgaard.dk/products/boffelhud"
+    ]
+  },
+  "needsReview": []
+}

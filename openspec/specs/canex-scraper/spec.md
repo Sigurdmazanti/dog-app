@@ -33,11 +33,11 @@ The scraper SHALL extract analytical composition values and combine them with th
 - **WHEN** the product page has analytical values inline in `.product-short-description` (e.g., "Analyse: Vand (22,5%), råprotein (9%)...")
 - **THEN** the scraper SHALL extract these values and include them in the `compositionText`
 
-### Requirement: Canex source YAML lists all products
-The source YAML SHALL contain all 44 product URLs (20 dry, 24 treats) with correct food-type categorization.
+### Requirement: Canex source JSON lists all products
+The source JSON SHALL contain all 44 product URLs (20 dry, 24 treats) with correct food-type categorization.
 
-#### Scenario: Source YAML product counts
-- **WHEN** the `canex.yaml` source file is loaded
+#### Scenario: source JSON product counts
+- **WHEN** the `canex.json` source file is loaded
 - **THEN** it SHALL contain exactly 20 URLs under `dry` and 24 URLs under `treats`, with `total` equal to 44
 
 ### Requirement: Canex domain is registered in source registry

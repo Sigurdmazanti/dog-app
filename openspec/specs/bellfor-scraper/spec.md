@@ -38,11 +38,11 @@ The source registry SHALL route any URL containing `bellfor.info` to the Bellfor
 - **WHEN** `findSource` is called with a URL containing `bellfor.info`
 - **THEN** the returned entry SHALL use the `scrapeBellfor` function
 
-### Requirement: Bellfor source YAML defines product URLs by food type
-The scraper SHALL have a source file at `scraper/sources/bellfor.yaml` listing product URLs grouped by food type, using `scraper: bellfor`, `brand: Bellfor`, and `domain: bellfor.info`.
+### Requirement: Bellfor source JSON defines product URLs by food type
+The scraper SHALL have a source file at `scraper/sources/bellfor.json` listing product URLs grouped by food type, using `scraper: bellfor`, `brand: Bellfor`, and `domain: bellfor.info`.
 
-#### Scenario: Bellfor YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `bellfor.yaml` and a valid food type
+#### Scenario: Bellfor JSON is loaded without error
+- **WHEN** `loadSource` is called with `bellfor.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
 
 ### Requirement: Bellfor selector reference documents HTML selectors

@@ -1,6 +1,6 @@
 ## Purpose
 
-Defines the requirements for scraping product data from `canagan.com`, including page extraction logic, source registry routing, YAML source scaffold, and selector reference documentation.
+Defines the requirements for scraping product data from `canagan.com`, including page extraction logic, source registry routing, JSON source scaffold, and selector reference documentation.
 
 ## Requirements
 
@@ -35,16 +35,12 @@ The scraper SHALL extract a product title, ingredients description, and analytic
 - **WHEN** a `canagan.com` product page is scraped and no `<h4>` with text `"NUTRITIONAL ADDITIVES (PER KG)"` is found
 - **THEN** the analytical constituents text SHALL contain only the ANALYTICAL CONSTITUENTS paragraph, with no trailing newline or empty string appended
 
-### Requirement: Canagan source YAML defines product URL scaffold
-The scraper SHALL have a source file at `scraper/sources/canagan.yaml` with `scraper: canagan`, `brand: Canagan`, `domain: canagan.com`, and product URL lists for food types `dry`, `wet`, `treats`, and `toppers`. A `productCounts` map SHALL be present and SHALL match the length of each product list.
+### Requirement: Canagan source JSON defines product URL scaffold
+The scraper SHALL have a source file at `scraper/sources/canagan.json` with `scraper: canagan`, `brand: Canagan`, `domain: canagan.com`, and product URL lists for food types `dry`, `wet`, `treats`, and `toppers`.
 
-#### Scenario: Canagan YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `canagan.yaml` and a valid food type
+#### Scenario: Canagan JSON is loaded without error
+- **WHEN** `loadSource` is called with `canagan.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
-
-#### Scenario: productCounts totals match list lengths
-- **WHEN** `canagan.yaml` is read
-- **THEN** each value in `productCounts` SHALL equal the length of the corresponding `products` list, and `productCounts.total` SHALL equal the sum of all per-category counts
 
 ### Requirement: Canagan selector reference documents HTML selectors
 A file at `scraper/sources/canagan.selectors.md` SHALL document the homepage URL, a representative HTML snippet, and the selectors used to extract title, ingredients description, and analytical constituents from `canagan.com` product pages.

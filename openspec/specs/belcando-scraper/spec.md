@@ -38,11 +38,11 @@ The source registry SHALL route any URL containing `belcando.com` to the Belcand
 - **WHEN** `findSource` is called with a URL containing `belcando.com`
 - **THEN** the returned entry SHALL use the `scrapeBelcando` function
 
-### Requirement: Belcando source YAML defines product URLs by food type
-The scraper SHALL have a source file at `scraper/sources/belcando.yaml` listing product URLs grouped by food type, using `scraper: belcando`, `brand: Belcando`, and `domain: belcando.com`.
+### Requirement: Belcando source JSON defines product URLs by food type
+The scraper SHALL have a source file at `scraper/sources/belcando.json` listing product URLs grouped by food type, using `scraper: belcando`, `brand: Belcando`, and `domain: belcando.com`.
 
-#### Scenario: Belcando YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `belcando.yaml` and a valid food type
+#### Scenario: Belcando JSON is loaded without error
+- **WHEN** `loadSource` is called with `belcando.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
 
 ### Requirement: Belcando selector reference documents HTML selectors

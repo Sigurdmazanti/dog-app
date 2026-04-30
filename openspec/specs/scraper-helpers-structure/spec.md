@@ -15,7 +15,7 @@ The canonical subdirectory layout SHALL be:
 | `nutrition/` | Nutrition domain calculations and mappings | `nutritionCalculator.ts`, `waterAmountMapper.ts` |
 | `composition/` | Product composition processing | `aiProductCompositionMapper.ts`, `productCompositionKeyMap.ts` |
 | `output/` | External output integrations | `googleSheetsAppender.ts` |
-| `utils/` | General cross-cutting utilities | `logger.ts`, `matchesAlias.ts`, `loadSourceUrls.ts`, `checkMissingFields.ts` |
+| `utils/` | General cross-cutting utilities | `logger.ts`, `matchesAlias.ts`, `loadSource.ts`, `checkMissingFields.ts` |
 
 #### Scenario: Parsing helpers are in the parsing subdirectory
 - **WHEN** a developer navigates to `scraper/src/helpers/`
@@ -35,7 +35,7 @@ The canonical subdirectory layout SHALL be:
 
 #### Scenario: General utilities are in the utils subdirectory
 - **WHEN** a developer navigates to `scraper/src/helpers/`
-- **THEN** `logger.ts`, `matchesAlias.ts`, `loadSourceUrls.ts`, and `checkMissingFields.ts` SHALL exist under `helpers/utils/` and NOT in the `helpers/` root
+- **THEN** `logger.ts`, `matchesAlias.ts`, `loadSource.ts`, and `checkMissingFields.ts` SHALL exist under `helpers/utils/` and NOT in the `helpers/` root
 
 #### Scenario: runScraper remains at the helpers root
 - **WHEN** a developer navigates to `scraper/src/helpers/`

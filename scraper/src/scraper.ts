@@ -83,6 +83,7 @@ async function main(): Promise<void> {
   const hasFoodTypeFlag = foodTypeArg !== undefined;
   const noSheets = process.argv.includes('--no-sheets');
   const concurrency = Number(getFlag('--concurrency') ?? '3');
+  const detectChangesFlag = getFlag('--detect-changes');
 
   const appendToSheets = !noSheets;
 
@@ -112,17 +113,26 @@ async function main(): Promise<void> {
 
   // Batch mode: --urls
   if (urlsPath) {
-    const isYaml = urlsPath.endsWith('.yaml') || urlsPath.endsWith('.yml');
+    const isJsonSource = urlsPath.endsWith('.json');
+    if (urlsPath.endsWith('.yaml') || urlsPath.endsWith('.yml')) {
+      log('', `[scraper] Source files are JSON now. Pass the corresponding .json file instead of ${urlsPath}.`);
+      process.exit(2);
+    }
     let entries: UrlWithFoodType[];
-    if (isYaml) {
+    if (isJsonSource) {
       entries = hasFoodTypeFlag ? loadSourceUrls(urlsPath, foodType) : loadSourceUrls(urlsPath);
     } else {
       const urls = parseUrlListFile(urlsPath);
       entries = urls.map((url) => ({ url, foodType }));
     }
-    const foodTypeLabel = isYaml && !hasFoodTypeFlag ? 'all (from YAML)' : String(foodType);
-    log('', `[scraper] mode=urls  food-type=${foodTypeLabel}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}`);
-    const summary = await runBatch(entries, batchOptions);
+    const foodTypeLabel = isJsonSource && !hasFoodTypeFlag ? 'all (from source JSON)' : String(foodType);
+    // Derive brand from JSON filename and decide change-detection default.
+    const brand = isJsonSource
+      ? urlsPath.replace(/\\/g, '/').split('/').pop()!.replace(/\.json$/, '')
+      : undefined;
+    const detectChanges = detectChangesFlag === undefined ? !!brand : detectChangesFlag !== 'false';
+    log('', `[scraper] mode=urls  food-type=${foodTypeLabel}  concurrency=${concurrency}  sheets=${appendToSheets && !!sheetsConfig}${brand ? `  brand=${brand}  detect-changes=${detectChanges}` : ''}`);
+    const summary = await runBatch(entries, { ...batchOptions, brand, detectChanges });
     process.exit(summary.failed > 0 ? 1 : 0);
     return;
   }
@@ -135,9 +145,9 @@ async function main(): Promise<void> {
     log('', 'Usage:');
     log('', '  npm run dev -- <url> [--food-type dry|wet] [--no-sheets]');
     log('', '  npm run dev -- --sitemap <path-or-url> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
-    log('', '  npm run dev -- --urls <file.yaml> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
+    log('', '  npm run dev -- --urls <file.json|.txt> [--food-type dry|wet] [--no-sheets] [--concurrency 3]');
     log('', '');
-    log('', 'When using a YAML source file, --food-type is optional. If omitted, all food types are scraped.');
+    log('', 'When using a brand source JSON file, --food-type is optional. If omitted, all food types are scraped.');
     process.exit(1);
   }
 

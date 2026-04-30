@@ -6,3 +6,6 @@ dist/
 .env
 credentials.json
 .DS_Store
+
+# Local change-detection cache
+.cache/

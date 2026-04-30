@@ -1,41 +1,41 @@
 ## Purpose
 
-Define the structure and loading behaviour of per-brand YAML source files and the supporting `FoodType` enum used throughout the scraper.
+Define the structure and loading behaviour of per-brand JSON source files and the supporting `FoodType` enum used throughout the scraper.
 
 ## Requirements
 
-### Requirement: Source YAML file defines brand product URLs by food type
-The system MUST support a per-brand YAML source file format at `scraper/sources/<scraper-id>.yaml` that specifies the scraper ID, brand name, domain, and product URLs grouped by food type.
+### Requirement: source JSON file defines brand product URLs by food type
+The system MUST support a per-brand JSON source file format at `scraper/sources/<scraper-id>.json` that specifies the scraper ID, brand name, domain, and product URLs grouped by food type.
 
-#### Scenario: Valid YAML source file is loaded
-- **WHEN** a YAML source file exists with a valid `scraper`, `brand`, `domain`, and `products` map
+#### Scenario: Valid JSON source file is loaded
+- **WHEN** a JSON source file exists with a valid `scraper`, `brand`, `domain`, and `products` map
 - **THEN** the file is parsed without error and its product URL lists are accessible by food type key
 
 #### Scenario: Food type key maps to FoodType enum value
-- **WHEN** a YAML source file contains a `products` map with keys `dry`, `wet`, `treats`, `freeze-dried`, `misc`, or `barf`
+- **WHEN** a JSON source file contains a `products` map with keys `dry`, `wet`, `treats`, `freeze-dried`, `misc`, or `barf`
 - **THEN** each key corresponds to a valid `FoodType` enum value and its URL list is accessible by that type
 
 #### Scenario: Missing food type key defaults to empty list
-- **WHEN** a YAML source file omits one or more food type keys (e.g. no `treats` key)
+- **WHEN** a JSON source file omits one or more food type keys (e.g. no `treats` key)
 - **THEN** querying that food type returns an empty array rather than an error
 
 #### Scenario: Empty URL list for a food type
-- **WHEN** a YAML source file has a food type key with an empty array (`[]`)
+- **WHEN** a JSON source file has a food type key with an empty array (`[]`)
 - **THEN** the system returns an empty list for that food type with no error
 
-### Requirement: loadSourceUrls extracts URLs for a given food type from a YAML source file
-The system MUST provide a `loadSourceUrls(yamlPath: string, foodType: FoodType): string[]` function that reads a YAML source file and returns the URL list for the given food type.
+### Requirement: loadSource extracts URLs for a given food type from a JSON source file
+The system MUST provide a `loadSource(sourcePath: string, foodType: FoodType): string[]` function that reads a JSON source file and returns the URL list for the given food type.
 
 #### Scenario: URLs returned for matching food type
-- **WHEN** `loadSourceUrls` is called with a valid YAML path and a food type that has entries
+- **WHEN** `loadSource` is called with a valid JSON path and a food type that has entries
 - **THEN** it returns the array of URLs defined under that food type key
 
 #### Scenario: Empty array returned for food type with no entries
-- **WHEN** `loadSourceUrls` is called with a food type not present or empty in the file
+- **WHEN** `loadSource` is called with a food type not present or empty in the file
 - **THEN** it returns an empty array
 
 #### Scenario: Error thrown if file not found
-- **WHEN** `loadSourceUrls` is called with a path that does not exist
+- **WHEN** `loadSource` is called with a path that does not exist
 - **THEN** it throws an error indicating the file was not found
 
 ### Requirement: FoodType enum covers all supported food categories

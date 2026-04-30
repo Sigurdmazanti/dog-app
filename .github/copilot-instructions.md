@@ -100,23 +100,23 @@ Package manager is **npm** (`package-lock.json`). Always use `npm`/`npx` in `scr
 
 Follow this exact 3-step workflow — create files only, do not run verification scripts:
 
-1. **Source YAML** — `scraper/sources/<brand>.yaml`
-   ```yaml
-   scraper: <brand>
-   brand: <Brand Name>
-   domain: <domain.com>
-   productCounts:
-     dry: 0
-     wet: 0
-     treats: 0
-     freeze-dried: 0
-     misc: 0
-     barf: 0
-     total: 0
-   products:
-     dry:
-       - https://...
+1. **Source JSON** — `scraper/sources/<brand>.json`
+   ```json
+   {
+     "scraper": "<brand>",
+     "brand": "<Brand Name>",
+     "domain": "<domain.com>",
+     "discovery": {
+       "listings": [],
+       "productLinkSelector": ""
+     },
+     "products": {
+       "dry": []
+     },
+     "needsReview": []
+   }
    ```
+   > **Note:** Leave `products` categories empty. Do NOT populate URLs unless the user explicitly provides them. Leave the `discovery` block empty too — it can be filled in later when you want automated URL discovery for this brand.
 
 2. **Scraper file** — `scraper/src/scrapers/<brand>.ts`
    ```typescript
@@ -140,5 +140,6 @@ Follow this exact 3-step workflow — create files only, do not run verification
 - **DO NOT** use `yarn` — the scraper project uses `npm`
 - **DO NOT** run ad-hoc verification scripts, `--eval` snippets, or create temporary `.ts` files to test scrapers
 - **DO NOT** install or add packages — the scraper's dependencies are stable
+- **DO NOT** invent or look up product URLs when creating a new scraper. The source JSON `products` section must be left empty (with placeholder category keys only) unless the user explicitly provides URLs in their request. The user will supply product URLs separately.
 - When the user asks to test a scraper, use only: `npx ts-node src/scraper.ts "<url>" --food-type <type> --no-sheets`
 - Copy patterns from existing scrapers in `src/scrapers/` — read one first if unsure about selector structure

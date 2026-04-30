@@ -1,0 +1,11 @@
+{
+  "scraper": "zooplus",
+  "brand": "Zooplus",
+  "domain": "zooplus.com",
+  "discovery": {
+    "listings": [],
+    "productLinkSelector": ""
+  },
+  "products": {},
+  "needsReview": []
+}

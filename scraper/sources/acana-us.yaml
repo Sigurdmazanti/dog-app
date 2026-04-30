@@ -6,7 +6,9 @@ productCounts:
   wet: 13
   treats: 6
   freeze-dried: 11
-  misc: 0  barf: 0  total: 58
+  misc: 0
+  barf: 0
+  total: 58
 products:
   dry:
     - https://www.acana.com/en-US/dogs/dog-food/classics%2C-chicken-and-barley-recipe/ds-aca-classics-chicken-barley.html

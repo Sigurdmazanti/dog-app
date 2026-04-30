@@ -35,14 +35,17 @@ npm run dev -- --sitemap ./sitemap.xml
 npm run dev -- --sitemap https://example.com/sitemap.xml
 ```
 
-### Batch from URL list
+### Batch from URL list or brand source
 
-Process URLs from a plain text or markdown file. Blank lines and `#` comments/headings are ignored. Markdown bullet lists (`- `, `* `), numbered lists (`1. `), and link syntax (`[text](url)`) are supported:
+Process URLs from a plain text/markdown file, or from a brand source JSON file (`sources/<brand>.json`). Blank lines and `#` comments/headings are ignored. Markdown bullet lists (`- `, `* `), numbered lists (`1. `), and link syntax (`[text](url)`) are supported in text/markdown:
 
 ```
 npm run dev -- --urls ./products.txt
 npm run dev -- --urls ./products.md
+npm run dev -- --urls ./sources/canex.json
 ```
+
+For a brand source JSON file, `--food-type` is optional — if omitted, all food types in the source are scraped.
 
 Full example with all flags:
 
@@ -58,9 +61,60 @@ npm run dev -- --urls ./products.md --food-type wet --concurrency 5 --no-sheets
 | `--no-sheets` | _(sheets on)_ | Skip Google Sheets append |
 | `--concurrency <n>` | `3` | Max concurrent scrapes in batch mode |
 | `--sitemap <path-or-url>` | — | Sitemap XML input for batch mode |
-| `--urls <file>` | — | URL list file input for batch mode |
+| `--urls <file>` | — | URL list file (txt/md) or brand source JSON for batch mode |
 
 Unrecognised URLs in batch mode are skipped (not errored). A progress line is printed per URL, and a summary is shown at the end.
+
+## Discovery
+
+Discovery refreshes a brand's product URL list by crawling its category/listing pages, with an OpenAI fallback for URLs the listing crawl cannot classify.
+
+Each brand opts in by filling the `discovery` block in its `sources/<brand>.json`:
+
+```json
+{
+  "discovery": {
+    "listings": [
+      { "url": "https://example.com/category/dry-food/", "foodType": "dry" },
+      { "url": "https://example.com/category/treats/",   "foodType": "treats" }
+    ],
+    "productLinkSelector": "a.product-link",
+    "pagination": { "nextSelector": "a.next.page-numbers", "maxPages": 20 },
+    "ignore": [
+      "https://example.com/products/cross-sell-promo-item.html"
+    ]
+  }
+}
+```
+
+The optional `ignore` array lists exact URLs to drop from discovery output — useful for cross-sell tiles, promo items, or non-product links the selector accidentally matches. Ignored URLs never appear in `added`, `regrouped`, or `needsReview`.
+
+Run discovery:
+
+```
+npm run discover -- --source <brand>            # dry-run, prints diff
+npm run discover -- --source <brand> --write    # apply diff to source JSON
+npm run discover -- --source <brand> --write --force  # bypass 50% safety guard
+```
+
+The diff has four buckets: `added`, `removed`, `regrouped` (URL moved between food types), and `needsReview` (low-confidence AI classifications). Without `--write` the source JSON is left untouched.
+
+The 50%-drop safety guard refuses write-back when any food type's discovered URL count drops to less than half of its prior count — a common symptom of a listing layout change. `--force` overrides.
+
+Required env var for the AI fallback: `OPENAI_API_KEY`. Without it, ungrouped URLs are placed in `needsReview` rather than being classified.
+
+## Change Detection
+
+When you run a batch against a brand source JSON via `--urls sources/<brand>.json`, the scraper hashes each successful product result and persists the hashes at `scraper/.cache/<brand>.hashes.json` (gitignored). On subsequent runs, every product is classified as one of:
+
+- **new** — URL not in the previous cache
+- **unchanged** — URL in cache, content hash matches
+- **changed** — URL in cache, content hash differs (previous + current hash printed)
+- **removed** — URL in cache but not produced by this run
+
+The hash covers the normalised product title, ingredients description, and the entire structured composition payload (nutrition, minerals, salts, vitamins, amino acids, vitamin-like compounds, fatty acids, sugar alcohols), with stable key ordering. Cosmetic whitespace differences do not change the hash.
+
+Disable with `--detect-changes false`. Change detection only runs when the `--urls` path is a brand source JSON (so the brand identifier can be derived from the filename).
 
 ## Dependencies
 - axios

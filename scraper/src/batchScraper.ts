@@ -1,13 +1,25 @@
 import { UrlWithFoodType } from './interfaces/urlWithFoodType';
+import { ScrapeResult } from './interfaces/scrapeResult';
 import { findSource } from './sourceRegistry';
 import { scrapeUrl } from './scraper';
 import { appendRowToGoogleSheets } from './helpers/output/googleSheetsAppender';
 import { log, logWarn, logError } from './helpers/utils/logger';
+import {
+  loadHashCache,
+  saveHashCache,
+  buildChangeSummary,
+  buildCacheFromRun,
+  renderChangeSummary,
+} from './changeDetection/changeCache';
 
 export interface BatchOptions {
   concurrency: number;
   appendToSheets: boolean;
   sheetsConfig: { spreadsheetId: string; sheetName: string; credentialsPath: string } | null;
+  /** Brand identifier (matches `scraper/sources/<brand>.json`); enables change detection. */
+  brand?: string;
+  /** Run change detection after the batch completes. Default: true when `brand` is set. */
+  detectChanges?: boolean;
 }
 
 export interface BatchSummary {
@@ -46,6 +58,7 @@ export async function runBatch(urls: UrlWithFoodType[], options: BatchOptions): 
   let succeeded = 0;
   let failed = 0;
   let completed = 0;
+  const successfulResults: ScrapeResult[] = [];
 
   const tasks = processable.map((entry) =>
     limit(async () => {
@@ -67,6 +80,7 @@ export async function runBatch(urls: UrlWithFoodType[], options: BatchOptions): 
         }
 
         log(logPrefix, `✓ ${result.title || entry.url} (${elapsed}ms)`);
+        successfulResults.push(result);
         succeeded++;
       } catch (error) {
         const elapsed = Date.now() - taskStart;
@@ -80,5 +94,19 @@ export async function runBatch(urls: UrlWithFoodType[], options: BatchOptions): 
   await Promise.all(tasks);
 
   log('', `\nDone: ${succeeded} succeeded, ${failed} failed, ${skippedUrls.length} skipped`);
+
+  // Change detection: opt-in via `brand`; default on unless explicitly disabled.
+  const detectChanges = options.detectChanges ?? !!options.brand;
+  if (detectChanges && options.brand && successfulResults.length > 0) {
+    try {
+      const previous = loadHashCache(options.brand);
+      const summary = buildChangeSummary(options.brand, previous, successfulResults);
+      log('', '\n' + renderChangeSummary(summary));
+      saveHashCache(options.brand, buildCacheFromRun(successfulResults));
+    } catch (e) {
+      logWarn('', `Change detection skipped: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
+
   return { succeeded, failed, skipped: skippedUrls.length };
 }

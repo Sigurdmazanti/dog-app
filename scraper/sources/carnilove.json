@@ -1,0 +1,65 @@
+{
+  "scraper": "carnilove",
+  "brand": "Carnilove",
+  "domain": "carnilove.com",
+  "discovery": {
+    "listings": [],
+    "productLinkSelector": ""
+  },
+  "products": {
+    "dry": [
+      "https://carnilove.com/en/products/active-dry-food-made-with-salmon-and-turkey-for-small-dogs",
+      "https://carnilove.com/en/products/active-dry-food-made-with-salmon-and-turkey-for-large-dogs",
+      "https://carnilove.com/en/products/active-dry-food-made-with-salmon-and-turkey-for-junior-dogs",
+      "https://carnilove.com/en/products/active-dry-food-made-with-salmon-and-turkey-for-adult-dogs",
+      "https://carnilove.com/en/products/active-dry-dog-food-made-with-duck-and-pheasant",
+      "https://carnilove.com/en/products/active-dry-dog-food-made-with-lamb-and-wild-boar",
+      "https://carnilove.com/en/products/active-dry-dog-food-made-with-venison-and-reindeer",
+      "https://carnilove.com/en/products/active-dry-food-made-with-salmon-and-turkey-for-puppies",
+      "https://carnilove.com/en/products/true-fresh-duck-dry-food-for-small-breeds",
+      "https://carnilove.com/en/products/true-fresh-fish-and-turkey-dry-dog-food",
+      "https://carnilove.com/en/products/true-fresh-duck-dry-food-for-large-breeds",
+      "https://carnilove.com/en/products/true-fresh-duck-dry-food-for-junior-large-breeds",
+      "https://carnilove.com/en/products/true-fresh-duck-dry-food-for-adult-dogs",
+      "https://carnilove.com/en/products/carnilove-true-fresh-dog-dry-turkey-for-adult-all-breeds",
+      "https://carnilove.com/en/products/carnilove-true-fresh-dog-dry-beef-for-adult-all-breeds",
+      "https://carnilove.com/en/products/true-fresh-duck-dry-food-for-puppies"
+    ],
+    "wet": [
+      "https://carnilove.com/en/products/turkey-and-duck-with-timothy-grass-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/multipack-dog-pouch-pate-4-x-300g",
+      "https://carnilove.com/en/products/turkey-and-buffalo-with-rose-petals-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/turkey-and-quail-with-carrot-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/turkey-and-pheasant-with-raspberry-leaves-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/turkey-and-venison-with-strawberry-leaves-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/turkey-and-wildboar-with-rosehips-dog-pouch-pate-300g",
+      "https://carnilove.com/en/products/turkey-and-salmon-with-blueberries-puppy-pouch-pate-300g",
+      "https://carnilove.com/en/products/pate-can-food-made-with-turkey-and-salmon-for-puppies-400g",
+      "https://carnilove.com/en/products/pate-can-food-made-with-turkey-and-salmon-for-dogs-400g",
+      "https://carnilove.com/en/products/pate-can-food-made-with-turkey-and-reindeer-for-dogs-400g",
+      "https://carnilove.com/en/products/pate-can-food-made-with-lamb-and-wild-boar-for-dogs-400g",
+      "https://carnilove.com/en/products/pate-can-food-made-with-duck-and-pheasant-for-dogs-400g"
+    ],
+    "treats": [
+      "https://carnilove.com/en/products/mackerel-with-raspberries-crunchy-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/turkey-and-rabbit-jerky-snack-for-dogs-100g",
+      "https://carnilove.com/en/products/lamb-and-salmon-jerky-snack-for-dogs-100g",
+      "https://carnilove.com/en/products/turkey-and-venison-jerky-snack-for-dogs-100g",
+      "https://carnilove.com/en/products/beef-jerky-snack-for-dogs-100g",
+      "https://carnilove.com/en/products/turkey-and-salmon-freeze-dried-snack-for-dogs-60g",
+      "https://carnilove.com/en/products/turkey-and-venison-freeze-dried-snack-for-dogs-60g",
+      "https://carnilove.com/en/products/turkey-freeze-dried-snack-for-dogs-60g",
+      "https://carnilove.com/en/products/lamb-freeze-dried-snack-for-dogs-60g",
+      "https://carnilove.com/en/products/quail-enriched-with-oregano-soft-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/duck-enriched-with-rosemary-soft-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/sardines-enriched-with-wild-garlic-soft-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/salmon-with-blueberries-crunchy-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/wild-boar-with-rosehips-crunchy-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/salmon-with-thyme-soft-snack-for-small-dog-breeds-200g",
+      "https://carnilove.com/en/products/trout-enriched-with-dill-soft-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/ostrich-with-blackberries-crunchy-snack-for-dogs-200g",
+      "https://carnilove.com/en/products/lamb-with-cranberries-crunchy-snack-for-dogs-200g"
+    ]
+  },
+  "needsReview": []
+}

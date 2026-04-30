@@ -1,6 +1,6 @@
 ## Purpose
 
-Defines the requirements for scraping product data from `bozita.com`, including page extraction logic, source registry routing, YAML source scaffold, and selector reference documentation.
+Defines the requirements for scraping product data from `bozita.com`, including page extraction logic, source registry routing, JSON source scaffold, and selector reference documentation.
 
 ## Requirements
 
@@ -38,16 +38,12 @@ The source registry SHALL route any URL containing `bozita.com` to the Bozita sc
 - **WHEN** `findSource` is called with a URL containing `bozita.com`
 - **THEN** the returned entry SHALL use the `scrapeBozita` function and have `brand` set to `"Bozita"`
 
-### Requirement: Bozita source YAML defines product URL scaffold
-The scraper SHALL have a source file at `scraper/sources/bozita.yaml` with `scraper: bozita`, `domain: bozita.com`, and product lists for food types `dry`, `wet`, and `treats`. A `productCounts` map SHALL be present and SHALL match the length of each product list.
+### Requirement: Bozita source JSON defines product URL scaffold
+The scraper SHALL have a source file at `scraper/sources/bozita.json` with `scraper: bozita`, `domain: bozita.com`, and product lists for food types `dry`, `wet`, and `treats`.
 
-#### Scenario: Bozita YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `bozita.yaml` and a valid food type
+#### Scenario: Bozita JSON is loaded without error
+- **WHEN** `loadSource` is called with `bozita.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
-
-#### Scenario: productCounts totals match list lengths
-- **WHEN** `bozita.yaml` is read
-- **THEN** each value in `productCounts` SHALL equal the length of the corresponding `products` list, and `productCounts.total` SHALL equal the sum of all per-category counts
 
 ### Requirement: Bozita selector reference documents HTML selectors
 A file at `scraper/sources/bozita.selectors.md` SHALL document the homepage URL, a representative HTML snippet, and the selectors used to extract title, ingredients description, and analytical constituents from `bozita.com` product pages.

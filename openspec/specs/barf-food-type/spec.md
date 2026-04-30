@@ -15,9 +15,9 @@ The `FoodType` enum MUST include a `barf` value (string `"barf"`) to support BAR
 - **WHEN** the water-amount mapper is called with `FoodType.Barf`
 - **THEN** it returns `0` as the default water percentage
 
-#### Scenario: barf products are loaded from source YAML
-- **WHEN** a YAML source file contains a `barf:` key under `products`
-- **THEN** `loadSourceUrls` returns the URLs listed under that key
+#### Scenario: barf products are loaded from source JSON
+- **WHEN** a JSON source file contains a `barf:` key under `products`
+- **THEN** `loadSource` returns the URLs listed under that key
 
 #### Scenario: barf food type written to Google Sheets output
 - **WHEN** a scrape run is executed with `--food-type barf`

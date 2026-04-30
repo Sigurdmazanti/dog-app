@@ -51,4 +51,4 @@
 - The accordion panels are powered by Alpine.js; there are no stable `id` attributes — match panels by button label text, not by index
 - Pack-size patterns observed: `6 x 85g`, `24 x 85g`, `8 x 156g`, `16 x 156g`, `32 x 156g`, `5 x 200g`, `200g` (bone broth pouches) — the regex `\s*•\s*\d+\s*x\s*[\d.]+\s*(kg|g)` covers these
 - Puppy products are included under `wet` food type
-- Dry food and treats URLs are not yet populated — add to the relevant sections in `applaws.yaml` as they are catalogued
+- Dry food and treats URLs are not yet populated — add to the relevant sections in `applaws.json` as they are catalogued

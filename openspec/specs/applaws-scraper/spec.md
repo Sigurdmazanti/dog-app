@@ -1,6 +1,6 @@
 ## Purpose
 
-Define the scraping behaviour, source registry routing, source YAML configuration, and selector documentation for `applaws.com` product pages.
+Define the scraping behaviour, source registry routing, source JSON configuration, and selector documentation for `applaws.com` product pages.
 
 ## Requirements
 
@@ -38,11 +38,11 @@ The source registry SHALL route any URL containing `applaws.com` to the Applaws 
 - **WHEN** `findSource` is called with a URL containing `applaws.com`
 - **THEN** the returned entry SHALL use the `scrapeApplaws` function
 
-### Requirement: Applaws source YAML defines product URLs by food type
-The scraper SHALL have a source file at `scraper/sources/applaws.yaml` listing product URLs grouped by food type, using `scraper: applaws` and `domain: applaws.com`.
+### Requirement: Applaws source JSON defines product URLs by food type
+The scraper SHALL have a source file at `scraper/sources/applaws.json` listing product URLs grouped by food type, using `scraper: applaws` and `domain: applaws.com`.
 
-#### Scenario: Applaws YAML is loaded without error
-- **WHEN** `loadSourceUrls` is called with `applaws.yaml` and a valid food type
+#### Scenario: Applaws JSON is loaded without error
+- **WHEN** `loadSource` is called with `applaws.json` and a valid food type
 - **THEN** it SHALL return the list of product URLs for that food type without error
 
 ### Requirement: Applaws selector reference documents HTML selectors

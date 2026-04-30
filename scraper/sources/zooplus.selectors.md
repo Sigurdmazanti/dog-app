@@ -34,4 +34,4 @@
 
 - Page content may be in Danish (Zooplus locale-dependent)
 - Ingredients text contains both ingredients and additives — split on "Tilsætningsstoffer" to isolate ingredient list
-- No product URLs added yet — add to `zooplus.yaml` when products are identified
+- No product URLs added yet — add to `zooplus.json` when products are identified

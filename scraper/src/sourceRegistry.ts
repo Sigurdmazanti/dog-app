@@ -24,6 +24,7 @@ import { scrapeCanex } from './scrapers/canex';
 import { scrapeCarnilove } from './scrapers/carnilove';
 import { scrapeCavom } from './scrapers/cavom';
 import { scrapeCesar } from './scrapers/cesar';
+import { scrapeDibo } from './scrapers/dibo';
 
 export interface SourceEntry {
   domain: string;
@@ -56,6 +57,7 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'carnilove.com', brand: 'Carnilove', scrape: scrapeCarnilove },
   { domain: 'cavom.com', brand: 'Cavom', scrape: scrapeCavom },
   { domain: 'cesar.com', brand: 'Cesar', scrape: scrapeCesar },
+  { domain: 'dibodog.com', brand: 'Dibo', scrape: scrapeDibo },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {

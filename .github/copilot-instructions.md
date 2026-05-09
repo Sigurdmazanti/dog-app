@@ -98,7 +98,7 @@ Package manager is **npm** (`package-lock.json`). Always use `npm`/`npx` in `scr
 
 ### Creating a New Scraper
 
-Follow this exact 3-step workflow — create files only, do not run verification scripts:
+Follow this exact 4-step workflow — create files only, do not run verification scripts:
 
 1. **Source JSON** — `scraper/sources/<brand>.json`
    ```json
@@ -134,6 +134,14 @@ Follow this exact 3-step workflow — create files only, do not run verification
    ```
 
 3. **Register** — add the domain → scraper mapping in `scraper/src/sourceRegistry.ts`
+
+4. **Selector reference** — `scraper/sources/<brand>.selectors.md`
+
+   Document the HTML structure and selectors used by the scraper. Include:
+   - A representative HTML snippet showing the relevant markup
+   - A selector table (`Field | Selector | Notes`)
+   - The extraction logic as a numbered list
+   - Any gotchas or notes about the site's HTML
 
 ### Scraper Rules
 

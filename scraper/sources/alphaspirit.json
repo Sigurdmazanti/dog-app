@@ -1,0 +1,55 @@
+{
+  "scraper": "alphaspirit",
+  "brand": "Alpha Spirit",
+  "domain": "alphaspirit.se",
+  "discovery": {
+    "listings": [
+      { "url": "https://alphaspirit.se/produkt-kategori/foder/the-only-one/", "foodType": "dry" },
+      { "url": "https://alphaspirit.se/produkt-kategori/foder/soft-food/", "foodType": "dry" },
+      { "url": "https://alphaspirit.se/produkt-kategori/foder/primal-spirit/", "foodType": "dry" },
+      { "url": "https://alphaspirit.se/produkt-kategori/foder/blotmat/", "foodType": "wet" },
+      { "url": "https://alphaspirit.se/produkt-kategori/foder/blotmat/page/2/", "foodType": "wet" },
+      { "url": "https://alphaspirit.se/produkt-kategori/godis-tugg/", "foodType": "treats" }
+    ],
+    "productLinkSelector": ".woocommerce.elementor-element .product .elementor-heading-title > a"
+  },
+  "products": {
+    "dry": [
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-7-days-formula/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-the-only-one-free-range-duck/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-the-only-one-free-range-poultry/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-the-only-one-multi-protein/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-puppies/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-the-only-one-wild-fish/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-soft-multi-protein-3/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-soft-puppies/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-soft-wild-fish/",
+      "https://alphaspirit.se/mat-godis/produkt/primal-spirit-iberian-pork/",
+      "https://alphaspirit.se/mat-godis/produkt/primal-spirit-iberian-salmon-for-hund/",
+      "https://alphaspirit.se/mat-godis/produkt/primal-spirit-iberian-sardine/",
+      "https://alphaspirit.se/mat-godis/produkt/primal-spirit-wanderlust-for-hundar/"
+    ],
+    "wet": [
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-anka-apple-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-ansjovis-apple-400g-vat-kopia/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-biff-melon-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-iberico-apple-400g-vat-kopia/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-kalon-paron-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-kanin-banan-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-kyckling-ananas-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-lamm-paron-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-lax-ananas-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-sardin-banan-400g-vat/",
+      "https://alphaspirit.se/mat-godis/produkt/alpha-spirit-skinka-melon-400g-vat/"
+    ],
+    "treats": [
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-ankbitar-50g/",
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-fiskbitar-50g/",
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-kalkonbitar-50g/",
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-kycklingbitar-50g-2/",
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-leverbitar-50g/",
+      "https://alphaspirit.se/mat-godis/produkt/hundgodis-skinkbitar-50g/"
+    ]
+  },
+  "needsReview": []
+}

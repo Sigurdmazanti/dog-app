@@ -1,0 +1,71 @@
+{
+  "scraper": "edenpetfoods",
+  "brand": "Eden Pet Foods",
+  "domain": "edenpetfoods.com",
+  "discovery": {
+    "listings": [
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=gourmet-dry-food", "foodType": "dry" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=working-dog-range&format=dry", "foodType": "dry" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=dried-food", "foodType": "dry" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=wet-food", "foodType": "wet" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=the-semi-moist-range", "foodType": "wet" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?format=wet", "foodType": "wet" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=treats_and_chews", "foodType": "treats" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=succulent-sausages", "foodType": "treats" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=training-treats", "foodType": "treats" },
+      { "url": "https://www.edenpetfoods.com/shop/for-dogs/food-for-dogs?sub-category=bone-broth", "foodType": "misc" }
+    ],
+    "productLinkSelector": ".products .product figure.product-image > a",
+    "pagination": {
+      "nextSelector": ".pages .pagination .paginate_button.page-item.next",
+      "maxPages": 8
+    }
+  },
+  "products": {
+    "dry": [
+      "https://www.edenpetfoods.com/shop/product/DGRM2KGOL1PEBDO/gourmet-range-goose-&-turkey-2kg",
+      "https://www.edenpetfoods.com/shop/product/DDHM2KGOL1PEBDO/gourmet-range-duck-&-herring-2kg",
+      "https://www.edenpetfoods.com/shop/product/DSPM2KGOL1PEBDO/gourmet-range-salmon-&-pheasant-2kg",
+      "https://www.edenpetfoods.com/shop/product/PUW0015KOASDEPF/eden-80/20-country-cuisine-sporting-&-working-dog-15kg-medium-kibble",
+      "https://www.edenpetfoods.com/shop/product/PUE0015KOASDEPF/eden-80/20-original-cuisine-sporting-&-working-dog-food-15kg-medium-kibble",
+      "https://www.edenpetfoods.com/shop/product/PUI0015KOASDEPF/eden-80/20-fish-cuisine-sporting-&-working-dog-food-15kg-medium-kibble",
+      "https://www.edenpetfoods.com/shop/product/PUE2kg/eden-80/20-original-cuisine-2kg-medium-kibble",
+      "https://www.edenpetfoods.com/shop/product/PUW2kg/eden-80/20-country-cuisine-2kg-medium-kibble",
+      "https://www.edenpetfoods.com/shop/product/PUI2kg/eden-80/20-fish-cuisine-2kg-medium-kibble"
+    ],
+    "wet": [
+      "https://www.edenpetfoods.com/shop/product/WSP0K4LAN1TINDO/gourmet-salmon-&-pheasant-400g",
+      "https://www.edenpetfoods.com/shop/product/WDH0K4LAN1TINDO/gourmet-duck-&-herring-400g",
+      "https://www.edenpetfoods.com/shop/product/WTGR0K4LAN1TINDO/gourmet-turkey,-goose-&-rabbit-400g",
+      "https://www.edenpetfoods.com/shop/product/SCFM2KBOS1PEPDO/semi-moist-country-feast-2kg",
+      "https://www.edenpetfoods.com/shop/product/SSQM2KBOS1PEPDO/semi-moist-salmon-&-quail-2kg",
+      "https://www.edenpetfoods.com/shop/product/SDTM2KBOS1PEPDO/semi-moist-duck-&-tripe-2kg",
+      "https://www.edenpetfoods.com/shop/product/EWWDCC6x400g/eden-wet-food-for-sporting-&-working-dogs:-country-cuisine-6x400g",
+      "https://www.edenpetfoods.com/shop/product/EWWDOrig6x400g/eden-wet-food-for-sporting-&-working-dogs:-original-6x400g",
+      "https://www.edenpetfoods.com/shop/product/EWWDTH6x400g/eden-wet-food-for-sporting-&-working-dogs:-turkey-and-herring-6x400g"
+    ],
+    "treats": [
+      "https://www.edenpetfoods.com/shop/product/ELT100",
+      "https://www.edenpetfoods.com/shop/product/EVT100",
+      "https://www.edenpetfoods.com/shop/product/EST100",
+      "https://www.edenpetfoods.com/shop/product/EDT100",
+      "https://www.edenpetfoods.com/shop/product/EWT100",
+      "https://www.edenpetfoods.com/shop/product/TVS80GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TCT80GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TLP80GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TVA130GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TLC130GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TCP100GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/TSA100GINO1PEPDO",
+      "https://www.edenpetfoods.com/shop/product/CPMCM0K075PNT1PAPDO",
+      "https://www.edenpetfoods.com/shop/product/CBMCM0K075PNT1PAPDO",
+      "https://www.edenpetfoods.com/shop/product/CFMCM0K075PNT1PAPDO"
+    ],
+    "misc": [
+      "https://www.edenpetfoods.com/shop/product/TLBB0K5KNL1IPIDOCA/nordic-lamb-bone-broth-500ml",
+      "https://www.edenpetfoods.com/shop/product/TCBB0K5KNL1IPIDOCA/free-range-chicken-bone-broth-500ml",
+      "https://www.edenpetfoods.com/shop/product/TVBB0K5KNL1IPIDOCA/wild-venison-bone-broth-500ml"
+    ]
+  },
+  "needsReview": []
+}

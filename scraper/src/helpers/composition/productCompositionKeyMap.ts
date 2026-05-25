@@ -13,9 +13,9 @@ export const nutritionKeyMap: Record<keyof NutritionData, string[]> = {
   kiloJoule: ['kilojoule'/*, 'kj', 'energi', 'gross energy'*/],
   water: ['moisture', 'vand', 'fugtighed', 'væske', 'water'],
   protein: ['protein', 'råprotein', 'crude protein'],
-  fat: ['fat', 'fedt', 'råfedt', 'crude fat'],
-  fiber: ['fibre', 'fiber', 'råfibre', 'træstof', 'crude fibre'],
-  crudeAsh: ['ash', 'råaske', 'aske', 'crude ash'],
+  fat: ['fat', 'fedt', 'fett', 'råfedt', 'crude fat'],
+  fiber: ['fibre', 'fiber', 'växttråd', 'råfibre', 'træstof', 'crude fibre'],
+  crudeAsh: ['ash', 'råaske', 'aske', 'aska', 'crude ash'],
   nfe: ['nfe', 'carbohydrates', 'kulhydrater', 'carbohydrate', 'kulhydrat'],
   sugar: ['sugar', 'sukker', 'sugars', 'sukkerarter', 'total sugar', 'total sukker'],
 };
@@ -40,7 +40,7 @@ export const mineralsKeyMap: Record<keyof MineralsData, string[]> = {
   arsenic: ['arsenic', 'arsenik', 'as'],
   lead: ['lead', 'bly', 'pb'],
   cadmium: ['cadmium', 'cd'],
-  iron: ['iron', 'jern', 'fe', 'ferrum', 'jernoxid'],
+  iron: ['iron', 'jern', 'järn', 'fe', 'ferrum', 'jernoxid'],
   copper: ['copper', 'kobber', 'cu', 'cuprum'],
   zinc: ['zinc', 'zink', 'zn'],
   iodine: ['iodine', 'jod', 'iod', 'i'],
@@ -129,7 +129,7 @@ export const vitaminLikeKeyMap: Record<keyof VitaminLikeData, string[]> = {
 };
 
 export const fattyAcidsKeyMap: Record<keyof FattyAcidsData, string[]> = {
-  omega3: ['omega 3', 'omega-3', 'omega-3 fedtsyre', 'omega 3 fedtsyre', 'omega3 fedtsyre', 'omega3-fedtsyre'],
+  omega3: ['omega 3', 'omega-3', 'omega-3 fedtsyre', 'omega 3 fedtsyre', 'omega3 fedtsyre', 'omega3-fedtsyre', 'omega-3 fettsyror', 'omega 3 fettsyror'],
   omega6: ['omega 6', 'omega-6', 'omega-6 fedtsyre', 'omega 6 fedtsyre', 'omega6 fedtsyre', 'omega6-fedtsyre'],
 };
 

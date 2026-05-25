@@ -1,0 +1,58 @@
+{
+  "scraper": "europremium",
+  "brand": "EuroPremium",
+  "domain": "europremium.com",
+  "discovery": {
+    "listings": [
+      { "url": "https://europremium.com/en/products", "foodType": "dry" }
+    ],
+    "productLinkSelector": ".products .products--grid a.products__item",
+    "pagination": {
+      "nextSelector": ".products .pagination .pagination__item:last-of-type",
+      "pages": 3
+    }
+  },
+  "products": {
+    "dry": [
+      "https://europremium.com/en/products/small-puppy-chicken-rice",
+      "https://europremium.com/en/products/medium-puppy-chicken-rice",
+      "https://europremium.com/en/products/large-puppy-chicken-rice",
+      "https://europremium.com/en/products/puppy-lamb-rice",
+      "https://europremium.com/en/products/small-adult-chicken-rice",
+      "https://europremium.com/en/products/small-adult-lamb-rice",
+      "https://europremium.com/en/products/medium-adult-chicken-rice",
+      "https://europremium.com/en/products/medium-adult-lamb-rice",
+      "https://europremium.com/en/products/large-adult-chicken-rice",
+      "https://europremium.com/en/products/large-adult-lamb-rice",
+      "https://europremium.com/en/products/giant-adult-chicken-rice",
+      "https://europremium.com/en/products/giant-adult-lamb-rice",
+      "https://europremium.com/en/products/adult-light",
+      "https://europremium.com/en/products/senior-chicken-rice",
+      "https://europremium.com/en/products/senior-lamb-rice",
+      "https://europremium.com/en/products/derma-adult",
+      "https://europremium.com/en/products/digestion-adult",
+      "https://europremium.com/en/products/medium-to-large-adult-sterilized",
+      "https://europremium.com/en/products/mobility-adult",
+      "https://europremium.com/en/products/high-energy-adult"
+    ],
+    "wet": [
+      "https://europremium.com/en/products/pate-puppy-chicken-lamb",
+      "https://europremium.com/en/products/pate-adult-chicken-lamb",
+      "https://europremium.com/en/products/pate-adult-turkey-chicken",
+      "https://europremium.com/en/products/pate-adult-duck-turkey",
+      "https://europremium.com/en/products/pate-adult-turkey-with-tuna-salmon",
+      "https://europremium.com/en/products/pate-adult-lamb-venison",
+      "https://europremium.com/en/products/pate-senior-chicken-lamb"
+    ],
+    "treats": [
+      "https://europremium.com/en/products/snack-with-chicken",
+      "https://europremium.com/en/products/snack-with-beef",
+      "https://europremium.com/en/products/snack-with-lamb",
+      "https://europremium.com/en/products/snack-with-salmon"
+    ],
+    "misc": [
+      "https://europremium.com/en/products/msm-glucosamine-tablets"
+    ]
+  },
+  "needsReview": []
+}

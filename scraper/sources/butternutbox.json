@@ -1,0 +1,54 @@
+{
+  "scraper": "butternutbox",
+  "brand": "Butternutbox",
+  "domain": "butternutbox.com",
+  "discovery": {
+    "listings": [
+      "https://butternutbox.com/our-dog-food/fresh-meals",
+      "https://butternutbox.com/our-dog-food/treats-and-chews",
+      "https://butternutbox.com/our-dog-food/supplements"
+    ],
+    "productLinkSelector": ""
+  },
+  "products": {
+    "wet": [
+      "https://butternutbox.com/our-dog-food/fresh-meals/beef",
+      "https://butternutbox.com/our-dog-food/fresh-meals/chicken",
+      "https://butternutbox.com/our-dog-food/fresh-meals/turkey",
+      "https://butternutbox.com/our-dog-food/fresh-meals/chicken-salmon",
+      "https://butternutbox.com/our-dog-food/fresh-meals/lamb",
+      "https://butternutbox.com/our-dog-food/fresh-meals/pork",
+      "https://butternutbox.com/our-dog-food/fresh-meals/duck-chicken",
+      "https://butternutbox.com/our-dog-food/fresh-meals/vegetarian",
+      "https://butternutbox.com/our-dog-food/fresh-meals/salmon",
+      "https://butternutbox.com/our-dog-food/fresh-meals/pork-grain",
+      "https://butternutbox.com/our-dog-food/fresh-meals/chicken-grain",
+      "https://butternutbox.com/our-dog-food/fresh-meals/game"
+    ],
+    "treats": [
+      "https://butternutbox.com/our-dog-food/treats-and-chews/training-treats-chicken",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/training-treats-pork",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/strips-chicken",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/sausages-chicken",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/sausages-pork",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/long-lasting-chew",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/treats-beef",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/treats-duck",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/treats-lamb",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/treats-fish",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/oat-biscuits-peanut-butter",
+      "https://butternutbox.com/our-dog-food/treats-and-chews/oat-biscuits-cheese"
+    ],
+    "misc": [
+      "https://butternutbox.com/our-dog-food/supplements/fish-oil",
+      "https://butternutbox.com/our-dog-food/supplements/dental-stick-chicken",
+      "https://butternutbox.com/our-dog-food/supplements/dental-stick-pork",
+      "https://butternutbox.com/our-dog-food/supplements/digestive-support-powder",
+      "https://butternutbox.com/our-dog-food/supplements/supplements-gut-health",
+      "https://butternutbox.com/our-dog-food/supplements/supplements-calming",
+      "https://butternutbox.com/our-dog-food/supplements/bone-broth-beef",
+      "https://butternutbox.com/our-dog-food/supplements/bone-broth-chicken"
+    ]
+  },
+  "needsReview": []
+}

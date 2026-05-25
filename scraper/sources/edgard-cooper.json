@@ -1,0 +1,83 @@
+{
+  "scraper": "edgard-cooper",
+  "brand": "Edgard & Cooper",
+  "domain": "edgardcooper.com",
+  "discovery": {
+    "listings": [
+      { "url": "https://www.edgardcooper.com/en/collections/dogs/?type-group=dry-food", "foodType": "dry" },
+      { "url": "https://www.edgardcooper.com/en/collections/dogs/?type-group=wet-food", "foodType": "wet" },
+      { "url": "https://www.edgardcooper.com/en/collections/dogs/?type-group=treats", "foodType": "treats" },
+      { "url": "https://www.edgardcooper.com/en/collections/dogs/?type-group=dental", "foodType": "misc" }
+    ],
+    "productLinkSelector": ".container div.grid > a"
+  },
+  "products": {
+    "dry": [
+      "https://www.edgardcooper.com/en/products/dog-dry-food-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-salmon/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-venison-duck/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-lamb/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-duck/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-beef-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-turkey-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-carrot-courgette/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-beetroot-pumpkin/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-duck-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-salmon-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-dry-food-chicken-salmon/"
+    ],
+    "wet": [
+      "https://www.edgardcooper.com/en/products/dog-tin-lamb-beef/",
+      "https://www.edgardcooper.com/en/products/dog-tin-chicken-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-tin-game-duck/",
+      "https://www.edgardcooper.com/en/products/dog-bundle-tins-grain-free/",
+      "https://www.edgardcooper.com/en/products/dog-tin-salmon-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-tin-beef/",
+      "https://www.edgardcooper.com/en/products/dog-tin-duck-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-tin-chicken-salmon/",
+      "https://www.edgardcooper.com/en/products/dog-cup-chicken-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-cup-game-duck/",
+      "https://www.edgardcooper.com/en/products/dog-bundle-cups-grain-free/",
+      "https://www.edgardcooper.com/en/products/dog-cup-lamb-beef/",
+      "https://www.edgardcooper.com/en/products/dog-cup-beef-duck/",
+      "https://www.edgardcooper.com/en/products/dog-cup-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-cup-beef/",
+      "https://www.edgardcooper.com/en/products/dog-cup-salmon-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-bundle-cups-hypoallergenic/",
+      "https://www.edgardcooper.com/en/products/dog-cup-fish/",
+      "https://www.edgardcooper.com/en/products/dog-cup-duck-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-puppy-bundle-cups-grain-free/",
+      "https://www.edgardcooper.com/en/products/dog-cup-chicken-fish/",
+      "https://www.edgardcooper.com/en/products/dog-cup-chicken-salmon/"
+    ],
+    "treats": [
+      "https://www.edgardcooper.com/en/products/dog-biscuits-banana-peanut/",
+      "https://www.edgardcooper.com/en/products/dog-biscuits-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-biscuits-turkey-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-biscuits-salmon-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-biscuits-apple-blueberry/",
+      "https://www.edgardcooper.com/en/products/dog-bites-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bites-duck-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bites-salmon-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bites-lamb-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-bites-turkey-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bites-apple-blueberry/",
+      "https://www.edgardcooper.com/en/products/dog-strips-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-strips-salmon-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-strips-lamb-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-strips-turkey-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bar-chicken/",
+      "https://www.edgardcooper.com/en/products/dog-bar-lamb-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-bar-turkey/",
+      "https://www.edgardcooper.com/en/products/dog-bar-apple-blueberry/",
+      "https://www.edgardcooper.com/en/products/dog-treats-variety-bundle/",
+      "https://www.edgardcooper.com/en/products/dog-bundle-treats-bites-biscuits/",
+      "https://www.edgardcooper.com/en/products/dog-bundle-treats-bars/"
+    ],
+    "misc": [
+      "https://www.edgardcooper.com/en/products/doggy-dental-apple-eucalyptus/",
+      "https://www.edgardcooper.com/en/products/doggy-dental-mint-strawberry/"
+    ]
+  },
+  "needsReview": []
+}

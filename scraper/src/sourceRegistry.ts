@@ -25,6 +25,14 @@ import { scrapeCarnilove } from './scrapers/carnilove';
 import { scrapeCavom } from './scrapers/cavom';
 import { scrapeCesar } from './scrapers/cesar';
 import { scrapeDibo } from './scrapers/dibo';
+import { scrapeAlphaSpirit } from './scrapers/alphaspirit';
+import { scrapeDrClauders } from './scrapers/dr-clauders';
+import { scrapeEdenPetFoods } from './scrapers/edenpetfoods';
+import { scrapeButternutbox } from './scrapers/butternutbox';
+import { scrapeEdgardCooper } from './scrapers/edgard-cooper';
+import { scrapeEssentialFoods } from './scrapers/essentialfoods';
+import { scrapeEukanuba } from './scrapers/eukanuba';
+import { scrapeEuroPremium } from './scrapers/europremium';
 
 export interface SourceEntry {
   domain: string;
@@ -58,6 +66,14 @@ export const sourceRegistry: SourceEntry[] = [
   { domain: 'cavom.com', brand: 'Cavom', scrape: scrapeCavom },
   { domain: 'cesar.com', brand: 'Cesar', scrape: scrapeCesar },
   { domain: 'dibodog.com', brand: 'Dibo', scrape: scrapeDibo },
+  { domain: 'alphaspirit.se', brand: 'Alpha Spirit', scrape: scrapeAlphaSpirit },
+  { domain: 'dr-clauder.com', brand: "Dr. Clauder's", scrape: scrapeDrClauders },
+  { domain: 'edenpetfoods.com', brand: 'Eden Pet Foods', scrape: scrapeEdenPetFoods },
+  { domain: 'butternutbox.com', brand: 'Butternutbox', scrape: scrapeButternutbox },
+  { domain: 'edgardcooper.com', brand: 'Edgard & Cooper', scrape: scrapeEdgardCooper },
+  { domain: 'essentialfoods.com', brand: 'Essential Foods', scrape: scrapeEssentialFoods },
+  { domain: 'eukanuba.eu', brand: 'Eukanuba', scrape: scrapeEukanuba },
+  { domain: 'europremium.com', brand: 'EuroPremium', scrape: scrapeEuroPremium },
 ];
 
 export function findSource(url: string): SourceEntry | undefined {
